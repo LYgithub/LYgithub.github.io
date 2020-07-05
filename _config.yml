@@ -52,6 +52,9 @@ highlight:
   wrap: true
   hljs: false
 
+# 代码样式 设置
+highlight_theme: night eighties
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -96,6 +99,7 @@ ignore:
 #theme: landscape
 theme: yilia
 # theme: yelog-hexo-theme-3
+# theme: iissnan X
 
 
 # Automatically Excerpt. Not recommand.
@@ -132,3 +136,8 @@ deploy:
   repo: https://github.com/LYgithub/LYgithub.github.io.git
   branch: master
 
+
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
