@@ -140,8 +140,7 @@ Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.5
 Good(id=2, name=电冰箱, consumers=null)
 ```
 
-mor
-
+> 一下具体内容及原因，有待进一步了解学习。
 
 ⚠️ : 如果使用 sqlSession.clearCache(); 清除缓存，但依然缓存着其他 SqlSession 对象的缓存数据。
 
