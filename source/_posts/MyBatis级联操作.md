@@ -2,14 +2,11 @@
 title: MyBatis级联操作
 tags: Spring
 date: 2020-07-05 15:19:29
-description: "Welcome to Hexo! This is your very first post."
 ---
 
-<Excerpt in index | 首页摘要> 
+> 级联操作
 
 <!-- more -->
-
-<The rest of contents | 余下全文>
 
 [详细教程网络资源](http://c.biancheng.net/view/4367.html)
 
