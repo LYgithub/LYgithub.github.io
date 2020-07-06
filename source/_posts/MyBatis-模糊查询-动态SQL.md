@@ -2,7 +2,7 @@
 
 title: 模糊查询-动态SQL
 data: 2020-6-22 10:30:21
-tags: MyBatis
+tags: [MyBatis, SQL]
 
 ---
 

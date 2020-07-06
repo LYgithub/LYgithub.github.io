@@ -1,8 +1,8 @@
 ---
 
 title: 级联操作
-data: 2020-6-21 09:30:21
-tags: MyBatis
+date: 2020-6-21 09:30:21
+tags: [MyBatis, SQL ]
 
 ---
 
