@@ -1,16 +1,21 @@
 ---
-title: MyBatis级联操作
-tags: Spring
-date: 2020-07-05 15:19:29
+
+title: 级联操作
+data: 2020-6-21 09:30:21
+tags: MyBatis
+
 ---
 
-> 级联操作
+> 本文介绍了`MyBatis`的级联操作，通过查询多张表完成数据的获取，关键在于练习 `resultMap`、`association`、`collection` 标签。
+
 
 <!-- more -->
 
+
+# MyBatis 级联操作
+
 [详细教程网络资源](http://c.biancheng.net/view/4367.html)
 
-关键在于练习 resultMap、association、collection 标签的使用
 
 [项目](https://github.com/LYgithub/IDEAProjects/tree/master/MyBatisNodeDemo2)
 
@@ -20,6 +25,7 @@ student 包含个人基本信息和内嵌对象 classes。
 在查询student时，需要联合 student表和classes表进行查询。
 
 ### 数据表
+
 
 ```sql
 CREATE TABLE classes(
@@ -54,6 +60,7 @@ public class Classes{
 	private String name;
 }
 ```
+
 - Student类对象
 
 ```java
@@ -71,6 +78,7 @@ public class Student{
 ### Repository
 
 编写数据库操作的接口
+
 
 ```java
 public interface IStudentRepository {
@@ -295,7 +303,6 @@ insert into con_good (id, gid, cid) VALUES (1,1,1),(2,3,2),(3,1,3),(4,2,1),(5,4,
 </mapper>
 
 ```
-
 
 
 
