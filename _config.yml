@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: KawYang
 subtitle: ''
 description: ''
 keywords: 
@@ -20,6 +20,12 @@ permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
+# permalink_defaults:
+#permalink: posts/:abbrlink.html
+#abbrlink:
+#  alg: crc32  # 算法：crc16(default) and crc32
+#  rep: hex    # 进制：dec(default) and hex
+
 
 # Directory
 source_dir: source
@@ -50,6 +56,7 @@ highlight:
   auto_detect: false
   tab_replace: ''
   wrap: true
+
   hljs: false
 
 # 代码样式 设置
