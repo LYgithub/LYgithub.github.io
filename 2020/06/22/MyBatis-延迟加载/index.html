@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>test1 | Hexo</title>
+  <title>延迟加载 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="博客搭建">
+  <meta name="description" content="本文主要总结了 Mybatis 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test1">
-<meta property="og:url" content="http://yoursite.com/2020/07/06/hexo/index.html">
+<meta property="og:title" content="延迟加载">
+<meta property="og:url" content="http://yoursite.com/2020/06/22/MyBatis-%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="博客搭建">
+<meta property="og:description" content="本文主要总结了 Mybatis 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-06T03:43:49.000Z">
-<meta property="article:modified_time" content="2020-07-06T03:44:34.907Z">
+<meta property="article:published_time" content="2020-06-22T02:30:21.000Z">
+<meta property="article:modified_time" content="2020-07-06T08:09:54.691Z">
 <meta property="article:author" content="KawYang">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -75,10 +76,6 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
-            
-    			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
     			
             
@@ -90,21 +87,11 @@
 		        
 					<a class="qq" target="_blank" href="/1595550476" title="qq"><i class="icon-qq"></i></a>
 		        
-					<a class="weixin" target="_blank" href="#" title="weixin"><i class="icon-weixin"></i></a>
-		        
-					<a class="csdn" target="_blank" href="https://blog.csdn.net/liang520521/" title="csdn"><i class="icon-csdn"></i></a>
-		        
 					<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/9f4c8febacc4" title="jianshu"><i class="icon-jianshu"></i></a>
-		        
-					<a class="segmentfault" target="_blank" href="#" title="segmentfault"><i class="icon-segmentfault"></i></a>
 		        
 					<a class="bilibili" target="_blank" href="https://space.bilibili.com/308187449" title="bilibili"><i class="icon-bilibili"></i></a>
 		        
 					<a class="mail" target="_blank" href="mailto:KawYang@163.com" title="mail"><i class="icon-mail"></i></a>
-		        
-					<a class="twitter" target="_blank" href="#" title="twitter"><i class="icon-twitter"></i></a>
-		        
-					<a class="linkedin" target="_blank" href="#" title="linkedin"><i class="icon-linkedin"></i></a>
 		        
 			</div>
 		</nav>
@@ -145,21 +132,11 @@
 			        
 						<a class="qq" target="_blank" href="/1595550476" title="qq"><i class="icon-qq"></i></a>
 			        
-						<a class="weixin" target="_blank" href="#" title="weixin"><i class="icon-weixin"></i></a>
-			        
-						<a class="csdn" target="_blank" href="https://blog.csdn.net/liang520521/" title="csdn"><i class="icon-csdn"></i></a>
-			        
 						<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/9f4c8febacc4" title="jianshu"><i class="icon-jianshu"></i></a>
-			        
-						<a class="segmentfault" target="_blank" href="#" title="segmentfault"><i class="icon-segmentfault"></i></a>
 			        
 						<a class="bilibili" target="_blank" href="https://space.bilibili.com/308187449" title="bilibili"><i class="icon-bilibili"></i></a>
 			        
 						<a class="mail" target="_blank" href="mailto:KawYang@163.com" title="mail"><i class="icon-mail"></i></a>
-			        
-						<a class="twitter" target="_blank" href="#" title="twitter"><i class="icon-twitter"></i></a>
-			        
-						<a class="linkedin" target="_blank" href="#" title="linkedin"><i class="icon-linkedin"></i></a>
 			        
 				</div>
 			</nav>
@@ -187,22 +164,22 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hexo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MyBatis-延迟加载" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      test1
+      延迟加载
     </h1>
   
 
         
           
 
-        <a href="/2020/07/06/hexo/" class="archive-article-date">
-  	<time datetime="2020-07-06T03:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-06</time>
+        <a href="/2020/06/22/MyBatis-%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" class="archive-article-date">
+  	<time datetime="2020-06-22T02:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-22</time>
 </a>
         
         
@@ -213,22 +190,52 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-      <!-- 
-        <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><a id="more"></a>
+      
+        <blockquote>
+<p>本文主要总结了 <code>Mybatis</code> 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。</p>
+</blockquote>
+<a id="more"></a>
 
-<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><h2 id="haxo"><a href="#haxo" class="headerlink" title="haxo"></a>haxo</h2><h2 id="安装淘宝镜像源"><a href="#安装淘宝镜像源" class="headerlink" title="安装淘宝镜像源"></a>安装淘宝镜像源</h2><blockquote>
-<p>npm install -g cnpm –registry-<a href="https://registry.npm.toobao.org" target="_blank" rel="noopener">https://registry.npm.toobao.org</a><br>cnpm install -g hexo-cli<br>mkdir blog<br>cd bolg<br>sudo hexo init</p>
+<h3 id="assocation-延迟加载"><a href="#assocation-延迟加载" class="headerlink" title="assocation 延迟加载"></a>assocation 延迟加载</h3><blockquote>
+<p>assocation实现一对一延迟加载</p>
 </blockquote>
-<p>hexo start</p>
+<p>将级联操作 转换为两条SQL语句，通过两次查询方式进行获取数据。</p>
+<p>含有 注入对象的对象查询，当查询结果不涉及注入对象信息时，不进行内嵌对象的查询。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"resultStuLazy"</span> <span class="attr">type</span>=<span class="string">"com.item.entity.Student"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加select 属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"com.item.entity.Classes_"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">select</span>=<span class="string">"com.item.repository.IClasses.findById"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">column</span>=<span class="string">"cid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findById"</span> <span class="attr">resultMap</span>=<span class="string">"resultStuLazy"</span>&gt;</span></span><br><span class="line">    select id,name,cid from student where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
 <blockquote>
-<p>安装 git<br>cnpm install –save hexo-deployer-git</p>
+<p>在全局配置文件中开启延迟加载</p>
 </blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"aggressiveLazyLoading"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p><a href="https://www.jianshu.com/p/6f5b42d52d38" target="_blank" rel="noopener">name 参数参考</a></p>
+<h3 id="Collection-延迟加载"><a href="#Collection-延迟加载" class="headerlink" title="Collection 延迟加载"></a>Collection 延迟加载</h3><blockquote>
+<p>Collection 实现一对多延迟加载。</p>
+</blockquote>
+<p>在查询班级信息时，如果需要查询班级内所有👨‍🎓信息，需要进行级联操作。<br>可以将该操作分为两步：</p>
+<ul>
+<li>先根据🆔查询出班级信息 =&gt; select * from classes where id=?</li>
+<li>再根据👩‍🎓的班级🆔，查询出班级内所有👨‍🎓 =&gt; select * from student where cid=?</li>
+</ul>
 <blockquote>
-<p>hexo n “nodename”<br>发布<br>hexo d </p>
+<p>查询班级信息</p>
 </blockquote>
+<p>采用配置文件的方式，用 <code>collection</code> 配置第二步的操作，使用 <code>ofType</code> 属性，完成数据类型的指定。<br>如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载start  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"classLazy"</span> <span class="attr">type</span>=<span class="string">"com.kawyang.entity.ClassesStu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"students"</span> <span class="attr">ofType</span>=<span class="string">"com.kawyang.entity.Student"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">select</span>=<span class="string">"com.kawyang.repository.IStudentRepository.findByCid"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIdLazy"</span> <span class="attr">resultMap</span>=<span class="string">"classLazy"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select * from classes where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  延迟加载end  --&gt;</span></span><br></pre></td></tr></table></figure></div>
+
 <blockquote>
-<p>查看多口进程<br>sudo lsof -i :4000</p>
+<p>根据班级 🆔 查询所有👩‍🎓👨‍🎓，使用注解方式如下：</p>
 </blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from student where cid=#&#123;id&#125;"</span>)</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">findByCid</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">IStudentRepository mapper = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IStudentRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">Student byIdLazy = mapper.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询学生信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级的名称，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy.getClasses().getName());</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"============"</span>);</span><br><span class="line"></span><br><span class="line">IClassRepository mapper1 = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IClassRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">ClassesStu byIdLazy1 = mapper1.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询本季信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级所有👩‍🎓👨‍🎓信息，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getStudents());</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1267149311.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@4b8729ff]</span><br><span class="line">==&gt;  Preparing: select * from student where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">KawYang</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line"></span><br><span class="line">============</span><br><span class="line"></span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1414549197.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@54504ecd]</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from student where cid=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==        Row: 3, 张三, 2</span><br><span class="line">&lt;==      Total: 2</span><br><span class="line">[Student(id=2, name=KawYang, classes=null), Student(id=3, name=张三, classes=null)]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure></div>
+
+<p>⚠️ : 由于 MyBatis 默认开启一级缓存，所以在第二步查询时，只执行了第二条SQL语句。</p>
 
       
 
@@ -242,7 +249,7 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>分享就是给我的最大鼓励<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
                     
@@ -253,27 +260,57 @@
           </div>
           </a>
         </div>
-       -->
+      
       
         
-          
-            <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><a id="more"></a>
+          <!-- 
+            <blockquote>
+<p>本文主要总结了 <code>Mybatis</code> 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。</p>
+</blockquote>
+<a id="more"></a>
 
-<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><h2 id="haxo"><a href="#haxo" class="headerlink" title="haxo"></a>haxo</h2><h2 id="安装淘宝镜像源"><a href="#安装淘宝镜像源" class="headerlink" title="安装淘宝镜像源"></a>安装淘宝镜像源</h2><blockquote>
-<p>npm install -g cnpm –registry-<a href="https://registry.npm.toobao.org" target="_blank" rel="noopener">https://registry.npm.toobao.org</a><br>cnpm install -g hexo-cli<br>mkdir blog<br>cd bolg<br>sudo hexo init</p>
+<h3 id="assocation-延迟加载"><a href="#assocation-延迟加载" class="headerlink" title="assocation 延迟加载"></a>assocation 延迟加载</h3><blockquote>
+<p>assocation实现一对一延迟加载</p>
 </blockquote>
-<p>hexo start</p>
-<blockquote>
-<p>安装 git<br>cnpm install –save hexo-deployer-git</p>
-</blockquote>
-<blockquote>
-<p>hexo n “nodename”<br>发布<br>hexo d </p>
-</blockquote>
-<blockquote>
-<p>查看多口进程<br>sudo lsof -i :4000</p>
-</blockquote>
+<p>将级联操作 转换为两条SQL语句，通过两次查询方式进行获取数据。</p>
+<p>含有 注入对象的对象查询，当查询结果不涉及注入对象信息时，不进行内嵌对象的查询。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"resultStuLazy"</span> <span class="attr">type</span>=<span class="string">"com.item.entity.Student"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加select 属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"com.item.entity.Classes_"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">select</span>=<span class="string">"com.item.repository.IClasses.findById"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">column</span>=<span class="string">"cid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findById"</span> <span class="attr">resultMap</span>=<span class="string">"resultStuLazy"</span>&gt;</span></span><br><span class="line">    select id,name,cid from student where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
-          
+
+<blockquote>
+<p>在全局配置文件中开启延迟加载</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"aggressiveLazyLoading"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p><a href="https://www.jianshu.com/p/6f5b42d52d38" target="_blank" rel="noopener">name 参数参考</a></p>
+<h3 id="Collection-延迟加载"><a href="#Collection-延迟加载" class="headerlink" title="Collection 延迟加载"></a>Collection 延迟加载</h3><blockquote>
+<p>Collection 实现一对多延迟加载。</p>
+</blockquote>
+<p>在查询班级信息时，如果需要查询班级内所有👨‍🎓信息，需要进行级联操作。<br>可以将该操作分为两步：</p>
+<ul>
+<li>先根据🆔查询出班级信息 =&gt; select * from classes where id=?</li>
+<li>再根据👩‍🎓的班级🆔，查询出班级内所有👨‍🎓 =&gt; select * from student where cid=?</li>
+</ul>
+<blockquote>
+<p>查询班级信息</p>
+</blockquote>
+<p>采用配置文件的方式，用 <code>collection</code> 配置第二步的操作，使用 <code>ofType</code> 属性，完成数据类型的指定。<br>如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载start  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"classLazy"</span> <span class="attr">type</span>=<span class="string">"com.kawyang.entity.ClassesStu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"students"</span> <span class="attr">ofType</span>=<span class="string">"com.kawyang.entity.Student"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">select</span>=<span class="string">"com.kawyang.repository.IStudentRepository.findByCid"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIdLazy"</span> <span class="attr">resultMap</span>=<span class="string">"classLazy"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select * from classes where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  延迟加载end  --&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>根据班级 🆔 查询所有👩‍🎓👨‍🎓，使用注解方式如下：</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from student where cid=#&#123;id&#125;"</span>)</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">findByCid</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">IStudentRepository mapper = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IStudentRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">Student byIdLazy = mapper.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询学生信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级的名称，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy.getClasses().getName());</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"============"</span>);</span><br><span class="line"></span><br><span class="line">IClassRepository mapper1 = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IClassRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">ClassesStu byIdLazy1 = mapper1.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询本季信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级所有👩‍🎓👨‍🎓信息，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getStudents());</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1267149311.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@4b8729ff]</span><br><span class="line">==&gt;  Preparing: select * from student where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">KawYang</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line"></span><br><span class="line">============</span><br><span class="line"></span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1414549197.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@54504ecd]</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from student where cid=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==        Row: 3, 张三, 2</span><br><span class="line">&lt;==      Total: 2</span><br><span class="line">[Student(id=2, name=KawYang, classes=null), Student(id=3, name=张三, classes=null)]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure></div>
+
+<p>⚠️ : 由于 MyBatis 默认开启一级缓存，所以在第二步查询时，只执行了第二条SQL语句。</p>
+
+           -->
         
     </div>
     <div class="article-info article-info-index">
@@ -284,7 +321,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
         		</li>
       		
 		</ul>
@@ -340,7 +381,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/06/hexo/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/22/MyBatis-%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -354,9 +395,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/07/03/MyBatis-%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2-%E5%8A%A8%E6%80%81SQL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          模糊查询-动态SQL
+        
+      </div>
+    </a>
   
-    <a href="/2020/07/05/MyBatis%E7%BA%A7%E8%81%94%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MyBatis级联操作</div>
+  
+    <a href="/2020/06/21/MyBatis-%E7%BA%A7%E8%81%94%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">级联操作</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -383,7 +433,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#博客搭建"><span class="toc-number">1.</span> <span class="toc-text">博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js"><span class="toc-number">1.1.</span> <span class="toc-text">Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#haxo"><span class="toc-number">1.2.</span> <span class="toc-text">haxo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装淘宝镜像源"><span class="toc-number">1.3.</span> <span class="toc-text">安装淘宝镜像源</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#assocation-延迟加载"><span class="toc-number">1.</span> <span class="toc-text">assocation 延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection-延迟加载"><span class="toc-number">2.</span> <span class="toc-text">Collection 延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">3.</span> <span class="toc-text">测试</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -481,25 +531,17 @@ MathJax.Hub.Queue(function() {
       
       
     
-      
-      
-      
-    
     
 
     <ul style="width: 70%">
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
-        
-      
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -520,11 +562,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
             
             <div class="clearfix"></div>
@@ -571,43 +617,11 @@ MathJax.Hub.Queue(function() {
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="https://www.baidu.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>百度</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;br&gt;&lt;br&gt;长路漫漫&lt;br&gt;</div>
   	  	
     	</section>
     
