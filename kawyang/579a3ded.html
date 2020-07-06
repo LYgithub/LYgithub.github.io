@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | KawYang</title>
+  <title>数据缓存 | KawYang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="KawYang">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据缓存">
+<meta property="og:url" content="http://yoursite.com/kawyang/579a3ded.html">
 <meta property="og:site_name" content="KawYang">
+<meta property="og:description" content="将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-06T08:08:04.000Z">
+<meta property="article:modified_time" content="2020-07-06T15:57:51.474Z">
 <meta property="article:author" content="KawYang">
+<meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="缓存">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="KawYang" type="application/atom+xml">
@@ -164,78 +170,180 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MyBatis-数据缓存" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/b3b09752.html" class="archive-article-date">
-  	<time datetime="2020-07-06T16:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/b3b09752.html">hexo-abbrlink-undefined</a>
+    <h1 class="article-title" itemprop="name">
+      数据缓存
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
+        
           
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/579a3ded.html" class="archive-article-date">
+        <a href="/kawyang/579a3ded.html" class="archive-article-date">
   	<time datetime="2020-07-06T08:08:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/579a3ded.html">数据缓存</a>
-    </h1>
-  
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+      
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。</p>
+</blockquote>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><blockquote>
+<p>一级缓存是 SqlSession 级别的缓存，只要 SqlSession 没有被 close 或 flush ，就会存在。</p>
+</blockquote>
+<ul>
+<li><p>当执行两次相同的查询时，MyBatis 会将第一次查询的结果保存到缓存中，再次运行查询代码，就不需要执行SQL 语句，直接从缓存中获取数据。</p>
+</li>
+<li><p>当调用 SqlSession 对数据进行 修改、插入、删除、commit()、close() 等就会清空一级缓存。以保证缓存中数据为最新数据，避免脏读。</p>
+</li>
+<li><p>一级缓存清空：</p>
+<ul>
+<li>调用 SqlSession对象的 <code>clearCache()</code> 方法</li>
+<li>close()</li>
+<li>commit()</li>
+</ul>
+</li>
+</ul>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><blockquote>
+<p>二级缓存是 <code>Mapper</code> 映射级别的缓存，多个 SqlSession 对象，操作同一个 Mapper 映射的 SQL ，公用一个缓存对象。</p>
+</blockquote>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="引入坐标"><a href="#引入坐标" class="headerlink" title="引入坐标"></a>引入坐标</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ehchache 缓存  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="开启缓存"><a href="#开启缓存" class="headerlink" title="开启缓存"></a>开启缓存</h4><p>在 MyBatis的配置文件中(config.xml)，使用 settings 标签下 的 setting 标签 开启缓存。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  打印SQL  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"STDOUT_LOGGING"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启延迟加载  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启二级缓存  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="配置Mapper"><a href="#配置Mapper" class="headerlink" title="配置Mapper"></a>配置Mapper</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>&gt;</span><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.ehcache.LoggingEhcache"</span> &gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   创建缓存之后，对吼一次访问缓存的时间值缓存失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToIdleSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存自创建时间起至失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToLiveSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--        --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalHeap"</span> <span class="attr">value</span>=<span class="string">"1000"</span>/&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalDisk"</span> <span class="attr">value</span>=<span class="string">"10000000"</span>/&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存回收策略，移除-近期使用最少的对象 --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"memoryStoreEvictionPolicy"</span> <span class="attr">value</span>=<span class="string">"LRU"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="配置-useCache-属性"><a href="#配置-useCache-属性" class="headerlink" title="配置 useCache 属性"></a>配置 useCache 属性</h4><blockquote>
+<p>如果每次查询都需要最新的数据，需要将 select🏷️ 中的 <code>useCache</code> 属性设置为 <code>false</code>, 禁用二级缓存。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"com.item.entity.Student"</span> <span class="attr">useCache</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    select id,name from student </span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><blockquote>
+<p>步骤</p>
+</blockquote>
+<p>使用<code>同一个</code>Mapper映射，创建两个<code>不同</code>的 SqlSession 对象，分别执行<code>相同</code> 的SQL操作</p>
+<p>if : 执行一次 SQL 语句<br>    二级缓存成功！<br>else :<br>    二级缓存失败！</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>结果:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">==&gt;  Preparing: select * from good where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 电冰箱</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br><span class="line">Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Returned connection 392918519 to pool.</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.5</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>一下具体内容及原因，有待进一步了解学习。</p>
+</blockquote>
+<p>⚠️ : 如果使用 sqlSession.clearCache(); 清除缓存，但依然缓存着其他 SqlSession 对象的缓存数据。</p>
+<p>如下测试：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.clearCache();</span><br><span class="line">        System.out.println(<span class="string">"====    🆑 sqlSession缓存    ===="</span>);</span><br><span class="line">        System.out.println(sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>).<span class="title">findGoodById</span>(2))</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>结果:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1804126860.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@6b88ca8c]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;    🆑 sqlSession缓存    &#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br></pre></td></tr></table></figure></div>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>分享就是给我的最大鼓励<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+      
+        
+          <!-- 
+            <blockquote>
+<p>将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><blockquote>
+<p>一级缓存是 SqlSession 级别的缓存，只要 SqlSession 没有被 close 或 flush ，就会存在。</p>
+</blockquote>
+<ul>
+<li><p>当执行两次相同的查询时，MyBatis 会将第一次查询的结果保存到缓存中，再次运行查询代码，就不需要执行SQL 语句，直接从缓存中获取数据。</p>
+</li>
+<li><p>当调用 SqlSession 对数据进行 修改、插入、删除、commit()、close() 等就会清空一级缓存。以保证缓存中数据为最新数据，避免脏读。</p>
+</li>
+<li><p>一级缓存清空：</p>
+<ul>
+<li>调用 SqlSession对象的 <code>clearCache()</code> 方法</li>
+<li>close()</li>
+<li>commit()</li>
+</ul>
+</li>
+</ul>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><blockquote>
+<p>二级缓存是 <code>Mapper</code> 映射级别的缓存，多个 SqlSession 对象，操作同一个 Mapper 映射的 SQL ，公用一个缓存对象。</p>
+</blockquote>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="引入坐标"><a href="#引入坐标" class="headerlink" title="引入坐标"></a>引入坐标</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ehchache 缓存  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="开启缓存"><a href="#开启缓存" class="headerlink" title="开启缓存"></a>开启缓存</h4><p>在 MyBatis的配置文件中(config.xml)，使用 settings 标签下 的 setting 标签 开启缓存。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  打印SQL  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"STDOUT_LOGGING"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启延迟加载  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启二级缓存  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="配置Mapper"><a href="#配置Mapper" class="headerlink" title="配置Mapper"></a>配置Mapper</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>&gt;</span><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.ehcache.LoggingEhcache"</span> &gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   创建缓存之后，对吼一次访问缓存的时间值缓存失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToIdleSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存自创建时间起至失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToLiveSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--        --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalHeap"</span> <span class="attr">value</span>=<span class="string">"1000"</span>/&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalDisk"</span> <span class="attr">value</span>=<span class="string">"10000000"</span>/&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存回收策略，移除-近期使用最少的对象 --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"memoryStoreEvictionPolicy"</span> <span class="attr">value</span>=<span class="string">"LRU"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="配置-useCache-属性"><a href="#配置-useCache-属性" class="headerlink" title="配置 useCache 属性"></a>配置 useCache 属性</h4><blockquote>
+<p>如果每次查询都需要最新的数据，需要将 select🏷️ 中的 <code>useCache</code> 属性设置为 <code>false</code>, 禁用二级缓存。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"com.item.entity.Student"</span> <span class="attr">useCache</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    select id,name from student </span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><blockquote>
+<p>步骤</p>
+</blockquote>
+<p>使用<code>同一个</code>Mapper映射，创建两个<code>不同</code>的 SqlSession 对象，分别执行<code>相同</code> 的SQL操作</p>
+<p>if : 执行一次 SQL 语句<br>    二级缓存成功！<br>else :<br>    二级缓存失败！</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>结果:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">==&gt;  Preparing: select * from good where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 电冰箱</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br><span class="line">Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Returned connection 392918519 to pool.</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.5</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>一下具体内容及原因，有待进一步了解学习。</p>
+</blockquote>
+<p>⚠️ : 如果使用 sqlSession.clearCache(); 清除缓存，但依然缓存着其他 SqlSession 对象的缓存数据。</p>
+<p>如下测试：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.clearCache();</span><br><span class="line">        System.out.println(<span class="string">"====    🆑 sqlSession缓存    ===="</span>);</span><br><span class="line">        System.out.println(sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>).<span class="title">findGoodById</span>(2))</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>结果:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1804126860.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@6b88ca8c]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;    🆑 sqlSession缓存    &#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br></pre></td></tr></table></figure></div>
+
+           -->
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -251,7 +359,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -264,214 +372,146 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/kawyang/579a3ded.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/5882fb3c.html" class="archive-article-date">
-  	<time datetime="2020-07-03T08:07:18.929Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-03</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/kawyang/b3b09752.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          hexo-abbrlink-undefined
+        
+      </div>
+    </a>
+  
+  
+    <a href="/kawyang/5882fb3c.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">模糊查询-动态SQL</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/5882fb3c.html">模糊查询-动态SQL</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/uncategorized//" class="article-tag-list-link color4">uncategorized</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一级缓存"><span class="toc-number">1.</span> <span class="toc-text">一级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二级缓存"><span class="toc-number">2.</span> <span class="toc-text">二级缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用步骤"><span class="toc-number">2.1.</span> <span class="toc-text">使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引入坐标"><span class="toc-number">2.1.1.</span> <span class="toc-text">引入坐标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启缓存"><span class="toc-number">2.1.2.</span> <span class="toc-text">开启缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Mapper"><span class="toc-number">2.1.3.</span> <span class="toc-text">配置Mapper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置-useCache-属性"><span class="toc-number">2.1.4.</span> <span class="toc-text">配置 useCache 属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">2.1.5.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/70e7f4d8.html" class="archive-article-date">
-  	<time datetime="2020-06-22T02:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/70e7f4d8.html">延迟加载</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/uncategorized//" class="article-tag-list-link color4">uncategorized</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/fb315360.html" class="archive-article-date">
-  	<time datetime="2020-06-21T01:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-21</time>
-</a>
-        </div>
-    	 
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="MyBatis-数据缓存" data-title="数据缓存" data-url="http://yoursite.com/kawyang/579a3ded.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/fb315360.html">级联操作</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/8661f06f.html" class="archive-article-date">
-  	<time datetime="2020-06-20T08:47:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/8661f06f.html">基本操作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/uncategorized//" class="article-tag-list-link color4">uncategorized</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -498,8 +538,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
