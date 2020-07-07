@@ -1,7 +1,9 @@
 ---
 title: 基本操作
-date: 2020-06-20 16:47:42
 tags: MyBatis
+abbrlink: 8661f06f
+categories: JavaWeb
+date: 2020-06-20 16:47:42
 ---
 
 > MyBatis 是一款优秀的半自动的轻量级的持久层框架。本文介绍了 `MyBatis` 的基本项目的创建和使用。

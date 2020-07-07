@@ -1,10 +1,10 @@
 ---
-
 title: 级联操作
-date: 2020-6-21 09:30:21
-abbrlink: jilian
-tags: [MyBatis, SQL ]
-
+tags:
+  - MyBatis
+  - SQL
+abbrlink: fb315360
+date: 2020-06-21 09:30:21
 ---
 
 > 本文介绍了`MyBatis`的级联操作，通过查询多张表完成数据的获取，关键在于练习 `resultMap`、`association`、`collection` 标签。

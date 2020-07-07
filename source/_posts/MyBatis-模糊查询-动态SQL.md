@@ -1,9 +1,11 @@
 ---
-
 title: 模糊查询-动态SQL
-data: 2020-6-22 10:30:21
-tags: [MyBatis, SQL]
-
+tags:
+  - MyBatis
+  - SQL
+abbrlink: 5882fb3c
+categories: JavaWeb
+data: 2020-06-22 10:30:21
 ---
 
 > 本文讲述了模糊查询的操作方法，配置实体类全局路径方法等内容，主要对 `MyBatis` 的动态SQL查询方式进行了相关总结。

@@ -1,9 +1,11 @@
 ---
-
 title: 延迟加载
-date: 2020-6-22 10:30:21
-tags: [MyBatis, SQL ]
-
+tags:
+  - MyBatis
+  - SQL
+abbrlink: 70e7f4d8
+categories: JavaWeb
+date: 2020-06-22 10:30:21
 ---
 
 > 本文主要总结了 `Mybatis` 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。

@@ -1,7 +1,11 @@
 ---
 title: 数据缓存
+tags:
+  - MyBatis
+  - 缓存
+abbrlink: 579a3ded
+categories: JavaWeb
 date: 2020-07-06 16:08:04
-tags: [MyBatis, 缓存]
 ---
 
 > 将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。
