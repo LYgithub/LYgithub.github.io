@@ -1,10 +1,10 @@
 ---
-title: 延迟加载
+title: MyBatis-延迟加载
 tags:
   - MyBatis
   - SQL
 abbrlink: 70e7f4d8
-categories: JavaWeb
+categories: 框架
 date: 2020-06-22 10:30:21
 ---
 

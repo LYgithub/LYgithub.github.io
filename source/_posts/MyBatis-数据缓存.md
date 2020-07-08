@@ -1,10 +1,10 @@
 ---
-title: 数据缓存
+title: MyBatis-数据缓存
 tags:
   - MyBatis
   - 缓存
 abbrlink: 579a3ded
-categories: JavaWeb
+categories: 框架
 date: 2020-07-06 16:08:04
 ---
 

@@ -1,10 +1,10 @@
 ---
-title: 模糊查询-动态SQL
+title: MyBatis-模糊查询&动态SQL
 tags:
   - MyBatis
   - SQL
 abbrlink: 5882fb3c
-categories: JavaWeb
+categories: 框架
 data: 2020-06-22 10:30:21
 ---
 

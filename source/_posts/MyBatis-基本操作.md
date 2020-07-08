@@ -1,8 +1,8 @@
 ---
-title: 基本操作
+title: MyBatis-基本操作
 tags: MyBatis
 abbrlink: 8661f06f
-categories: JavaWeb
+categories: 框架
 date: 2020-06-20 16:47:42
 ---
 
