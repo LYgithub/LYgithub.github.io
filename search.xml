@@ -126,60 +126,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MyBatis-模糊查询&amp;动态SQL</title>
-    <url>/kawyang/5882fb3c.html</url>
-    <content><![CDATA[<blockquote>
-<p>本文讲述了模糊查询的操作方法，配置实体类全局路径方法等内容，主要对 <code>MyBatis</code> 的动态SQL查询方式进行了相关总结。</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><ul>
-<li>#{} sql语句占位符</li>
-<li>${} sql语句拼接</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="comment">#&#123;data&#125;;</span></span><br><span class="line"><span class="comment">-- =&gt; select * from student where name like ?;</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'%$&#123;data&#125;%'</span>; </span><br><span class="line"><span class="comment">-- =&gt; select * from student where name like '%data%';</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="配置实体类路径-别名"><a href="#配置实体类路径-别名" class="headerlink" title="配置实体类路径 (别名)"></a>配置实体类路径 (别名)</h2><p>在全局配置文件中使用</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--  别名设置，放在settings标签之下，environment 标签之前  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 单个别名配置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">"student"</span> <span class="attr">type</span>=<span class="string">"com.kawyang.entity.Student"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--   批量别名，扫描包内所有内容，别名为类名(首字母大小写都可以)     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.kawyang.entity"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-<blockquote>
-<p>配置文件书写顺序<br>properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,<br>objectWrapperFactory?,plugins?,environments?,databaseIdProvider?,mappers?</p>
-</blockquote>
-<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><blockquote>
-<p>通过 if 标签可以判断是否包含查询的字段</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStudent"</span> <span class="attr">parameterType</span>=<span class="string">"student"</span> <span class="attr">resultType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        select * from student where 1=1</span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name != ''"</span>&gt;</span></span><br><span class="line">            and name like #&#123;name&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"age != -1"</span>&gt;</span></span><br><span class="line">            and age=#&#123;age&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><blockquote>
-<p>通过 where 标签可以解决以上 1=1 的多余内容  </p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStudent"</span> <span class="attr">parameterType</span>=<span class="string">"student"</span> <span class="attr">resultType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        select * from student</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name != ''"</span>&gt;</span></span><br><span class="line">	            and name like #&#123;name&#125;</span><br><span class="line">	        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"age != -1"</span>&gt;</span></span><br><span class="line">	            and age=#&#123;age&#125;</span><br><span class="line">	        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-<p>where 会自动判断第一条判断条件，并将 and 删除</p>
-<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><p>select * from student where id in (1,2,3);</p>
-<p>后端传递的参数为 Integer 的 集合<br>需要对该集合进行封装</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListIds</span> <span class="keyword">extends</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;Integer&gt; listIds;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询所有用户在 id 的集合之中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findInIds"</span> <span class="attr">resultType</span>=<span class="string">"student"</span> <span class="attr">parameterType</span>=<span class="string">"ListIds"</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--select * from student where id in (1,2,3);--&gt;</span></span><br><span class="line">	select * from student</span><br><span class="line">	<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids != null and ids.size() &gt; 0"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">			<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"student"</span> <span class="attr">open</span>=<span class="string">"id in ( "</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">item</span>=<span class="string">"id"</span> &gt;</span></span><br><span class="line">				#&#123;id&#125;</span><br><span class="line">			<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIds"</span> <span class="attr">resultType</span>=<span class="string">"com.kawyang.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"com.kawyang.entity.ListIds"</span>&gt;</span></span><br><span class="line">        select * from student</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">			foreach </span></span><br><span class="line"><span class="comment">			collection="需要遍历的元素" </span></span><br><span class="line"><span class="comment">			open="元素之前的部分"</span></span><br><span class="line"><span class="comment">			close="之后部分" </span></span><br><span class="line"><span class="comment">			separator="分割方式" </span></span><br><span class="line"><span class="comment">			item="属性名" &lt;/foreach&gt;  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span>  <span class="attr">open</span>=<span class="string">"id in ( "</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">item</span>=<span class="string">"id"</span> &gt;</span></span><br><span class="line">                #&#123;id&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-
-<h3 id="choose"><a href="#choose" class="headerlink" title="choose"></a>choose</h3><p>choose 标签，类似 java 中的 <code>switch-case-default</code> 结构。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStu"</span> <span class="attr">parameterType</span>=<span class="string">"com.item.entity.Student"</span> &gt;</span></span><br><span class="line">    select * from student</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"id != 0"</span>&gt;</span></span><br><span class="line">                id = #&#123;id&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"name != null"</span>&gt;</span></span><br><span class="line">                name=#&#123;name&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h3><p>使用 sql 标签 将 使用次数较多的sql语句用sql🏷️进行定义，使用 include🏷️引入到真正的查询语句中，使用方便。<br>例子：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"selectAll"</span> &gt;</span></span><br><span class="line">    select * from student</span><br><span class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStudent"</span> <span class="attr">parameterType</span>=<span class="string">"com.kawyang.entity.Student"</span> <span class="attr">resultType</span>=<span class="string">"com.kawyang.entity.Student"</span> &gt;</span></span><br><span class="line">--         select * from student</span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"selectAll"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"id != 0"</span>&gt;</span></span><br><span class="line">            id=#&#123;id&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"name != null"</span>&gt;</span></span><br><span class="line">            name=#&#123;name&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="注解形式使用动态SQL-待补充"><a href="#注解形式使用动态SQL-待补充" class="headerlink" title="注解形式使用动态SQL(待补充)"></a>注解形式使用动态SQL(待补充)</h3><p>添加  <code>&lt;script&gt;</code> 标签，即可使用 xml 中形式进行配置。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"&lt;script&gt;"</span> +</span><br><span class="line">        <span class="string">"select * from student"</span> +</span><br><span class="line">        <span class="string">"        &lt;where&gt;"</span> +</span><br><span class="line">        <span class="string">"            &lt;if test=\"ids != null and ids.size&gt;0\"&gt;"</span> +</span><br><span class="line">        <span class="string">"                &lt;foreach collection=\"ids\"  open=\"id in ( \" close=\")\" separator=\",\" item=\"id\" &gt;"</span> +</span><br><span class="line">        <span class="string">"                    #&#123;id&#125;"</span> +</span><br><span class="line">        <span class="string">"                &lt;/foreach&gt;"</span> +</span><br><span class="line">        <span class="string">"            &lt;/if&gt;"</span> +</span><br><span class="line">        <span class="string">"        &lt;/where&gt; "</span> +</span><br><span class="line">        <span class="string">"&lt;/script&gt;"</span>)</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">findByIds</span><span class="params">(ListIds listIds)</span></span>;</span><br></pre></td></tr></table></figure></div>
-
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>MyBatis</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MyBatis-基本操作</title>
     <url>/kawyang/8661f06f.html</url>
     <content><![CDATA[<blockquote>
@@ -351,6 +297,60 @@
       </tags>
   </entry>
   <entry>
+    <title>MyBatis-模糊查询&amp;动态SQL</title>
+    <url>/kawyang/5882fb3c.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文讲述了模糊查询的操作方法，配置实体类全局路径方法等内容，主要对 <code>MyBatis</code> 的动态SQL查询方式进行了相关总结。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><ul>
+<li>#{} sql语句占位符</li>
+<li>${} sql语句拼接</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="comment">#&#123;data&#125;;</span></span><br><span class="line"><span class="comment">-- =&gt; select * from student where name like ?;</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'%$&#123;data&#125;%'</span>; </span><br><span class="line"><span class="comment">-- =&gt; select * from student where name like '%data%';</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="配置实体类路径-别名"><a href="#配置实体类路径-别名" class="headerlink" title="配置实体类路径 (别名)"></a>配置实体类路径 (别名)</h2><p>在全局配置文件中使用</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--  别名设置，放在settings标签之下，environment 标签之前  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 单个别名配置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">"student"</span> <span class="attr">type</span>=<span class="string">"com.kawyang.entity.Student"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--   批量别名，扫描包内所有内容，别名为类名(首字母大小写都可以)     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.kawyang.entity"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>配置文件书写顺序<br>properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,<br>objectWrapperFactory?,plugins?,environments?,databaseIdProvider?,mappers?</p>
+</blockquote>
+<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><blockquote>
+<p>通过 if 标签可以判断是否包含查询的字段</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStudent"</span> <span class="attr">parameterType</span>=<span class="string">"student"</span> <span class="attr">resultType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        select * from student where 1=1</span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name != ''"</span>&gt;</span></span><br><span class="line">            and name like #&#123;name&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"age != -1"</span>&gt;</span></span><br><span class="line">            and age=#&#123;age&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><blockquote>
+<p>通过 where 标签可以解决以上 1=1 的多余内容  </p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStudent"</span> <span class="attr">parameterType</span>=<span class="string">"student"</span> <span class="attr">resultType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        select * from student</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name != ''"</span>&gt;</span></span><br><span class="line">	            and name like #&#123;name&#125;</span><br><span class="line">	        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"age != -1"</span>&gt;</span></span><br><span class="line">	            and age=#&#123;age&#125;</span><br><span class="line">	        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p>where 会自动判断第一条判断条件，并将 and 删除</p>
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><p>select * from student where id in (1,2,3);</p>
+<p>后端传递的参数为 Integer 的 集合<br>需要对该集合进行封装</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListIds</span> <span class="keyword">extends</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;Integer&gt; listIds;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询所有用户在 id 的集合之中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findInIds"</span> <span class="attr">resultType</span>=<span class="string">"student"</span> <span class="attr">parameterType</span>=<span class="string">"ListIds"</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--select * from student where id in (1,2,3);--&gt;</span></span><br><span class="line">	select * from student</span><br><span class="line">	<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids != null and ids.size() &gt; 0"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">			<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"student"</span> <span class="attr">open</span>=<span class="string">"id in ( "</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">item</span>=<span class="string">"id"</span> &gt;</span></span><br><span class="line">				#&#123;id&#125;</span><br><span class="line">			<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIds"</span> <span class="attr">resultType</span>=<span class="string">"com.kawyang.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"com.kawyang.entity.ListIds"</span>&gt;</span></span><br><span class="line">        select * from student</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">			foreach </span></span><br><span class="line"><span class="comment">			collection="需要遍历的元素" </span></span><br><span class="line"><span class="comment">			open="元素之前的部分"</span></span><br><span class="line"><span class="comment">			close="之后部分" </span></span><br><span class="line"><span class="comment">			separator="分割方式" </span></span><br><span class="line"><span class="comment">			item="属性名" &lt;/foreach&gt;  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span>  <span class="attr">open</span>=<span class="string">"id in ( "</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">item</span>=<span class="string">"id"</span> &gt;</span></span><br><span class="line">                #&#123;id&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="choose"><a href="#choose" class="headerlink" title="choose"></a>choose</h3><p>choose 标签，类似 java 中的 <code>switch-case-default</code> 结构。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStu"</span> <span class="attr">parameterType</span>=<span class="string">"com.item.entity.Student"</span> &gt;</span></span><br><span class="line">    select * from student</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"id != 0"</span>&gt;</span></span><br><span class="line">                id = #&#123;id&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"name != null"</span>&gt;</span></span><br><span class="line">                name=#&#123;name&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h3><p>使用 sql 标签 将 使用次数较多的sql语句用sql🏷️进行定义，使用 include🏷️引入到真正的查询语句中，使用方便。<br>例子：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"selectAll"</span> &gt;</span></span><br><span class="line">    select * from student</span><br><span class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByStudent"</span> <span class="attr">parameterType</span>=<span class="string">"com.kawyang.entity.Student"</span> <span class="attr">resultType</span>=<span class="string">"com.kawyang.entity.Student"</span> &gt;</span></span><br><span class="line">--         select * from student</span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"selectAll"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"id != 0"</span>&gt;</span></span><br><span class="line">            id=#&#123;id&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"name != null"</span>&gt;</span></span><br><span class="line">            name=#&#123;name&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="注解形式使用动态SQL-待补充"><a href="#注解形式使用动态SQL-待补充" class="headerlink" title="注解形式使用动态SQL(待补充)"></a>注解形式使用动态SQL(待补充)</h3><p>添加  <code>&lt;script&gt;</code> 标签，即可使用 xml 中形式进行配置。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"&lt;script&gt;"</span> +</span><br><span class="line">        <span class="string">"select * from student"</span> +</span><br><span class="line">        <span class="string">"        &lt;where&gt;"</span> +</span><br><span class="line">        <span class="string">"            &lt;if test=\"ids != null and ids.size&gt;0\"&gt;"</span> +</span><br><span class="line">        <span class="string">"                &lt;foreach collection=\"ids\"  open=\"id in ( \" close=\")\" separator=\",\" item=\"id\" &gt;"</span> +</span><br><span class="line">        <span class="string">"                    #&#123;id&#125;"</span> +</span><br><span class="line">        <span class="string">"                &lt;/foreach&gt;"</span> +</span><br><span class="line">        <span class="string">"            &lt;/if&gt;"</span> +</span><br><span class="line">        <span class="string">"        &lt;/where&gt; "</span> +</span><br><span class="line">        <span class="string">"&lt;/script&gt;"</span>)</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">findByIds</span><span class="params">(ListIds listIds)</span></span>;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>MyBatis</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBatis-级联操作</title>
     <url>/kawyang/fb315360.html</url>
     <content><![CDATA[<blockquote>
@@ -425,69 +425,65 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring-AOP</title>
-    <url>/kawyang/97375e6e.html</url>
+    <title>Spring-工厂方法</title>
+    <url>/kawyang/6c92115f.html</url>
     <content><![CDATA[<blockquote>
-<p>AOP</p>
+<p>📝 : Spring的工厂方法，将🏭 交给 <code>IoC容器</code> 进行管理，🏭包括：静态🏭、实例🏭。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>Aspect Oriented Programming  —- 面向切面编程</p>
-<ul>
-<li>降低耦合度</li>
-<li>易拓展</li>
-<li>复用</li>
-<li>非业务集中，便于统一管理</li>
-<li>业务代码比较纯粹，没有其他代码影响</li>
-</ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
-<li><p>创建Maven工程，添加坐标</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
-</li>
+<h2 id="Spring-的工厂方法"><a href="#Spring-的工厂方法" class="headerlink" title="Spring 的工厂方法"></a>Spring 的工厂方法</h2><blockquote>
+<p>使用工厂创建独享，并将工厂交给 IoC容器 进行管理</p>
+</blockquote>
+<h3 id="静态工厂"><a href="#静态工厂" class="headerlink" title="静态工厂"></a>静态工厂</h3><ul>
+<li>实体类</li>
 </ul>
-<p>Invocationhandler</p>
-<p>  生成代理类的类，</p>
-<p>  imlements InvocationHandler</p>
-<ul>
-<li><p>接收jjadf 啊收到回复ahsudjf 委托对象</p>
-</li>
-<li><p>设置返回代理类</p>
-<p>Proxy.newProxyInstance()</p>
-</li>
-<li><p>编写委托对象方法</p>
-</li>
-</ul>
-<h3 id="Spring框架对AOP进行封装"><a href="#Spring框架对AOP进行封装" class="headerlink" title="Spring框架对AOP进行封装"></a>Spring框架对AOP进行封装</h3><p>不需要创建InvocationHandler，只需要创建一个切面对象，将业务代码在切面中完成即可</p>
-<ul>
-<li>创建切面类对象 Aspect（切面）</li>
-<li>添加注解</li>
-</ul>
-<p>LoggerAspect</p>
-<ul>
-<li><code>@Aspect</code> ： 表示该类为切面类</li>
-<li><code>@Component</code>：将该类对象注入到IoC容器中</li>
-<li><code>@Befor</code> :表示方法执行的具体位置和时机  </li>
-</ul>
-<p>CalImpl2 也需要添加<code>@Component</code></p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  自动扫描  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.item"</span> &gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean class="com.item.AOP.LoggerAspect" p:id="" /&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  使 Aspect 标签生效，为目标类自动生成代理对象  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Long id;</span><br><span class="line">    String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>context:component-scan 标签是扫描包内所有添加@Component注解的类，注入到IoC中</p>
-<p>aop:aspectj-autoproxy 让Spring结合切面类和目标类自动生成代理对象。</p>
 <ul>
-<li>切面：横切关注点被模块化的抽象对象</li>
-<li>通知：切面对象完成的工作（非业务代码，日志…）</li>
-<li>目标：被通知的对象，即被切面的对象</li>
-<li>代理：切面、通知、目标混合之后的对象</li>
-<li>连接点：通知插入业务代码的具体位置</li>
-<li>切点：AOP通过切点定位到连接点</li>
+<li>静态工厂</li>
 </ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.item.Car;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, Car&gt; carMap;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        carMap = <span class="keyword">new</span> HashMap&lt;Long, Car&gt;();</span><br><span class="line">        carMap.put(<span class="number">1L</span>, <span class="keyword">new</span> Car(<span class="number">1L</span>, <span class="string">"宝马"</span>));</span><br><span class="line">        carMap.put(<span class="number">2L</span>, <span class="keyword">new</span> Car(<span class="number">2L</span>, <span class="string">"奔驰"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(Long id, String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="keyword">return</span> carMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>配置工厂</li>
+</ul>
+<blockquote>
+<p>将类使用bean🏷️配置到工厂的方法中，IoC容器使用配置的方法，根据传递的参数来获取对象。</p>
+</blockquote>
+<p>配置参数 : index (0开始、形参位置)、name(形参名称)</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置静态工厂 默认为单例模式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.CarFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置参数 getCar--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">value</span>=<span class="string">"String"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>获取IoC容器中对象</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">        Car car =(Car) context.getBean(<span class="string">"car"</span>);</span><br><span class="line">        System.out.println(car);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h3><ul>
+<li>工厂类</li>
+</ul>
+<p>同上</p>
+<ul>
+<li>配置文件</li>
+</ul>
+<blockquote>
+<p>在配置文件中配置两个 bean (🏭bean、获取Car的bean)，将🏭类先交给 IoC容器管理，然后再配置Car，调用容器中🏭创建对象的方法。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置工厂 bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factory"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.InstanceCarFactory"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置对象 Car  使用工厂 factory获取  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car2"</span> <span class="attr">factory-bean</span>=<span class="string">"factory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>使用</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    InstanceCarFactory factory = <span class="keyword">new</span> InstanceCarFactory();</span><br><span class="line">    System.out.println(factory.getCar(<span class="number">1L</span>));</span><br><span class="line"></span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">    Car car2 = (Car) context.getBean(<span class="string">"car2"</span>);</span><br><span class="line">    System.out.println(car2);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
 ]]></content>
       <categories>
         <category>框架</category>
       </categories>
       <tags>
         <tag>Spring</tag>
-        <tag>AOP</tag>
       </tags>
   </entry>
   <entry>
@@ -634,68 +630,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring-工厂方法</title>
-    <url>/kawyang/6c92115f.html</url>
-    <content><![CDATA[<blockquote>
-<p>📝 : Spring的工厂方法，将🏭 交给 <code>IoC容器</code> 进行管理，🏭包括：静态🏭、实例🏭。</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="Spring-的工厂方法"><a href="#Spring-的工厂方法" class="headerlink" title="Spring 的工厂方法"></a>Spring 的工厂方法</h2><blockquote>
-<p>使用工厂创建独享，并将工厂交给 IoC容器 进行管理</p>
-</blockquote>
-<h3 id="静态工厂"><a href="#静态工厂" class="headerlink" title="静态工厂"></a>静态工厂</h3><ul>
-<li>实体类</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Long id;</span><br><span class="line">    String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>静态工厂</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.item.Car;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, Car&gt; carMap;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        carMap = <span class="keyword">new</span> HashMap&lt;Long, Car&gt;();</span><br><span class="line">        carMap.put(<span class="number">1L</span>, <span class="keyword">new</span> Car(<span class="number">1L</span>, <span class="string">"宝马"</span>));</span><br><span class="line">        carMap.put(<span class="number">2L</span>, <span class="keyword">new</span> Car(<span class="number">2L</span>, <span class="string">"奔驰"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(Long id, String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="keyword">return</span> carMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>配置工厂</li>
-</ul>
-<blockquote>
-<p>将类使用bean🏷️配置到工厂的方法中，IoC容器使用配置的方法，根据传递的参数来获取对象。</p>
-</blockquote>
-<p>配置参数 : index (0开始、形参位置)、name(形参名称)</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置静态工厂 默认为单例模式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.CarFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置参数 getCar--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">value</span>=<span class="string">"String"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>获取IoC容器中对象</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">        Car car =(Car) context.getBean(<span class="string">"car"</span>);</span><br><span class="line">        System.out.println(car);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h3><ul>
-<li>工厂类</li>
-</ul>
-<p>同上</p>
-<ul>
-<li>配置文件</li>
-</ul>
-<blockquote>
-<p>在配置文件中配置两个 bean (🏭bean、获取Car的bean)，将🏭类先交给 IoC容器管理，然后再配置Car，调用容器中🏭创建对象的方法。</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置工厂 bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factory"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.InstanceCarFactory"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置对象 Car  使用工厂 factory获取  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car2"</span> <span class="attr">factory-bean</span>=<span class="string">"factory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>使用</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    InstanceCarFactory factory = <span class="keyword">new</span> InstanceCarFactory();</span><br><span class="line">    System.out.println(factory.getCar(<span class="number">1L</span>));</span><br><span class="line"></span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">    Car car2 = (Car) context.getBean(<span class="string">"car2"</span>);</span><br><span class="line">    System.out.println(car2);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-
-
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo-abbrlink-undefined</title>
     <url>/kawyang/b3b09752.html</url>
     <content><![CDATA[<blockquote>
@@ -728,13 +662,79 @@
       </tags>
   </entry>
   <entry>
-    <title>archives</title>
-    <url>/archives/index.html</url>
-    <content><![CDATA[]]></content>
+    <title>Spring-AOP</title>
+    <url>/kawyang/97375e6e.html</url>
+    <content><![CDATA[<blockquote>
+<p>AOP</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>Aspect Oriented Programming  —- 面向切面编程</p>
+<ul>
+<li>降低耦合度</li>
+<li>易拓展</li>
+<li>复用</li>
+<li>非业务集中，便于统一管理</li>
+<li>业务代码比较纯粹，没有其他代码影响</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>创建Maven工程，添加坐标</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+</li>
+</ul>
+<p>Invocationhandler</p>
+<p>  生成代理类的类，</p>
+<p>  imlements InvocationHandler</p>
+<ul>
+<li><p>接收jjadf 啊收到回复ahsudjf 委托对象</p>
+</li>
+<li><p>设置返回代理类</p>
+<p>Proxy.newProxyInstance()</p>
+</li>
+<li><p>编写委托对象方法</p>
+</li>
+</ul>
+<h3 id="Spring框架对AOP进行封装"><a href="#Spring框架对AOP进行封装" class="headerlink" title="Spring框架对AOP进行封装"></a>Spring框架对AOP进行封装</h3><p>不需要创建InvocationHandler，只需要创建一个切面对象，将业务代码在切面中完成即可</p>
+<ul>
+<li>创建切面类对象 Aspect（切面）</li>
+<li>添加注解</li>
+</ul>
+<p>LoggerAspect</p>
+<ul>
+<li><code>@Aspect</code> ： 表示该类为切面类</li>
+<li><code>@Component</code>：将该类对象注入到IoC容器中</li>
+<li><code>@Befor</code> :表示方法执行的具体位置和时机  </li>
+</ul>
+<p>CalImpl2 也需要添加<code>@Component</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  自动扫描  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.item"</span> &gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean class="com.item.AOP.LoggerAspect" p:id="" /&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  使 Aspect 标签生效，为目标类自动生成代理对象  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>context:component-scan 标签是扫描包内所有添加@Component注解的类，注入到IoC中</p>
+<p>aop:aspectj-autoproxy 让Spring结合切面类和目标类自动生成代理对象。</p>
+<ul>
+<li>切面：横切关注点被模块化的抽象对象</li>
+<li>通知：切面对象完成的工作（非业务代码，日志…）</li>
+<li>目标：被通知的对象，即被切面的对象</li>
+<li>代理：切面、通知、目标混合之后的对象</li>
+<li>连接点：通知插入业务代码的具体位置</li>
+<li>切点：AOP通过切点定位到连接点</li>
+</ul>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>AOP</tag>
+      </tags>
   </entry>
   <entry>
     <title>tags</title>
     <url>/tags/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>archives</title>
+    <url>/archives/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
