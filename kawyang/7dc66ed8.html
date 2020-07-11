@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 单例模式 | KawYang</title>
+  <title>LeetC移除元素 | KawYang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="KawYang">
-<meta property="og:url" content="http://yoursite.com/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
+  <meta name="description" content="给你一个数组nums 和一个值 val，你需要 原地 移除所有数值等于val的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetC移除元素">
+<meta property="og:url" content="http://yoursite.com/kawyang/7dc66ed8.html">
 <meta property="og:site_name" content="KawYang">
+<meta property="og:description" content="给你一个数组nums 和一个值 val，你需要 原地 移除所有数值等于val的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/KawYang/image/raw/master/img/20200711154934.png">
+<meta property="article:published_time" content="2020-07-11T07:51:17.000Z">
+<meta property="article:modified_time" content="2020-07-11T08:01:23.377Z">
 <meta property="article:author" content="KawYang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/KawYang/image/raw/master/img/20200711154934.png">
   
     <link rel="alternative" href="/atom.xml" title="KawYang" type="application/atom+xml">
   
@@ -166,76 +172,276 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetC移除元素" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/cd333c07.html" class="archive-article-date">
-  	<time datetime="2020-07-09T02:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/cd333c07.html">单例设计模式</a>
+    <h1 class="article-title" itemprop="name">
+      LeetC移除元素
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
           
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">单例模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
+        <a href="/kawyang/7dc66ed8.html" class="archive-article-date">
+  	<time datetime="2020-07-11T07:51:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-11</time>
+</a>
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+      
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>给你一个数组<code>nums</code> 和一个值 val，你需要 原地 移除所有数值等于<code>val</code>的元素，并返回移除后数组的新长度。<br>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 <code>原地</code> 修改输入数组。<br>元素的<code>顺序可以改变</code>。你不需要考虑数组中超出新长度后面的元素。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。<br>示例2:</p>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span></span><br><span class="line"><span class="keyword">int</span> len = removeElement(nums, val);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">	print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="解"><a href="#解" class="headerlink" title="解"></a>解</h1><blockquote>
+<p>i 标记符合元素的结尾， 初始值为 : 第一个为 val 的值，在 i 之前全部符合要求。<br>j 标记查找后方元素，如果 为 val : 跳过，如果不同：将元素移动到 i 标记处.</p>
+</blockquote>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200711154934.png" alt=""></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 找出 i 的初始值</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;nums.length &amp;&amp; nums[i] != val)&#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// j 查找不同的元素，如果不相同，移动到 i 的位置，i后移。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j&lt; nums.length; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] != val)&#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/remove-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+
+      
+
+      <!-- 标签云start -->
+      <div class="article-entry" itemprop="articleBody">
+        
+            
+            <!-- <blockquote>
+<p>给你一个数组<code>nums</code> 和一个值 val，你需要 原地 移除所有数值等于<code>val</code>的元素，并返回移除后数组的新长度。<br>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 <code>原地</code> 修改输入数组。<br>元素的<code>顺序可以改变</code>。你不需要考虑数组中超出新长度后面的元素。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。<br>示例2:</p>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span></span><br><span class="line"><span class="keyword">int</span> len = removeElement(nums, val);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">	print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="解"><a href="#解" class="headerlink" title="解"></a>解</h1><blockquote>
+<p>i 标记符合元素的结尾， 初始值为 : 第一个为 val 的值，在 i 之前全部符合要求。<br>j 标记查找后方元素，如果 为 val : 跳过，如果不同：将元素移动到 i 标记处.</p>
+</blockquote>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200711154934.png" alt=""></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 找出 i 的初始值</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;nums.length &amp;&amp; nums[i] != val)&#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// j 查找不同的元素，如果不相同，移动到 i 的位置，i后移。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j&lt; nums.length; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] != val)&#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/remove-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+ -->
+        
+    </div>
+    <!-- 标签云  -->
+    <!--  -->
+    <!-- 标签云end -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的鼓励<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+      
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
+        			<a href="/categories/文章类型//" class="article-tag-list-link color5">文章类型</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/kawyang/7dc66ed8.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/kawyang/276090df.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          LeetCode-双指针&amp;移除元素-27
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/kawyang/16b04212.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode-双指针&amp;167</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#示例"><span class="toc-number">1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说明"><span class="toc-number">2.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解"><span class="toc-number">3.</span> <span class="toc-text">解</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="LeetC移除元素" data-title="LeetC移除元素" data-url="http://yoursite.com/kawyang/7dc66ed8.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
 
           </div>
@@ -262,9 +468,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
