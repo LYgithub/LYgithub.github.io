@@ -100,38 +100,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetC移除元素</title>
-    <url>/kawyang/7dc66ed8.html</url>
-    <content><![CDATA[<blockquote>
-<p>给你一个数组<code>nums</code> 和一个值 val，你需要 原地 移除所有数值等于<code>val</code>的元素，并返回移除后数组的新长度。<br>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 <code>原地</code> 修改输入数组。<br>元素的<code>顺序可以改变</code>。你不需要考虑数组中超出新长度后面的元素。</p>
-</blockquote>
-<a id="more"></a>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
-<p>给定 nums = [3,2,2,3], val = 3,</p>
-<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
-<p>你不需要考虑数组中超出新长度后面的元素。<br>示例2:</p>
-<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
-<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
-<p>注意这五个元素可为任意顺序。</p>
-<p>你不需要考虑数组中超出新长度后面的元素。</p>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
-<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
-<p>你可以想象内部操作如下:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span></span><br><span class="line"><span class="keyword">int</span> len = removeElement(nums, val);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">	print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="解"><a href="#解" class="headerlink" title="解"></a>解</h1><blockquote>
-<p>i 标记符合元素的结尾， 初始值为 : 第一个为 val 的值，在 i 之前全部符合要求。<br>j 标记查找后方元素，如果 为 val : 跳过，如果不同：将元素移动到 i 标记处.</p>
-</blockquote>
-<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200711154934.png" alt=""></p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 找出 i 的初始值</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;nums.length &amp;&amp; nums[i] != val)&#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// j 查找不同的元素，如果不相同，移动到 i 的位置，i后移。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j&lt; nums.length; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] != val)&#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<hr>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/remove-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-]]></content>
-      <categories>
-        <category>文章类型</category>
-      </categories>
-  </entry>
-  <entry>
     <title>MyBatis-基本操作</title>
     <url>/kawyang/8661f06f.html</url>
     <content><![CDATA[<blockquote>
@@ -360,6 +328,74 @@
       </tags>
   </entry>
   <entry>
+    <title>MyBatis-数据缓存</title>
+    <url>/kawyang/579a3ded.html</url>
+    <content><![CDATA[<blockquote>
+<p>将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><blockquote>
+<p>一级缓存是 SqlSession 级别的缓存，只要 SqlSession 没有被 close 或 flush ，就会存在。</p>
+</blockquote>
+<ul>
+<li><p>当执行两次相同的查询时，MyBatis 会将第一次查询的结果保存到缓存中，再次运行查询代码，就不需要执行SQL 语句，直接从缓存中获取数据。</p>
+</li>
+<li><p>当调用 SqlSession 对数据进行 修改、插入、删除、commit()、close() 等就会清空一级缓存。以保证缓存中数据为最新数据，避免脏读。</p>
+</li>
+<li><p>一级缓存清空：</p>
+<ul>
+<li>调用 SqlSession对象的 <code>clearCache()</code> 方法</li>
+<li>close()</li>
+<li>commit()</li>
+</ul>
+</li>
+</ul>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><blockquote>
+<p>二级缓存是 <code>Mapper</code> 映射级别的缓存，多个 SqlSession 对象，操作同一个 Mapper 映射的 SQL ，公用一个缓存对象。</p>
+</blockquote>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="引入坐标"><a href="#引入坐标" class="headerlink" title="引入坐标"></a>引入坐标</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ehchache 缓存  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="开启缓存"><a href="#开启缓存" class="headerlink" title="开启缓存"></a>开启缓存</h4><p>在 MyBatis的配置文件中(config.xml)，使用 settings 标签下 的 setting 标签 开启缓存。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  打印SQL  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"STDOUT_LOGGING"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启延迟加载  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启二级缓存  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="配置Mapper"><a href="#配置Mapper" class="headerlink" title="配置Mapper"></a>配置Mapper</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>&gt;</span><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.ehcache.LoggingEhcache"</span> &gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   创建缓存之后，对吼一次访问缓存的时间值缓存失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToIdleSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存自创建时间起至失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToLiveSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--        --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalHeap"</span> <span class="attr">value</span>=<span class="string">"1000"</span>/&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalDisk"</span> <span class="attr">value</span>=<span class="string">"10000000"</span>/&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存回收策略，移除-近期使用最少的对象 --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"memoryStoreEvictionPolicy"</span> <span class="attr">value</span>=<span class="string">"LRU"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="配置-useCache-属性"><a href="#配置-useCache-属性" class="headerlink" title="配置 useCache 属性"></a>配置 useCache 属性</h4><blockquote>
+<p>如果每次查询都需要最新的数据，需要将 select🏷️ 中的 <code>useCache</code> 属性设置为 <code>false</code>, 禁用二级缓存。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"com.item.entity.Student"</span> <span class="attr">useCache</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    select id,name from student </span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><blockquote>
+<p>步骤</p>
+</blockquote>
+<p>使用<code>同一个</code>Mapper映射，创建两个<code>不同</code>的 SqlSession 对象，分别执行<code>相同</code> 的SQL操作</p>
+<p>if : 执行一次 SQL 语句<br>    二级缓存成功！<br>else :<br>    二级缓存失败！</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>结果:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">==&gt;  Preparing: select * from good where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 电冰箱</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br><span class="line">Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Returned connection 392918519 to pool.</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.5</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>一下具体内容及原因，有待进一步了解学习。</p>
+</blockquote>
+<p>⚠️ : 如果使用 sqlSession.clearCache(); 清除缓存，但依然缓存着其他 SqlSession 对象的缓存数据。</p>
+<p>如下测试：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.clearCache();</span><br><span class="line">        System.out.println(<span class="string">"====    🆑 sqlSession缓存    ===="</span>);</span><br><span class="line">        System.out.println(sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>).<span class="title">findGoodById</span>(2))</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>结果:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1804126860.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@6b88ca8c]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;    🆑 sqlSession缓存    &#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>MyBatis</tag>
+        <tag>缓存</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBatis-模糊查询&amp;动态SQL</title>
     <url>/kawyang/5882fb3c.html</url>
     <content><![CDATA[<blockquote>
@@ -488,65 +524,69 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring-工厂方法</title>
-    <url>/kawyang/6c92115f.html</url>
+    <title>Spring-AOP</title>
+    <url>/kawyang/97375e6e.html</url>
     <content><![CDATA[<blockquote>
-<p>📝 : Spring的工厂方法，将🏭 交给 <code>IoC容器</code> 进行管理，🏭包括：静态🏭、实例🏭。</p>
+<p>AOP</p>
 </blockquote>
 <a id="more"></a>
-
-<h2 id="Spring-的工厂方法"><a href="#Spring-的工厂方法" class="headerlink" title="Spring 的工厂方法"></a>Spring 的工厂方法</h2><blockquote>
-<p>使用工厂创建独享，并将工厂交给 IoC容器 进行管理</p>
-</blockquote>
-<h3 id="静态工厂"><a href="#静态工厂" class="headerlink" title="静态工厂"></a>静态工厂</h3><ul>
-<li>实体类</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Long id;</span><br><span class="line">    String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
+<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>Aspect Oriented Programming  —- 面向切面编程</p>
 <ul>
-<li>静态工厂</li>
+<li>降低耦合度</li>
+<li>易拓展</li>
+<li>复用</li>
+<li>非业务集中，便于统一管理</li>
+<li>业务代码比较纯粹，没有其他代码影响</li>
 </ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.item.Car;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, Car&gt; carMap;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        carMap = <span class="keyword">new</span> HashMap&lt;Long, Car&gt;();</span><br><span class="line">        carMap.put(<span class="number">1L</span>, <span class="keyword">new</span> Car(<span class="number">1L</span>, <span class="string">"宝马"</span>));</span><br><span class="line">        carMap.put(<span class="number">2L</span>, <span class="keyword">new</span> Car(<span class="number">2L</span>, <span class="string">"奔驰"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(Long id, String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="keyword">return</span> carMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>创建Maven工程，添加坐标</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
+</li>
+</ul>
+<p>Invocationhandler</p>
+<p>  生成代理类的类，</p>
+<p>  imlements InvocationHandler</p>
 <ul>
-<li>配置工厂</li>
+<li><p>接收jjadf 啊收到回复ahsudjf 委托对象</p>
+</li>
+<li><p>设置返回代理类</p>
+<p>Proxy.newProxyInstance()</p>
+</li>
+<li><p>编写委托对象方法</p>
+</li>
 </ul>
-<blockquote>
-<p>将类使用bean🏷️配置到工厂的方法中，IoC容器使用配置的方法，根据传递的参数来获取对象。</p>
-</blockquote>
-<p>配置参数 : index (0开始、形参位置)、name(形参名称)</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置静态工厂 默认为单例模式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.CarFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置参数 getCar--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">value</span>=<span class="string">"String"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
+<h3 id="Spring框架对AOP进行封装"><a href="#Spring框架对AOP进行封装" class="headerlink" title="Spring框架对AOP进行封装"></a>Spring框架对AOP进行封装</h3><p>不需要创建InvocationHandler，只需要创建一个切面对象，将业务代码在切面中完成即可</p>
 <ul>
-<li>获取IoC容器中对象</li>
+<li>创建切面类对象 Aspect（切面）</li>
+<li>添加注解</li>
 </ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">        Car car =(Car) context.getBean(<span class="string">"car"</span>);</span><br><span class="line">        System.out.println(car);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h3><ul>
-<li>工厂类</li>
-</ul>
-<p>同上</p>
+<p>LoggerAspect</p>
 <ul>
-<li>配置文件</li>
+<li><code>@Aspect</code> ： 表示该类为切面类</li>
+<li><code>@Component</code>：将该类对象注入到IoC容器中</li>
+<li><code>@Befor</code> :表示方法执行的具体位置和时机  </li>
 </ul>
-<blockquote>
-<p>在配置文件中配置两个 bean (🏭bean、获取Car的bean)，将🏭类先交给 IoC容器管理，然后再配置Car，调用容器中🏭创建对象的方法。</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置工厂 bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factory"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.InstanceCarFactory"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置对象 Car  使用工厂 factory获取  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car2"</span> <span class="attr">factory-bean</span>=<span class="string">"factory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p>CalImpl2 也需要添加<code>@Component</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  自动扫描  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.item"</span> &gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean class="com.item.AOP.LoggerAspect" p:id="" /&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  使 Aspect 标签生效，为目标类自动生成代理对象  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
+<p>context:component-scan 标签是扫描包内所有添加@Component注解的类，注入到IoC中</p>
+<p>aop:aspectj-autoproxy 让Spring结合切面类和目标类自动生成代理对象。</p>
 <ul>
-<li>使用</li>
+<li>切面：横切关注点被模块化的抽象对象</li>
+<li>通知：切面对象完成的工作（非业务代码，日志…）</li>
+<li>目标：被通知的对象，即被切面的对象</li>
+<li>代理：切面、通知、目标混合之后的对象</li>
+<li>连接点：通知插入业务代码的具体位置</li>
+<li>切点：AOP通过切点定位到连接点</li>
 </ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    InstanceCarFactory factory = <span class="keyword">new</span> InstanceCarFactory();</span><br><span class="line">    System.out.println(factory.getCar(<span class="number">1L</span>));</span><br><span class="line"></span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">    Car car2 = (Car) context.getBean(<span class="string">"car2"</span>);</span><br><span class="line">    System.out.println(car2);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-
-
 ]]></content>
       <categories>
         <category>框架</category>
       </categories>
       <tags>
         <tag>Spring</tag>
+        <tag>AOP</tag>
       </tags>
   </entry>
   <entry>
@@ -693,137 +733,65 @@
       </tags>
   </entry>
   <entry>
-    <title>MyBatis-数据缓存</title>
-    <url>/kawyang/579a3ded.html</url>
+    <title>Spring-工厂方法</title>
+    <url>/kawyang/6c92115f.html</url>
     <content><![CDATA[<blockquote>
-<p>将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。</p>
+<p>📝 : Spring的工厂方法，将🏭 交给 <code>IoC容器</code> 进行管理，🏭包括：静态🏭、实例🏭。</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><blockquote>
-<p>一级缓存是 SqlSession 级别的缓存，只要 SqlSession 没有被 close 或 flush ，就会存在。</p>
+<h2 id="Spring-的工厂方法"><a href="#Spring-的工厂方法" class="headerlink" title="Spring 的工厂方法"></a>Spring 的工厂方法</h2><blockquote>
+<p>使用工厂创建独享，并将工厂交给 IoC容器 进行管理</p>
 </blockquote>
-<ul>
-<li><p>当执行两次相同的查询时，MyBatis 会将第一次查询的结果保存到缓存中，再次运行查询代码，就不需要执行SQL 语句，直接从缓存中获取数据。</p>
-</li>
-<li><p>当调用 SqlSession 对数据进行 修改、插入、删除、commit()、close() 等就会清空一级缓存。以保证缓存中数据为最新数据，避免脏读。</p>
-</li>
-<li><p>一级缓存清空：</p>
-<ul>
-<li>调用 SqlSession对象的 <code>clearCache()</code> 方法</li>
-<li>close()</li>
-<li>commit()</li>
+<h3 id="静态工厂"><a href="#静态工厂" class="headerlink" title="静态工厂"></a>静态工厂</h3><ul>
+<li>实体类</li>
 </ul>
-</li>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Long id;</span><br><span class="line">    String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>静态工厂</li>
 </ul>
-<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><blockquote>
-<p>二级缓存是 <code>Mapper</code> 映射级别的缓存，多个 SqlSession 对象，操作同一个 Mapper 映射的 SQL ，公用一个缓存对象。</p>
-</blockquote>
-<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="引入坐标"><a href="#引入坐标" class="headerlink" title="引入坐标"></a>引入坐标</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ehchache 缓存  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.item.Car;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, Car&gt; carMap;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        carMap = <span class="keyword">new</span> HashMap&lt;Long, Car&gt;();</span><br><span class="line">        carMap.put(<span class="number">1L</span>, <span class="keyword">new</span> Car(<span class="number">1L</span>, <span class="string">"宝马"</span>));</span><br><span class="line">        carMap.put(<span class="number">2L</span>, <span class="keyword">new</span> Car(<span class="number">2L</span>, <span class="string">"奔驰"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(Long id, String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="keyword">return</span> carMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<h4 id="开启缓存"><a href="#开启缓存" class="headerlink" title="开启缓存"></a>开启缓存</h4><p>在 MyBatis的配置文件中(config.xml)，使用 settings 标签下 的 setting 标签 开启缓存。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  打印SQL  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"STDOUT_LOGGING"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启延迟加载  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  开启二级缓存  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h4 id="配置Mapper"><a href="#配置Mapper" class="headerlink" title="配置Mapper"></a>配置Mapper</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>&gt;</span><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.ehcache.LoggingEhcache"</span> &gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   创建缓存之后，对吼一次访问缓存的时间值缓存失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToIdleSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存自创建时间起至失效的时间间隔  --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeToLiveSeconds"</span> <span class="attr">value</span>=<span class="string">"3600"</span>/&gt;</span><span class="comment">&lt;!--1 hour--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--        --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalHeap"</span> <span class="attr">value</span>=<span class="string">"1000"</span>/&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxEntriesLocalDisk"</span> <span class="attr">value</span>=<span class="string">"10000000"</span>/&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--   缓存回收策略，移除-近期使用最少的对象 --&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"memoryStoreEvictionPolicy"</span> <span class="attr">value</span>=<span class="string">"LRU"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-
-<h4 id="配置-useCache-属性"><a href="#配置-useCache-属性" class="headerlink" title="配置 useCache 属性"></a>配置 useCache 属性</h4><blockquote>
-<p>如果每次查询都需要最新的数据，需要将 select🏷️ 中的 <code>useCache</code> 属性设置为 <code>false</code>, 禁用二级缓存。</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"com.item.entity.Student"</span> <span class="attr">useCache</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    select id,name from student </span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><blockquote>
-<p>步骤</p>
-</blockquote>
-<p>使用<code>同一个</code>Mapper映射，创建两个<code>不同</code>的 SqlSession 对象，分别执行<code>相同</code> 的SQL操作</p>
-<p>if : 执行一次 SQL 语句<br>    二级缓存成功！<br>else :<br>    二级缓存失败！</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>结果:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">==&gt;  Preparing: select * from good where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 电冰箱</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br><span class="line">Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">Returned connection 392918519 to pool.</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.5</span><br><span class="line">Good(id=2, name=电冰箱, consumers=null)</span><br></pre></td></tr></table></figure></div>
-
+<ul>
+<li>配置工厂</li>
+</ul>
 <blockquote>
-<p>一下具体内容及原因，有待进一步了解学习。</p>
+<p>将类使用bean🏷️配置到工厂的方法中，IoC容器使用配置的方法，根据传递的参数来获取对象。</p>
 </blockquote>
-<p>⚠️ : 如果使用 sqlSession.clearCache(); 清除缓存，但依然缓存着其他 SqlSession 对象的缓存数据。</p>
-<p>如下测试：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindCache</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        InputStream resourceAsStream = FindCache.class.getClassLoader().getResourceAsStream("config.xml");</span><br><span class="line">        SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">        SqlSessionFactory build = builder.build(resourceAsStream);</span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        IGoodRepository mapper = sqlSession.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById = mapper.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById.toString());</span><br><span class="line"></span><br><span class="line">        SqlSession sqlSession1 = build.openSession();</span><br><span class="line">        IGoodRepository mapper1 = sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        Good goodById1 = mapper1.findGoodById(<span class="number">2</span>);</span><br><span class="line">        System.out.println(goodById1.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭一级缓存</span></span><br><span class="line">        sqlSession.clearCache();</span><br><span class="line">        System.out.println(<span class="string">"====    🆑 sqlSession缓存    ===="</span>);</span><br><span class="line">        System.out.println(sqlSession1.getMapper(IGoodRepository<span class="class">.<span class="keyword">class</span>).<span class="title">findGoodById</span>(2))</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>配置参数 : index (0开始、形参位置)、name(形参名称)</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置静态工厂 默认为单例模式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.CarFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置参数 getCar--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">value</span>=<span class="string">"String"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
-<p>结果:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 392918519.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@176b75f7]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1804126860.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@6b88ca8c]</span><br><span class="line">&#x3D;&#x3D;&gt;  Preparing: select * from good where id&#x3D;?</span><br><span class="line">&#x3D;&#x3D;&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;&#x3D;&#x3D;    Columns: id, name</span><br><span class="line">&lt;&#x3D;&#x3D;        Row: 2, 电冰箱</span><br><span class="line">&lt;&#x3D;&#x3D;      Total: 1</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;    🆑 sqlSession缓存    &#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Cache Hit Ratio [com.kawyang.repository.IGoodRepository]: 0.0</span><br><span class="line">Good(id&#x3D;2, name&#x3D;电冰箱, consumers&#x3D;null)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>MyBatis</tag>
-        <tag>缓存</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring-AOP</title>
-    <url>/kawyang/97375e6e.html</url>
-    <content><![CDATA[<blockquote>
-<p>AOP</p>
+<ul>
+<li>获取IoC容器中对象</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">        Car car =(Car) context.getBean(<span class="string">"car"</span>);</span><br><span class="line">        System.out.println(car);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h3><ul>
+<li>工厂类</li>
+</ul>
+<p>同上</p>
+<ul>
+<li>配置文件</li>
+</ul>
+<blockquote>
+<p>在配置文件中配置两个 bean (🏭bean、获取Car的bean)，将🏭类先交给 IoC容器管理，然后再配置Car，调用容器中🏭创建对象的方法。</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>Aspect Oriented Programming  —- 面向切面编程</p>
-<ul>
-<li>降低耦合度</li>
-<li>易拓展</li>
-<li>复用</li>
-<li>非业务集中，便于统一管理</li>
-<li>业务代码比较纯粹，没有其他代码影响</li>
-</ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
-<li><p>创建Maven工程，添加坐标</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置工厂 bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factory"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.InstanceCarFactory"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置对象 Car  使用工厂 factory获取  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car2"</span> <span class="attr">factory-bean</span>=<span class="string">"factory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
-</li>
-</ul>
-<p>Invocationhandler</p>
-<p>  生成代理类的类，</p>
-<p>  imlements InvocationHandler</p>
 <ul>
-<li><p>接收jjadf 啊收到回复ahsudjf 委托对象</p>
-</li>
-<li><p>设置返回代理类</p>
-<p>Proxy.newProxyInstance()</p>
-</li>
-<li><p>编写委托对象方法</p>
-</li>
+<li>使用</li>
 </ul>
-<h3 id="Spring框架对AOP进行封装"><a href="#Spring框架对AOP进行封装" class="headerlink" title="Spring框架对AOP进行封装"></a>Spring框架对AOP进行封装</h3><p>不需要创建InvocationHandler，只需要创建一个切面对象，将业务代码在切面中完成即可</p>
-<ul>
-<li>创建切面类对象 Aspect（切面）</li>
-<li>添加注解</li>
-</ul>
-<p>LoggerAspect</p>
-<ul>
-<li><code>@Aspect</code> ： 表示该类为切面类</li>
-<li><code>@Component</code>：将该类对象注入到IoC容器中</li>
-<li><code>@Befor</code> :表示方法执行的具体位置和时机  </li>
-</ul>
-<p>CalImpl2 也需要添加<code>@Component</code></p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  自动扫描  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.item"</span> &gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean class="com.item.AOP.LoggerAspect" p:id="" /&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  使 Aspect 标签生效，为目标类自动生成代理对象  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    InstanceCarFactory factory = <span class="keyword">new</span> InstanceCarFactory();</span><br><span class="line">    System.out.println(factory.getCar(<span class="number">1L</span>));</span><br><span class="line"></span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">    Car car2 = (Car) context.getBean(<span class="string">"car2"</span>);</span><br><span class="line">    System.out.println(car2);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>context:component-scan 标签是扫描包内所有添加@Component注解的类，注入到IoC中</p>
-<p>aop:aspectj-autoproxy 让Spring结合切面类和目标类自动生成代理对象。</p>
-<ul>
-<li>切面：横切关注点被模块化的抽象对象</li>
-<li>通知：切面对象完成的工作（非业务代码，日志…）</li>
-<li>目标：被通知的对象，即被切面的对象</li>
-<li>代理：切面、通知、目标混合之后的对象</li>
-<li>连接点：通知插入业务代码的具体位置</li>
-<li>切点：AOP通过切点定位到连接点</li>
-</ul>
+
+
 ]]></content>
       <categories>
         <category>框架</category>
       </categories>
       <tags>
         <tag>Spring</tag>
-        <tag>AOP</tag>
       </tags>
   </entry>
   <entry>
@@ -856,6 +824,45 @@
       <tags>
         <tag>hexo</tag>
         <tag>Error</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式-工厂模式</title>
+    <url>/kawyang/ccff2b22.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文记录了工厂设计模式的基本实现方法。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><blockquote>
+<p>在明确地计划不同条件下创建不同实例时，使用工厂模式</p>
+</blockquote>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ol>
+<li>将实体类进行抽象</li>
+<li>实体类实现接口</li>
+<li>创建工厂类</li>
+<li>根据不同参数，返回不同对象</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Inside Rectangle::draw() method."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Inside Square::draw() method."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShapeFactory</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">//使用 getShape 方法获取形状类型的对象</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Shape <span class="title">getShape</span><span class="params">(String shapeType)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(shapeType == <span class="keyword">null</span>)&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(shapeType.equalsIgnoreCase(<span class="string">"RECTANGLE"</span>))&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> Rectangle();</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(shapeType.equalsIgnoreCase(<span class="string">"SQUARE"</span>))&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> Square();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryPatternDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      ShapeFactory shapeFactory = <span class="keyword">new</span> ShapeFactory();</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//获取 Rectangle 的对象，并调用它的 draw 方法</span></span><br><span class="line">      Shape shape2 = shapeFactory.getShape(<span class="string">"RECTANGLE"</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//调用 Rectangle 的 draw 方法</span></span><br><span class="line">      shape2.draw();</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//获取 Square 的对象，并调用它的 draw 方法</span></span><br><span class="line">      Shape shape3 = shapeFactory.getShape(<span class="string">"SQUARE"</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//调用 Square 的 draw 方法</span></span><br><span class="line">      shape3.draw();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h2><blockquote>
+<p>将多个🏭进行<code>抽象</code>，使用不同的实现类，完成不同 <code>产品族</code> 🏭的创建，再使用🏭生产对象。</p>
+</blockquote>
+<ul>
+<li>使用抽象类的方式将多个🏭进行抽象</li>
+<li>使用工厂的方式实现🏭类</li>
+<li>根据不同的需要使用🏭的🏭创建🏭</li>
+<li>然后使用🏭生产对象</li>
+</ul>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9B%BE.png" alt="抽象🏭类图"></p>
+<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p><a href="https://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>工厂模式</tag>
+        <tag>抽象工厂</tag>
       </tags>
   </entry>
   <entry>
@@ -955,45 +962,6 @@
       <tags>
         <tag>设计模式</tag>
         <tag>单例模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式-工厂模式</title>
-    <url>/kawyang/ccff2b22.html</url>
-    <content><![CDATA[<blockquote>
-<p>本文记录了工厂设计模式的基本实现方法。</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><blockquote>
-<p>在明确地计划不同条件下创建不同实例时，使用工厂模式</p>
-</blockquote>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ol>
-<li>将实体类进行抽象</li>
-<li>实体类实现接口</li>
-<li>创建工厂类</li>
-<li>根据不同参数，返回不同对象</li>
-</ol>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Inside Rectangle::draw() method."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Inside Square::draw() method."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShapeFactory</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">//使用 getShape 方法获取形状类型的对象</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Shape <span class="title">getShape</span><span class="params">(String shapeType)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(shapeType == <span class="keyword">null</span>)&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(shapeType.equalsIgnoreCase(<span class="string">"RECTANGLE"</span>))&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> Rectangle();</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(shapeType.equalsIgnoreCase(<span class="string">"SQUARE"</span>))&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> Square();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryPatternDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      ShapeFactory shapeFactory = <span class="keyword">new</span> ShapeFactory();</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//获取 Rectangle 的对象，并调用它的 draw 方法</span></span><br><span class="line">      Shape shape2 = shapeFactory.getShape(<span class="string">"RECTANGLE"</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//调用 Rectangle 的 draw 方法</span></span><br><span class="line">      shape2.draw();</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//获取 Square 的对象，并调用它的 draw 方法</span></span><br><span class="line">      Shape shape3 = shapeFactory.getShape(<span class="string">"SQUARE"</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">//调用 Square 的 draw 方法</span></span><br><span class="line">      shape3.draw();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h2><blockquote>
-<p>将多个🏭进行<code>抽象</code>，使用不同的实现类，完成不同 <code>产品族</code> 🏭的创建，再使用🏭生产对象。</p>
-</blockquote>
-<ul>
-<li>使用抽象类的方式将多个🏭进行抽象</li>
-<li>使用工厂的方式实现🏭类</li>
-<li>根据不同的需要使用🏭的🏭创建🏭</li>
-<li>然后使用🏭生产对象</li>
-</ul>
-<p><img src="https://gitee.com/KawYang/image/raw/master/img/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9B%BE.png" alt="抽象🏭类图"></p>
-<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p><a href="https://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>工厂模式</tag>
-        <tag>抽象工厂</tag>
       </tags>
   </entry>
   <entry>
