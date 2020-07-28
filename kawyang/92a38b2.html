@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>KawYang</title>
+  <title>设计模式-原型模式 | KawYang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="KawYang">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="原型模式 指定原型实例制定创建对象的类型，通过拷贝完成对象创建。   Java 的克隆机制  实现 Cloneable 标记接口需要实现 clone 方法 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-原型模式">
+<meta property="og:url" content="http://yoursite.com/kawyang/92a38b2.html">
 <meta property="og:site_name" content="KawYang">
+<meta property="og:description" content="原型模式 指定原型实例制定创建对象的类型，通过拷贝完成对象创建。   Java 的克隆机制  实现 Cloneable 标记接口需要实现 clone 方法 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-17T10:36:18.858Z">
+<meta property="article:modified_time" content="2020-07-24T13:20:30.578Z">
 <meta property="article:author" content="KawYang">
 <meta name="twitter:card" content="summary">
   
@@ -166,43 +170,81 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-设计模式-原型模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式-原型模式
+    </h1>
+  
+
+        
+          
+
+        <a href="/kawyang/92a38b2.html" class="archive-article-date">
+  	<time datetime="2020-07-17T10:36:18.858Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-17</time>
+</a>
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+      
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote>
+<p>指定原型实例制定创建对象的类型，通过拷贝完成对象创建。</p>
+</blockquote>
+<blockquote>
+<p>Java 的克隆机制</p>
+</blockquote>
+<p>实现 <code>Cloneable</code> 标记接口<br>需要实现 <code>clone</code> 方法</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> 设计模式.原型模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> LiYang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Project</span> Name: Java设计模式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> Name: 设计模式.原型模式</span></span><br><span class="line"><span class="comment"> * Created by MacBook Air on 2020/07/17.</span></span><br><span class="line"><span class="comment"> * Copyright © 2020 LiYang. All rights reserved.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Product product = <span class="keyword">new</span> Product();</span><br><span class="line">        Product clone = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            clone = ((Product) product.clone());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        clone.setId(<span class="number">1</span>);</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Product&#123;"</span> +</span><br><span class="line">                <span class="string">"id="</span> + id +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Creates and returns a copy of this object.  The precise meaning</span></span><br><span class="line"><span class="comment">     * of "copy" may depend on the class of the object. The general</span></span><br><span class="line"><span class="comment">     * intent is that, for any object &#123;<span class="doctag">@code</span> x&#125;, the expression:</span></span><br><span class="line"><span class="comment">     * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment">     * &lt;pre&gt;</span></span><br><span class="line"><span class="comment">     * x.clone() != x&lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment">     * will be true, and that the expression:</span></span><br><span class="line"><span class="comment">     * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment">     * &lt;pre&gt;</span></span><br><span class="line"><span class="comment">     * x.clone().getClass() == x.getClass()&lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment">     * will be &#123;<span class="doctag">@code</span> true&#125;, but these are not absolute requirements.</span></span><br><span class="line"><span class="comment">     * While it is typically the case that:</span></span><br><span class="line"><span class="comment">     * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment">     * &lt;pre&gt;</span></span><br><span class="line"><span class="comment">     * x.clone().equals(x)&lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment">     * will be &#123;<span class="doctag">@code</span> true&#125;, this is not an absolute requirement.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * By convention, the returned object should be obtained by calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> super.clone&#125;.  If a class and all of its superclasses (except</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> Object&#125;) obey this convention, it will be the case that</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> x.clone().getClass() == x.getClass()&#125;.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * By convention, the object returned by this method should be independent</span></span><br><span class="line"><span class="comment">     * of this object (which is being cloned).  To achieve this independence,</span></span><br><span class="line"><span class="comment">     * it may be necessary to modify one or more fields of the object returned</span></span><br><span class="line"><span class="comment">     * by &#123;<span class="doctag">@code</span> super.clone&#125; before returning it.  Typically, this means</span></span><br><span class="line"><span class="comment">     * copying any mutable objects that comprise the internal "deep structure"</span></span><br><span class="line"><span class="comment">     * of the object being cloned and replacing the references to these</span></span><br><span class="line"><span class="comment">     * objects with references to the copies.  If a class contains only</span></span><br><span class="line"><span class="comment">     * primitive fields or references to immutable objects, then it is usually</span></span><br><span class="line"><span class="comment">     * the case that no fields in the object returned by &#123;<span class="doctag">@code</span> super.clone&#125;</span></span><br><span class="line"><span class="comment">     * need to be modified.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * 数组拷贝方式是浅拷贝</span></span><br><span class="line"><span class="comment">     * The method &#123;<span class="doctag">@code</span> clone&#125; for class &#123;<span class="doctag">@code</span> Object&#125; performs a</span></span><br><span class="line"><span class="comment">     * specific cloning operation. First, if the class of this object does</span></span><br><span class="line"><span class="comment">     * not implement the interface &#123;<span class="doctag">@code</span> Cloneable&#125;, then a</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> CloneNotSupportedException&#125; is thrown. Note that all arrays</span></span><br><span class="line"><span class="comment">     * are considered to implement the interface &#123;<span class="doctag">@code</span> Cloneable&#125; and that</span></span><br><span class="line"><span class="comment">     * the return type of the &#123;<span class="doctag">@code</span> clone&#125; method of an array type &#123;<span class="doctag">@code</span> T[]&#125;</span></span><br><span class="line"><span class="comment">     * is &#123;<span class="doctag">@code</span> T[]&#125; where T is any reference or primitive type.</span></span><br><span class="line"><span class="comment">     * Otherwise, this method creates a new instance of the class of this</span></span><br><span class="line"><span class="comment">     * object and initializes all its fields with exactly the contents of</span></span><br><span class="line"><span class="comment">     * the corresponding fields of this object, as if by assignment; the</span></span><br><span class="line"><span class="comment">     * contents of the fields are not themselves cloned. Thus, this method</span></span><br><span class="line"><span class="comment">     * performs a "shallow copy" of this object, not a "deep copy" operation.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * The class &#123;<span class="doctag">@code</span> Object&#125; does not itself implement the interface</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> Cloneable&#125;, so calling the &#123;<span class="doctag">@code</span> clone&#125; method on an object</span></span><br><span class="line"><span class="comment">     * whose class is &#123;<span class="doctag">@code</span> Object&#125; will result in throwing an</span></span><br><span class="line"><span class="comment">     * exception at run time.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> a clone of this instance.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> CloneNotSupportedException if the object's class does not</span></span><br><span class="line"><span class="comment">     *                                    support the &#123;<span class="doctag">@code</span> Cloneable&#125; interface. Subclasses</span></span><br><span class="line"><span class="comment">     *                                    that override the &#123;<span class="doctag">@code</span> clone&#125; method can also</span></span><br><span class="line"><span class="comment">     *                                    throw this exception to indicate that an instance cannot</span></span><br><span class="line"><span class="comment">     *                                    be cloned.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> Cloneable</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h2 id="含有依赖注入的类的clone-方法"><a href="#含有依赖注入的类的clone-方法" class="headerlink" title="含有依赖注入的类的clone 方法"></a>含有依赖注入的类的clone 方法</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">       <span class="comment">// 修改clone 方法，实现深复制</span></span><br><span class="line">       <span class="comment">// return super.clone();</span></span><br><span class="line">       Product clone = (Product) <span class="keyword">super</span>.clone();</span><br><span class="line">       System.out.println(clone.toString());</span><br><span class="line">       Inner inner = ((Inner) clone.getInner().clone());</span><br><span class="line">       clone.setInner(inner);</span><br><span class="line">       <span class="keyword">return</span> clone; </span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="序列化实现拷贝"><a href="#序列化实现拷贝" class="headerlink" title="序列化实现拷贝"></a>序列化实现拷贝</h2><p>ArrayList .clone();</p>
+<p>类及其子类实现 <code>Serializable</code> 接口</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//序列化</span></span><br><span class="line">      ByteArrayOutputStream byteArrayOutputStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">      <span class="keyword">try</span>(ObjectOutputStream outputStream = <span class="keyword">new</span> ObjectOutputStream(byteArrayOutputStream)) &#123;</span><br><span class="line">          outputStream.writeObject(<span class="keyword">this</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      ByteArrayInputStream byteArrayInputStream = <span class="keyword">new</span> ByteArrayInputStream(byteArrayOutputStream.toByteArray());</span><br><span class="line">      <span class="keyword">try</span>(ObjectInputStream inputStream = <span class="keyword">new</span> ObjectInputStream(byteArrayInputStream))&#123;</span><br><span class="line">          Product product = ((Product) inputStream.readObject());</span><br><span class="line">          <span class="keyword">return</span> product;</span><br><span class="line">      &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure></div>
+
+
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>代码不应该依赖于需要复制的对象的具体类事，使用Protoype模式</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>1、可以不耦合具体类的情况下克隆对象<br>2、避免重的初始化代码<br>3、方便构建复杂对象</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>org.springframwork.beans.factory.support.AvstrackBeanDefinition<br>java.util.Arrays<br>ArrayList</p>
+
+      
+
+      <!-- 标签云start -->
+      <div class="article-entry" itemprop="articleBody">
+        
             
-  
-    <article id="post-Spring-IoC&amp;DI" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/6c92115f.html">Spring-IoC(控制反转)&amp;DI(依赖注入)</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/6c92115f.html" class="archive-article-date">
-  	<time datetime="2020-07-08T07:40:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文主要记录了 <code>Spring</code> 框架的 <code>IoC &amp; ID</code> 基本内容。</p>
+            <!-- <h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote>
+<p>指定原型实例制定创建对象的类型，通过拷贝完成对象创建。</p>
 </blockquote>
-        
-      
+<blockquote>
+<p>Java 的克隆机制</p>
+</blockquote>
+<p>实现 <code>Cloneable</code> 标记接口<br>需要实现 <code>clone</code> 方法</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> 设计模式.原型模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> LiYang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Project</span> Name: Java设计模式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> Name: 设计模式.原型模式</span></span><br><span class="line"><span class="comment"> * Created by MacBook Air on 2020/07/17.</span></span><br><span class="line"><span class="comment"> * Copyright © 2020 LiYang. All rights reserved.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Product product = <span class="keyword">new</span> Product();</span><br><span class="line">        Product clone = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            clone = ((Product) product.clone());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        clone.setId(<span class="number">1</span>);</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Product&#123;"</span> +</span><br><span class="line">                <span class="string">"id="</span> + id +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Creates and returns a copy of this object.  The precise meaning</span></span><br><span class="line"><span class="comment">     * of "copy" may depend on the class of the object. The general</span></span><br><span class="line"><span class="comment">     * intent is that, for any object &#123;<span class="doctag">@code</span> x&#125;, the expression:</span></span><br><span class="line"><span class="comment">     * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment">     * &lt;pre&gt;</span></span><br><span class="line"><span class="comment">     * x.clone() != x&lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment">     * will be true, and that the expression:</span></span><br><span class="line"><span class="comment">     * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment">     * &lt;pre&gt;</span></span><br><span class="line"><span class="comment">     * x.clone().getClass() == x.getClass()&lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment">     * will be &#123;<span class="doctag">@code</span> true&#125;, but these are not absolute requirements.</span></span><br><span class="line"><span class="comment">     * While it is typically the case that:</span></span><br><span class="line"><span class="comment">     * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment">     * &lt;pre&gt;</span></span><br><span class="line"><span class="comment">     * x.clone().equals(x)&lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment">     * will be &#123;<span class="doctag">@code</span> true&#125;, this is not an absolute requirement.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * By convention, the returned object should be obtained by calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> super.clone&#125;.  If a class and all of its superclasses (except</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> Object&#125;) obey this convention, it will be the case that</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> x.clone().getClass() == x.getClass()&#125;.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * By convention, the object returned by this method should be independent</span></span><br><span class="line"><span class="comment">     * of this object (which is being cloned).  To achieve this independence,</span></span><br><span class="line"><span class="comment">     * it may be necessary to modify one or more fields of the object returned</span></span><br><span class="line"><span class="comment">     * by &#123;<span class="doctag">@code</span> super.clone&#125; before returning it.  Typically, this means</span></span><br><span class="line"><span class="comment">     * copying any mutable objects that comprise the internal "deep structure"</span></span><br><span class="line"><span class="comment">     * of the object being cloned and replacing the references to these</span></span><br><span class="line"><span class="comment">     * objects with references to the copies.  If a class contains only</span></span><br><span class="line"><span class="comment">     * primitive fields or references to immutable objects, then it is usually</span></span><br><span class="line"><span class="comment">     * the case that no fields in the object returned by &#123;<span class="doctag">@code</span> super.clone&#125;</span></span><br><span class="line"><span class="comment">     * need to be modified.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * 数组拷贝方式是浅拷贝</span></span><br><span class="line"><span class="comment">     * The method &#123;<span class="doctag">@code</span> clone&#125; for class &#123;<span class="doctag">@code</span> Object&#125; performs a</span></span><br><span class="line"><span class="comment">     * specific cloning operation. First, if the class of this object does</span></span><br><span class="line"><span class="comment">     * not implement the interface &#123;<span class="doctag">@code</span> Cloneable&#125;, then a</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> CloneNotSupportedException&#125; is thrown. Note that all arrays</span></span><br><span class="line"><span class="comment">     * are considered to implement the interface &#123;<span class="doctag">@code</span> Cloneable&#125; and that</span></span><br><span class="line"><span class="comment">     * the return type of the &#123;<span class="doctag">@code</span> clone&#125; method of an array type &#123;<span class="doctag">@code</span> T[]&#125;</span></span><br><span class="line"><span class="comment">     * is &#123;<span class="doctag">@code</span> T[]&#125; where T is any reference or primitive type.</span></span><br><span class="line"><span class="comment">     * Otherwise, this method creates a new instance of the class of this</span></span><br><span class="line"><span class="comment">     * object and initializes all its fields with exactly the contents of</span></span><br><span class="line"><span class="comment">     * the corresponding fields of this object, as if by assignment; the</span></span><br><span class="line"><span class="comment">     * contents of the fields are not themselves cloned. Thus, this method</span></span><br><span class="line"><span class="comment">     * performs a "shallow copy" of this object, not a "deep copy" operation.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * The class &#123;<span class="doctag">@code</span> Object&#125; does not itself implement the interface</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> Cloneable&#125;, so calling the &#123;<span class="doctag">@code</span> clone&#125; method on an object</span></span><br><span class="line"><span class="comment">     * whose class is &#123;<span class="doctag">@code</span> Object&#125; will result in throwing an</span></span><br><span class="line"><span class="comment">     * exception at run time.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> a clone of this instance.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> CloneNotSupportedException if the object's class does not</span></span><br><span class="line"><span class="comment">     *                                    support the &#123;<span class="doctag">@code</span> Cloneable&#125; interface. Subclasses</span></span><br><span class="line"><span class="comment">     *                                    that override the &#123;<span class="doctag">@code</span> clone&#125; method can also</span></span><br><span class="line"><span class="comment">     *                                    throw this exception to indicate that an instance cannot</span></span><br><span class="line"><span class="comment">     *                                    be cloned.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> Cloneable</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>本文主要记录了 <code>Spring</code> 框架的 <code>IoC &amp; ID</code> 基本内容。</p>
-</blockquote> -->
+
+<h2 id="含有依赖注入的类的clone-方法"><a href="#含有依赖注入的类的clone-方法" class="headerlink" title="含有依赖注入的类的clone 方法"></a>含有依赖注入的类的clone 方法</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">       <span class="comment">// 修改clone 方法，实现深复制</span></span><br><span class="line">       <span class="comment">// return super.clone();</span></span><br><span class="line">       Product clone = (Product) <span class="keyword">super</span>.clone();</span><br><span class="line">       System.out.println(clone.toString());</span><br><span class="line">       Inner inner = ((Inner) clone.getInner().clone());</span><br><span class="line">       clone.setInner(inner);</span><br><span class="line">       <span class="keyword">return</span> clone; </span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="序列化实现拷贝"><a href="#序列化实现拷贝" class="headerlink" title="序列化实现拷贝"></a>序列化实现拷贝</h2><p>ArrayList .clone();</p>
+<p>类及其子类实现 <code>Serializable</code> 接口</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//序列化</span></span><br><span class="line">      ByteArrayOutputStream byteArrayOutputStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">      <span class="keyword">try</span>(ObjectOutputStream outputStream = <span class="keyword">new</span> ObjectOutputStream(byteArrayOutputStream)) &#123;</span><br><span class="line">          outputStream.writeObject(<span class="keyword">this</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      ByteArrayInputStream byteArrayInputStream = <span class="keyword">new</span> ByteArrayInputStream(byteArrayOutputStream.toByteArray());</span><br><span class="line">      <span class="keyword">try</span>(ObjectInputStream inputStream = <span class="keyword">new</span> ObjectInputStream(byteArrayInputStream))&#123;</span><br><span class="line">          Product product = ((Product) inputStream.readObject());</span><br><span class="line">          <span class="keyword">return</span> product;</span><br><span class="line">      &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure></div>
+
+
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>代码不应该依赖于需要复制的对象的具体类事，使用Protoype模式</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>1、可以不耦合具体类的情况下克隆对象<br>2、避免重的初始化代码<br>3、方便构建复杂对象</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>org.springframwork.beans.factory.support.AvstrackBeanDefinition<br>java.util.Arrays<br>ArrayList</p>
+ -->
         
     </div>
     <!-- 标签云  -->
@@ -210,47 +252,114 @@
     <!-- 标签云end -->
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的鼓励<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
       
         
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/框架//" class="article-tag-list-link color3">框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/6c92115f.html">show all >></a>
-        </p>
       
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/kawyang/92a38b2.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/kawyang/ae0f95e0.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SpringMVC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/kawyang/2a48474d.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式-建造者模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -265,663 +374,53 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo-abbrlink-undefined" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/b3b09752.html">hexo-abbrlink-undefined</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/b3b09752.html" class="archive-article-date">
-  	<time datetime="2020-07-06T16:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文解决的问题： 安装 <code>hexo-abbrlink</code> 后，并配置 <code>abbrlink</code> 连接，出现 <code>undefined</code>问题，所有文章标题都指向同一篇文章，并且无法重新启动 hexo 服务。</p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>本文解决的问题： 安装 <code>hexo-abbrlink</code> 后，并配置 <code>abbrlink</code> 连接，出现 <code>undefined</code>问题，所有文章标题都指向同一篇文章，并且无法重新启动 hexo 服务。</p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/b3b09752.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型模式"><span class="toc-number">1.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#含有依赖注入的类的clone-方法"><span class="toc-number">2.</span> <span class="toc-text">含有依赖注入的类的clone 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化实现拷贝"><span class="toc-number">3.</span> <span class="toc-text">序列化实现拷贝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用场景"><span class="toc-number">4.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优点"><span class="toc-number">5.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">6.</span> <span class="toc-text">源码</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-MyBatis-数据缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/579a3ded.html">MyBatis-数据缓存</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/579a3ded.html" class="archive-article-date">
-  	<time datetime="2020-07-06T08:08:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-06</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。</p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。</p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/框架//" class="article-tag-list-link color3">框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/579a3ded.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-MyBatis-模糊查询-动态SQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/5882fb3c.html">MyBatis-模糊查询&amp;动态SQL</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/5882fb3c.html" class="archive-article-date">
-  	<time datetime="2020-07-03T08:07:18.929Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-03</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文讲述了模糊查询的操作方法，配置实体类全局路径方法等内容，主要对 <code>MyBatis</code> 的动态SQL查询方式进行了相关总结。</p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>本文讲述了模糊查询的操作方法，配置实体类全局路径方法等内容，主要对 <code>MyBatis</code> 的动态SQL查询方式进行了相关总结。</p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/框架//" class="article-tag-list-link color3">框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/5882fb3c.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-MyBatis-延迟加载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/70e7f4d8.html">MyBatis-延迟加载</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/70e7f4d8.html" class="archive-article-date">
-  	<time datetime="2020-06-22T02:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-22</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文主要总结了 <code>Mybatis</code> 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。</p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>本文主要总结了 <code>Mybatis</code> 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。</p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/框架//" class="article-tag-list-link color3">框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/70e7f4d8.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-MyBatis-级联操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/fb315360.html">MyBatis-级联操作</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/fb315360.html" class="archive-article-date">
-  	<time datetime="2020-06-21T01:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-21</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文介绍了<code>MyBatis</code>的级联操作，通过查询多张表完成数据的获取，关键在于练习 <code>resultMap</code>、<code>association</code>、<code>collection</code> 标签。</p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>本文介绍了<code>MyBatis</code>的级联操作，通过查询多张表完成数据的获取，关键在于练习 <code>resultMap</code>、<code>association</code>、<code>collection</code> 标签。</p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/框架//" class="article-tag-list-link color3">框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/fb315360.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-MyBatis-基本操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/8661f06f.html">MyBatis-基本操作</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/8661f06f.html" class="archive-article-date">
-  	<time datetime="2020-06-20T08:47:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>MyBatis 是一款优秀的半自动的轻量级的持久层框架。本文介绍了 <code>MyBatis</code> 的基本项目的创建和使用。</p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p>MyBatis 是一款优秀的半自动的轻量级的持久层框架。本文介绍了 <code>MyBatis</code> 的基本项目的创建和使用。</p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/框架//" class="article-tag-list-link color3">框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/8661f06f.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="设计模式-原型模式" data-title="设计模式-原型模式" data-url="http://yoursite.com/kawyang/92a38b2.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
+  
+
+  
+
+  
 
 
           </div>
@@ -947,8 +446,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
