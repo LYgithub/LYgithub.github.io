@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: JavaWeb | KawYang</title>
+  <title>SSM-CRUD总结 | KawYang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="KawYang">
-<meta property="og:url" content="http://yoursite.com/tags/JavaWeb/index.html">
+  <meta name="description" content="本文对 SSM 整合的项目总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSM-CRUD总结">
+<meta property="og:url" content="http://yoursite.com/kawyang/20ec3355.html">
 <meta property="og:site_name" content="KawYang">
+<meta property="og:description" content="本文对 SSM 整合的项目总结">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/KawYang/image/raw/master/img/20200807182752.png">
+<meta property="article:published_time" content="2020-08-07T06:38:55.000Z">
+<meta property="article:modified_time" content="2020-08-09T08:59:38.304Z">
 <meta property="article:author" content="KawYang">
+<meta property="article:tag" content="SSM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/KawYang/image/raw/master/img/20200807182752.png">
   
     <link rel="alternative" href="/atom.xml" title="KawYang" type="application/atom+xml">
   
@@ -166,76 +173,386 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SSM/SSM-CRUD总结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/kawyang/3dd30874.html" class="archive-article-date">
-  	<time datetime="2020-07-11T08:09:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/kawyang/3dd30874.html">JavaWeb-Servlet</a>
+    <h1 class="article-title" itemprop="name">
+      SSM-CRUD总结
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
           
+
+        <a href="/kawyang/20ec3355.html" class="archive-article-date">
+  	<time datetime="2020-08-07T06:38:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-07</time>
+</a>
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+      
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文对 SSM 整合的项目总结</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><h2 id="开发技术"><a href="#开发技术" class="headerlink" title="开发技术"></a>开发技术</h2><blockquote>
+<p>Maven 项目管理</p>
+</blockquote>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200807182752.png" alt=""></p>
+<h1 id="color-red-Error-整理"><a href="#color-red-Error-整理" class="headerlink" title="$\color{red}{Error}$整理"></a>$\color{red}{Error}$整理</h1><h2 id="发布Error"><a href="#发布Error" class="headerlink" title="发布Error"></a>发布Error</h2><blockquote>
+<p>服务器环境 Window Server 2012R2</p>
+</blockquote>
+<h3 id="URL-路径错误"><a href="#URL-路径错误" class="headerlink" title="URL 路径错误"></a>URL 路径错误</h3><h4 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h4><blockquote>
+<ul>
+<li>相对路径: 不可以确定唯一资源 ,<ul>
+<li><strong>不</strong> 以<code>/ 或 ./</code>开头。 <strong>可以不写</strong> , 以本文件路径为准</li>
+</ul>
+</li>
+<li>绝对路径:确定唯一资源,找到当前路径和目标资源之间的<code>相对关系</code><ul>
+<li>/ 开始，以 服务器 路径为准</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>文件加载使用绝对路径</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 获得站点的根路径 --&gt;</span><br><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br><span class="line">&lt;!-- 绝对路径 --&gt;</span><br><span class="line">&lt;script src="$&#123;APP_PATH&#125;/static/updateEmp.js" &gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- 相对路径 --&gt;</span><br><span class="line">&lt;script src="static/updateEmp.js" &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>pageContext.setAttribute 不提示</strong></p>
+<ul>
+<li>添加<code>jsp-api</code>依赖</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="请求的URL"><a href="#请求的URL" class="headerlink" title="请求的URL"></a>请求的URL</h4><blockquote>
+<p>IDEA 运行的路径为 <code>/</code> , 当发布到服务器时，URL的根路径为项目<code>Tomcat\webapps</code>下的文件名，如果直接采用 <code>localhost:8080/add..</code>的方式进行访问会出现 404 错误。</p>
+</blockquote>
+<ul>
+<li>解决</li>
+</ul>
+<ol>
+<li>在 jsp 网页文件中，获取项目路径</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>使用 JavaScript 获取变量，当发送请求时，添加该 PATH 即可。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> App_Path = <span class="string">"$&#123;APP_PATH&#125;"</span>;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 JS 文件中，直接使用 App_Path 变量即可。[^资源]</li>
+</ol>
+<h3 id="数据库连接错误"><a href="#数据库连接错误" class="headerlink" title="数据库连接错误"></a>数据库连接错误</h3><blockquote>
+<p>在本地采用远程连接 MySQL 数据库的方式报 <code>serverTimezone</code> 错误。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8月 07, 2020 5:03:42 下午 com.mchange.v2.resourcepool.BasicResourcePool </span><br><span class="line">警告: com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@1ecb3ad -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: </span><br><span class="line">java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>解决</p>
+<p>设置时区: 东八区设置为 <code>serverTimezone=GMT%2B8</code> </p>
+<p><a href="https://blog.csdn.net/love20yh/article/details/80799610" target="_blank" rel="noopener">参考链接</a></p>
+</li>
+</ul>
+<h3 id="JS文件编码错误"><a href="#JS文件编码错误" class="headerlink" title="JS文件编码错误"></a>JS文件编码错误</h3><blockquote>
+<p>访问网站时发现 使用 JS 文件加载的内容，中文乱码.</p>
+</blockquote>
+<ul>
+<li><p>解决</p>
+<p>将 JS 文件编码改为 <code>UTF-8 with BOM</code> </p>
+</li>
+</ul>
+<hr>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.bilibili.com/video/BV19t41197zi?p=1" target="_blank" rel="noopener">学习资源</a></p>
+<p>[^资源]:</p>
+<p> Ty</p>
+
+      
+
+      <!-- 标签云start -->
+      <div class="article-entry" itemprop="articleBody">
+        
+            
+            <!-- <blockquote>
+<p>本文对 SSM 整合的项目总结</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><h2 id="开发技术"><a href="#开发技术" class="headerlink" title="开发技术"></a>开发技术</h2><blockquote>
+<p>Maven 项目管理</p>
+</blockquote>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200807182752.png" alt=""></p>
+<h1 id="color-red-Error-整理"><a href="#color-red-Error-整理" class="headerlink" title="$\color{red}{Error}$整理"></a>$\color{red}{Error}$整理</h1><h2 id="发布Error"><a href="#发布Error" class="headerlink" title="发布Error"></a>发布Error</h2><blockquote>
+<p>服务器环境 Window Server 2012R2</p>
+</blockquote>
+<h3 id="URL-路径错误"><a href="#URL-路径错误" class="headerlink" title="URL 路径错误"></a>URL 路径错误</h3><h4 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h4><blockquote>
+<ul>
+<li>相对路径: 不可以确定唯一资源 ,<ul>
+<li><strong>不</strong> 以<code>/ 或 ./</code>开头。 <strong>可以不写</strong> , 以本文件路径为准</li>
+</ul>
+</li>
+<li>绝对路径:确定唯一资源,找到当前路径和目标资源之间的<code>相对关系</code><ul>
+<li>/ 开始，以 服务器 路径为准</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>文件加载使用绝对路径</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 获得站点的根路径 --&gt;</span><br><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br><span class="line">&lt;!-- 绝对路径 --&gt;</span><br><span class="line">&lt;script src="$&#123;APP_PATH&#125;/static/updateEmp.js" &gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- 相对路径 --&gt;</span><br><span class="line">&lt;script src="static/updateEmp.js" &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>pageContext.setAttribute 不提示</strong></p>
+<ul>
+<li>添加<code>jsp-api</code>依赖</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="请求的URL"><a href="#请求的URL" class="headerlink" title="请求的URL"></a>请求的URL</h4><blockquote>
+<p>IDEA 运行的路径为 <code>/</code> , 当发布到服务器时，URL的根路径为项目<code>Tomcat\webapps</code>下的文件名，如果直接采用 <code>localhost:8080/add..</code>的方式进行访问会出现 404 错误。</p>
+</blockquote>
+<ul>
+<li>解决</li>
+</ul>
+<ol>
+<li>在 jsp 网页文件中，获取项目路径</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>使用 JavaScript 获取变量，当发送请求时，添加该 PATH 即可。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> App_Path = <span class="string">"$&#123;APP_PATH&#125;"</span>;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 JS 文件中，直接使用 App_Path 变量即可。[^资源]</li>
+</ol>
+<h3 id="数据库连接错误"><a href="#数据库连接错误" class="headerlink" title="数据库连接错误"></a>数据库连接错误</h3><blockquote>
+<p>在本地采用远程连接 MySQL 数据库的方式报 <code>serverTimezone</code> 错误。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8月 07, 2020 5:03:42 下午 com.mchange.v2.resourcepool.BasicResourcePool </span><br><span class="line">警告: com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@1ecb3ad -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: </span><br><span class="line">java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>解决</p>
+<p>设置时区: 东八区设置为 <code>serverTimezone=GMT%2B8</code> </p>
+<p><a href="https://blog.csdn.net/love20yh/article/details/80799610" target="_blank" rel="noopener">参考链接</a></p>
+</li>
+</ul>
+<h3 id="JS文件编码错误"><a href="#JS文件编码错误" class="headerlink" title="JS文件编码错误"></a>JS文件编码错误</h3><blockquote>
+<p>访问网站时发现 使用 JS 文件加载的内容，中文乱码.</p>
+</blockquote>
+<ul>
+<li><p>解决</p>
+<p>将 JS 文件编码改为 <code>UTF-8 with BOM</code> </p>
+</li>
+</ul>
+<hr>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.bilibili.com/video/BV19t41197zi?p=1" target="_blank" rel="noopener">学习资源</a></p>
+<p>[^资源]:</p>
+<p> Ty</p>
+ -->
+        
+    </div>
+    <!-- 标签云  -->
+    <!--  -->
+    <!-- 标签云end -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的鼓励<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+      
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Servlet</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SSM</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JavaWeb//" class="article-tag-list-link color3">JavaWeb</a>
+        			<a href="/categories/SSM//" class="article-tag-list-link color4">SSM</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/kawyang/20ec3355.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/kawyang/cb358a7b.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Json</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#整体框架"><span class="toc-number">1.</span> <span class="toc-text">整体框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开发技术"><span class="toc-number">1.1.</span> <span class="toc-text">开发技术</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#color-red-Error-整理"><span class="toc-number">2.</span> <span class="toc-text">$\color{red}{Error}$整理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#发布Error"><span class="toc-number">2.1.</span> <span class="toc-text">发布Error</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#URL-路径错误"><span class="toc-number">2.1.1.</span> <span class="toc-text">URL 路径错误</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#静态文件"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">静态文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求的URL"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">请求的URL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库连接错误"><span class="toc-number">2.1.2.</span> <span class="toc-text">数据库连接错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS文件编码错误"><span class="toc-number">2.1.3.</span> <span class="toc-text">JS文件编码错误</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考内容"><span class="toc-number">3.</span> <span class="toc-text">参考内容</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="SSM/SSM-CRUD总结" data-title="SSM-CRUD总结" data-url="http://yoursite.com/kawyang/20ec3355.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
 
           </div>
@@ -262,9 +579,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
