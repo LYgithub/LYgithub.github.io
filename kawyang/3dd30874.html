@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://gitee.com/KawYang/image/raw/master/img/image-20200608164323934.png">
 <meta property="og:image" content="https://gitee.com/KawYang/image/raw/master/img/image-20200609164456185.png">
 <meta property="article:published_time" content="2020-07-11T08:09:23.000Z">
-<meta property="article:modified_time" content="2020-08-05T08:18:09.557Z">
+<meta property="article:modified_time" content="2020-08-20T01:19:08.657Z">
 <meta property="article:author" content="KawYang">
 <meta property="article:tag" content="Servlet">
 <meta property="article:tag" content="JavaWeb">
@@ -591,9 +591,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="练习-exclamation"><a href="#练习-exclamation" class="headerlink" title="练习:exclamation:"></a>练习:exclamation:</h3><ol>
-<li><p>重定向</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动跳转到Demo2  重定向</span></span><br><span class="line"><span class="comment">//设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">// 设置头</span></span><br><span class="line">resp.setHeader(<span class="string">"location"</span>, <span class="string">"/HomeWork/responseDemo2"</span>);</span><br><span class="line"></span><br><span class="line">resp.sendRedirect(<span class="string">"/HomeWork/responseDemo2"</span>);</span><br></pre></td></tr></table></figure></div>
+<h3 id="练习-exclamation"><a href="#练习-exclamation" class="headerlink" title="练习:exclamation:"></a>练习:exclamation:</h3><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动跳转到Demo2  重定向</span></span><br><span class="line"><span class="comment">//设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">// 设置头</span></span><br><span class="line">resp.setHeader(<span class="string">"location"</span>, <span class="string">"/HomeWork/responseDemo2"</span>);</span><br><span class="line">resp.sendRedirect(<span class="string">"/HomeWork/responseDemo2"</span>);</span><br></pre></td></tr></table></figure></div>
 
 <ul>
 <li><p><strong>$ \color {red}{ forword 和   Redirect 区别}$</strong></p>
@@ -624,14 +622,17 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p>服务器输出字符数据</p>
-</li>
-<li><p>服务器输出字节流</p>
-</li>
-<li><p>验证码</p>
-</li>
+<ol>
+<li>服务器输出字符数据</li>
+<li>服务器输出字节流</li>
+<li>验证码</li>
 </ol>
+<h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.getRequestDispatcher(<span class="string">"responseDemo3"</span>).forward(req, resp);</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
 <h1 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h1><ol>
 <li>代表整个web应用，可以和程序的容器<code>tomcat</code>进行通讯</li>
 <li>功能<ol>
@@ -1105,9 +1106,7 @@ System.out.println(mimeType);</code></pre>
 </ol>
 </li>
 </ol>
-<h3 id="练习-exclamation"><a href="#练习-exclamation" class="headerlink" title="练习:exclamation:"></a>练习:exclamation:</h3><ol>
-<li><p>重定向</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动跳转到Demo2  重定向</span></span><br><span class="line"><span class="comment">//设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">// 设置头</span></span><br><span class="line">resp.setHeader(<span class="string">"location"</span>, <span class="string">"/HomeWork/responseDemo2"</span>);</span><br><span class="line"></span><br><span class="line">resp.sendRedirect(<span class="string">"/HomeWork/responseDemo2"</span>);</span><br></pre></td></tr></table></figure></div>
+<h3 id="练习-exclamation"><a href="#练习-exclamation" class="headerlink" title="练习:exclamation:"></a>练习:exclamation:</h3><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动跳转到Demo2  重定向</span></span><br><span class="line"><span class="comment">//设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">// 设置头</span></span><br><span class="line">resp.setHeader(<span class="string">"location"</span>, <span class="string">"/HomeWork/responseDemo2"</span>);</span><br><span class="line">resp.sendRedirect(<span class="string">"/HomeWork/responseDemo2"</span>);</span><br></pre></td></tr></table></figure></div>
 
 <ul>
 <li><p><strong>$ \color {red}{ forword 和   Redirect 区别}$</strong></p>
@@ -1138,14 +1137,17 @@ System.out.println(mimeType);</code></pre>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>服务器输出字符数据</p>
-</li>
-<li><p>服务器输出字节流</p>
-</li>
-<li><p>验证码</p>
-</li>
+<ol>
+<li>服务器输出字符数据</li>
+<li>服务器输出字节流</li>
+<li>验证码</li>
 </ol>
+<h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.getRequestDispatcher(<span class="string">"responseDemo3"</span>).forward(req, resp);</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
 <h1 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h1><ol>
 <li>代表整个web应用，可以和程序的容器<code>tomcat</code>进行通讯</li>
 <li>功能<ol>
@@ -1389,7 +1391,7 @@ System.out.println(mimeType);</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#B-S-浏览器-服务器"><span class="toc-number">1.</span> <span class="toc-text">B&#x2F;S 浏览器&#x2F;服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络通信"><span class="toc-number">1.1.</span> <span class="toc-text">网络通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-S-客户端-服务器"><span class="toc-number">2.</span> <span class="toc-text">C&#x2F;S 客户端&#x2F;服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器-Tomcat"><span class="toc-number">3.</span> <span class="toc-text">服务器(Tomcat)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#download"><span class="toc-number">3.1.</span> <span class="toc-text">download</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置部署"><span class="toc-number">3.2.</span> <span class="toc-text">配置部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态项目与静态项目"><span class="toc-number">3.3.</span> <span class="toc-text">动态项目与静态项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-：-server-applet"><span class="toc-number">4.</span> <span class="toc-text">Servlet ： server applet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速入门"><span class="toc-number">4.1.</span> <span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">4.2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-number">4.3.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-方法"><span class="toc-number">5.</span> <span class="toc-text">Servlet 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-生命周期"><span class="toc-number">6.</span> <span class="toc-text">Servlet 生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-3-0"><span class="toc-number">7.</span> <span class="toc-text">Servlet 3.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注解配置"><span class="toc-number">7.1.</span> <span class="toc-text">注解配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDEA与Tomcat"><span class="toc-number">8.</span> <span class="toc-text">IDEA与Tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet体系结构"><span class="toc-number">9.</span> <span class="toc-text">Servlet体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GenericServlet"><span class="toc-number">9.1.</span> <span class="toc-text">GenericServlet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpServlet"><span class="toc-number">9.2.</span> <span class="toc-text">HttpServlet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">9.3.</span> <span class="toc-text">配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Http"><span class="toc-number"></span> <span class="toc-text">Http</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史版本"><span class="toc-number">2.</span> <span class="toc-text">历史版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请求消息数据格式"><span class="toc-number">3.</span> <span class="toc-text">请求消息数据格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Request"><span class="toc-number">3.1.</span> <span class="toc-text">Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request-继承结构"><span class="toc-number">3.2.</span> <span class="toc-text">Request 继承结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request功能"><span class="toc-number">3.3.</span> <span class="toc-text">Request功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他方法"><span class="toc-number">3.4.</span> <span class="toc-text">其他方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录练习-exclamation"><span class="toc-number">4.</span> <span class="toc-text">登录练习 :exclamation:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应消息数据格式"><span class="toc-number">5.</span> <span class="toc-text">响应消息数据格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#响应消息"><span class="toc-number">5.1.</span> <span class="toc-text">响应消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">5.2.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-exclamation"><span class="toc-number">5.3.</span> <span class="toc-text">练习:exclamation:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ServletContext对象"><span class="toc-number"></span> <span class="toc-text">ServletContext对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取"><span class="toc-number">1.</span> <span class="toc-text">获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例-：-文件下载"><span class="toc-number">2.</span> <span class="toc-text">案例   ： 文件下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中文乱码"><span class="toc-number">3.</span> <span class="toc-text">中文乱码</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#B-S-浏览器-服务器"><span class="toc-number">1.</span> <span class="toc-text">B&#x2F;S 浏览器&#x2F;服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络通信"><span class="toc-number">1.1.</span> <span class="toc-text">网络通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-S-客户端-服务器"><span class="toc-number">2.</span> <span class="toc-text">C&#x2F;S 客户端&#x2F;服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器-Tomcat"><span class="toc-number">3.</span> <span class="toc-text">服务器(Tomcat)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#download"><span class="toc-number">3.1.</span> <span class="toc-text">download</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置部署"><span class="toc-number">3.2.</span> <span class="toc-text">配置部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态项目与静态项目"><span class="toc-number">3.3.</span> <span class="toc-text">动态项目与静态项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-：-server-applet"><span class="toc-number">4.</span> <span class="toc-text">Servlet ： server applet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速入门"><span class="toc-number">4.1.</span> <span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">4.2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-number">4.3.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-方法"><span class="toc-number">5.</span> <span class="toc-text">Servlet 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-生命周期"><span class="toc-number">6.</span> <span class="toc-text">Servlet 生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-3-0"><span class="toc-number">7.</span> <span class="toc-text">Servlet 3.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注解配置"><span class="toc-number">7.1.</span> <span class="toc-text">注解配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDEA与Tomcat"><span class="toc-number">8.</span> <span class="toc-text">IDEA与Tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet体系结构"><span class="toc-number">9.</span> <span class="toc-text">Servlet体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GenericServlet"><span class="toc-number">9.1.</span> <span class="toc-text">GenericServlet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpServlet"><span class="toc-number">9.2.</span> <span class="toc-text">HttpServlet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">9.3.</span> <span class="toc-text">配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Http"><span class="toc-number"></span> <span class="toc-text">Http</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史版本"><span class="toc-number">2.</span> <span class="toc-text">历史版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请求消息数据格式"><span class="toc-number">3.</span> <span class="toc-text">请求消息数据格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Request"><span class="toc-number">3.1.</span> <span class="toc-text">Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request-继承结构"><span class="toc-number">3.2.</span> <span class="toc-text">Request 继承结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request功能"><span class="toc-number">3.3.</span> <span class="toc-text">Request功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他方法"><span class="toc-number">3.4.</span> <span class="toc-text">其他方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录练习-exclamation"><span class="toc-number">4.</span> <span class="toc-text">登录练习 :exclamation:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应消息数据格式"><span class="toc-number">5.</span> <span class="toc-text">响应消息数据格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#响应消息"><span class="toc-number">5.1.</span> <span class="toc-text">响应消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">5.2.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-exclamation"><span class="toc-number">5.3.</span> <span class="toc-text">练习:exclamation:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-number">5.4.</span> <span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转发"><span class="toc-number">5.5.</span> <span class="toc-text">转发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ServletContext对象"><span class="toc-number"></span> <span class="toc-text">ServletContext对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取"><span class="toc-number">1.</span> <span class="toc-text">获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例-：-文件下载"><span class="toc-number">2.</span> <span class="toc-text">案例   ： 文件下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中文乱码"><span class="toc-number">3.</span> <span class="toc-text">中文乱码</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -1583,19 +1585,23 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color3">Servlet</a>
-            </li>
-            
-            <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-            </li>
-            
-            <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color5">hexo</a>
             </li>
             
             <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color1">Error</a>
+            </li>
+            
+            <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color5">java</a>
+            </li>
+            
+            <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color3">Servlet</a>
+            </li>
+            
+            <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
             </li>
             
             <li class="article-tag-list-item">
@@ -1611,11 +1617,11 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color4">SSM</a>
+              <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
+              <a href="javascript:void(0)" class="js-tag color4">SSM</a>
             </li>
             
             <li class="article-tag-list-item">

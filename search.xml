@@ -1,6 +1,337 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Redis</title>
+    <url>/kawyang/bae4ff13.html</url>
+    <content><![CDATA[<h1 id="Redis-Remote-Dictionary-Server"><a href="#Redis-Remote-Dictionary-Server" class="headerlink" title="Redis(Remote Dictionary Server)"></a>Redis(Remote Dictionary Server)</h1><blockquote>
+<p>Key - Value  的非关系型数据库，C语言编写的，提供多种持久化机制，基于内存的存储的，提供了主从，哨兵以及集群的搭建方式，更加方便的横向和垂直拓展。</p>
+</blockquote>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><blockquote>
+<ol>
+<li>Redis基于内存存储数据和读取数据 =&gt; 提高存储速度</li>
+<li>将Session共享数据存放在 Redis中 =&gt; 多服务器存储共享</li>
+<li>Redis接收用户请求是单线程的 =&gt; 解决多服务器锁不能互斥的问题</li>
+</ol>
+</blockquote>
+<p>NoSQL =&gt; 非关系型数据库 =&gt; Not Only SQL</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hibernate-HQL(Hibernate Query Language)</title>
+    <url>/kawyang/387c2947.html</url>
+    <content><![CDATA[<blockquote>
+<p>面向对象的数据查询,直接使用实体类的属性实现查询。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><blockquote>
+<p>将表格信息修改为 JavaBean 信息</p>
+</blockquote>
+<ul>
+<li>SQL</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span>  &lt;cloums&gt; <span class="keyword">from</span> &lt;<span class="keyword">table</span>-<span class="keyword">name</span>&gt; <span class="keyword">where</span> &lt;<span class="keyword">id</span>&gt; = ?</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>HQL</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> &lt;class.属性&gt; <span class="keyword">from</span> &lt;<span class="keyword">class</span>-<span class="keyword">name</span>&gt;  <span class="keyword">as</span> s <span class="keyword">where</span> &lt;s.属性&gt;=?</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 创建 session 对象</span></span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">Session session = sessionFactory.openSession();</span><br><span class="line"><span class="comment">// 2. 创建查询对象</span></span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line"><span class="comment">// 3. 执行查询方法，获取数据</span></span><br><span class="line">List&lt;Student&gt; list = query.list();</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><ul>
+<li><pre><code class="sql">from Student // 从 Student 关联的 数据表进行查询 
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  from Student as s &#x2F;&#x2F; 表格取别名</span><br></pre></td></tr></table></figure></div></code></pre>
+</li>
+<li><pre><code class="sql">from Student s //省略 as
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### select</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select s from Student as s &#x2F;&#x2F; 查询全部信息</span><br></pre></td></tr></table></figure></div></code></pre>
+</li>
+<li><pre><code class="sql"><span class="keyword">select</span> s.id, s.name <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询相应属性
+&lt;!<span class="comment">--￼5--&gt;</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="where-amp-不同参数的设置形式"><a href="#where-amp-不同参数的设置形式" class="headerlink" title="where &amp; 不同参数的设置形式"></a>where &amp; 不同参数的设置形式</h3><ul>
+<li><pre><code class="sql">where s.age between 18 and 20
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  where s.age between  :ageMin and :ageMax</span><br></pre></td></tr></table></figure></div>
+
+&gt; 使用 `:name ` 的形式 设置HQL 中参数
+&gt;
+&gt; 运用 query.setParameter("name", value); 的方式设置变量的值</code></pre>
+</li>
+<li><pre><code class="sql">where s.age between  ? and ?
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  &gt; 使用 &#96;?&#96; 的形式设置 参数</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; 则运用  query.setParameter(index, value); 的形式设置变量的值，下标从 0 开始</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  where s.age in (:ids)</span><br></pre></td></tr></table></figure></div>
+
+
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>query.setParameterList(“ids”, int []{1,2,3,4,4}); 设置集合参数</p>
+</blockquote>
+<h3 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h3><blockquote>
+<p>min(), max(), avg(), count(),</p>
+</blockquote>
+<ul>
+<li><pre><code class="sql"><span class="keyword">select</span> <span class="keyword">count</span>( * ) <span class="keyword">from</span> Strudent
+&lt;!<span class="comment">--￼8--&gt;</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><blockquote>
+<ul>
+<li>asc 升序 (默认)</li>
+<li>desc 降序</li>
+</ul>
+</blockquote>
+<ul>
+<li><pre><code class="sql">where s.age&gt; 20 order by s.name desc
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">### 连接查询</span><br><span class="line"></span><br><span class="line">&gt; - 内连接 inner (**inner join**) - inner 可以省略</span><br><span class="line">&gt; - 外连接 outer (**outer join , left outer join , right outer join **) - outer 可以省略</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select s.name , d.name from Student s [inner] join s.classes d;</span><br></pre></td></tr></table></figure></div></code></pre>
+</li>
+<li><pre><code class="sql"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> s.classes d;
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### distinct 过滤掉重复值</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select distinct s.age from Student s</span><br></pre></td></tr></table></figure></div>
+</code></pre>
+</li>
+</ul>
+<h2 id="Query使用"><a href="#Query使用" class="headerlink" title="Query使用"></a>Query使用</h2><ul>
+<li>creatQuery(HQL);</li>
+<li>list() : 返回List 查询结果</li>
+<li>setMaxResults() ： 返回最大记录书</li>
+<li>setParameterList()</li>
+<li>uniqueResult() ： 返回Object 类，当查询结果只有一个时</li>
+<li>excuteUpdate() : 执行 update 和 delete 语句。</li>
+</ul>
+<h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><ul>
+<li>setFirstResult() : 起始位置，从 0 开始</li>
+<li>setMaxResults() ： 每页记录数</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Query query = session.creatQuery(<span class="string">"from Student s order by s.id"</span>);</span><br><span class="line">query.setFirstResult((pageNum -<span class="number">1</span>) * pageSize);</span><br></pre></td></tr></table></figure></div>
+
+
+
+]]></content>
+      <categories>
+        <category>文章类型</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hibernate</title>
+    <url>/kawyang/ffb50895.html</url>
+    <content><![CDATA[<a id="more"></a>
+
+<blockquote>
+<p>ORM 框架</p>
+</blockquote>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ol>
+<li>创建 Maven 项目</li>
+<li>导入相关依赖</li>
+</ol>
+<ul>
+<li>hibernate-core</li>
+<li>mysql-connector-java</li>
+<li>jaxb-api</li>
+<li>jaxb-impl</li>
+<li>jaxb-core</li>
+<li>junit-jupiter</li>
+<li>c3p0 》c3p0</li>
+<li>lombok</li>
+</ul>
+<ol start="3">
+<li>创建 hibernate.cfg.xml</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>创建 JavaBean 及 classMapper.hbm.xml</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"com.kawyang.entity"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">table</span>=<span class="string">"Student"</span> <span class="attr">name</span>=<span class="string">"Student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"int"</span> &gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 由 数据库设置 主键的生成方式 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>&gt;</span><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">column</span>=<span class="string">"age"</span> <span class="attr">type</span>=<span class="string">"int"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"birthday"</span> <span class="attr">column</span>=<span class="string">"birthday"</span> <span class="attr">type</span>=<span class="string">"date"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
+
+<ol start="3">
+<li>数据查询</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>lmbda入门</title>
+    <url>/kawyang/1ba1fa2d.html</url>
+    <content><![CDATA[<blockquote>
+<p>总结 lambda 使用</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FunctionalInterface &#123;&#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>函数式接口: 注解用于接口，只允许有一个抽象函数</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>java.lang.Runnable,</li>
+<li>java.awt.event.ActionListener,</li>
+<li>java.util.Comparator,</li>
+<li>java.util.concurrent.Callable</li>
+<li>java.util.function包下的接口，如Consumer、Predicate、Supplier等</li>
+</ul>
+</blockquote>
+<h2 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h2><p><strong>基本语法：</strong></p>
+<p><strong>(parameters) -&gt; expression</strong> 或 <strong>(parameters) -&gt;{ statements; }</strong></p>
+<p>当 statements 只包含一句语句时可以省略 <code>{ }</code></p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ol>
+<li>编写函数式接口</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyInterface2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>将接口作为函数参数</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">(MyInterface2 myInterface2,<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    myInterface2.method(x,y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>调用方法，使用lambda 表达式</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">test2((x,y)-&gt;&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = x + y;</span><br><span class="line">            <span class="keyword">return</span> sum;</span><br><span class="line">&#125;,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>可以转换为</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">test2((x,y)-&gt;x + y,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><h3 id="完整格式"><a href="#完整格式" class="headerlink" title="完整格式"></a>完整格式</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">int</span> x, <span class="keyword">int</span> y )-&gt;&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = x + y;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="省略参数类型"><a href="#省略参数类型" class="headerlink" title="省略参数类型"></a>省略参数类型</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">(x, y )-&gt;&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = x + y;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="省略参数括号"><a href="#省略参数括号" class="headerlink" title="省略参数括号"></a>省略参数括号</h3><blockquote>
+<p>当参数列表包含一个参数时可以省略 <code>()</code>,<code>参数的数据类型不许一块省略</code></p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">x-&gt;&#123;</span><br><span class="line">    <span class="keyword">int</span> double_nu = x * <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> double_nu;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="省略大括号"><a href="#省略大括号" class="headerlink" title="省略大括号"></a>省略大括号</h3><blockquote>
+<p>当实现方法的语句只包含一句，或直接返回值时可以省略</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">int</span> x, <span class="keyword">int</span> y ) -&gt; x + y</span><br><span class="line">(<span class="keyword">int</span> x) -&gt; <span class="number">2</span> * x</span><br></pre></td></tr></table></figure></div>
+
+
+<hr>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.jianshu.com/p/52cdc402fb5d" target="_blank" rel="noopener">@FunctionInterface</a></p>
+<p><a href="https://blog.csdn.net/qq_37176126/article/details/81273195" target="_blank" rel="noopener">JAVA8 Lambda 使用实例</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo-abbrlink-undefined</title>
+    <url>/kawyang/b3b09752.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文解决的问题： 安装 <code>hexo-abbrlink</code> 后，并配置 <code>abbrlink</code> 连接，出现 <code>undefined</code>问题，所有文章标题都指向同一篇文章，并且无法重新启动 hexo 服务。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="错误信息Error"><a href="#错误信息Error" class="headerlink" title="错误信息Error"></a>错误信息Error</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">&gt; hexo s</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something's wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">TypeError: Cannot read property 'enable' of undefined</span><br><span class="line">    at Hexo.logic (/Users/mac/blog/node_modules/hexo-abbrlink/lib/logic.js:59:44)</span><br><span class="line">    at Hexo.tryCatcher (/Users/mac/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.<span class="tag">&lt;<span class="name">anonymous</span>&gt;</span> (/Users/mac/blog/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/mac/blog/node_modules/hexo/lib/extend/filter.js:62:52</span><br><span class="line">    at tryCatcher (/Users/mac/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Object.gotValue (/Users/mac/blog/node_modules/bluebird/js/release/reduce.js:166:18)</span><br><span class="line">    at Object.gotAccum (/Users/mac/blog/node_modules/bluebird/js/release/reduce.js:155:25)</span><br><span class="line">    at Object.tryCatcher (/Users/mac/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:547:31)</span><br><span class="line">    at Promise._settlePromise (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:604:18)</span><br><span class="line">    at Promise._settlePromise0 (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:649:10)</span><br><span class="line">    at Promise._settlePromises (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:729:18)</span><br><span class="line">    at _drainQueueStep (/Users/mac/blog/node_modules/bluebird/js/release/async.js:93:12)</span><br><span class="line">    at _drainQueue (/Users/mac/blog/node_modules/bluebird/js/release/async.js:86:9)</span><br><span class="line">    at Async._drainQueues (/Users/mac/blog/node_modules/bluebird/js/release/async.js:102:5)</span><br><span class="line">    at Immediate.Async.drainQueues [as _onImmediate] (/Users/mac/blog/node_modules/bluebird/js/release/async.js:15:14)</span><br><span class="line">    at processImmediate (internal/timers.js:456:21)</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>根据错误提示，找到<code>/Users/mac/blog/node_modules/hexo-abbrlink/lib/logic.js:59:44</code> 59 行，如图<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9naXRlZS5jb20vS2F3WWFuZy9pbWFnZS9yYXcvbWFzdGVyL2ltZy8yMDIwMDcwNzAwMDYxNy5wbmc?x-oss-process=image/format,png" alt=""><br>发现提示 <code>abbrlink.auto_category.enable</code> 未定义，因此在根目录配置文件内添加该属性即可解决。<br>最终 <code>abbrlink</code> 配置如下：</p>
+<blockquote>
+<p>修改 abbrlink 配置：</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">#permalink: :year/:month/:day/:title/</span><br><span class="line">permalink: kawyang/:abbrlink.html</span><br><span class="line">abbrlink: </span><br><span class="line">  auto_category: </span><br><span class="line">    enable: false</span><br><span class="line">  alg: crc32</span><br><span class="line">  rep: hex</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="enable-差别"><a href="#enable-差别" class="headerlink" title="enable 差别"></a>enable 差别</h2><ul>
+<li><p>true : 含有提示, 如图所示<br><img src="https://gitee.com/KawYang/image/raw/master/img/20200707001755.png" alt=""></p>
+</li>
+<li><p>false : 没有提示，如图所示</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200707001913.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Error</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络编程练习</title>
+    <url>/kawyang/e252efa0.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文总结了 Socket 和 ServerSocket 类的使用。示例：<code>通讯</code>、<code>文件上传</code>、<code>B/S 模式</code>。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ServerSocket 会等待 客户端发送请求，，一旦接收到请求会创建一个 Socket 与 客户端进行通讯</span></span><br><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">System.out.println(<span class="string">"======   ServerStart    ====="</span>);</span><br><span class="line"><span class="comment">// 等待客户端发送请求</span></span><br><span class="line">Socket socket =  serverSocket.accept();</span><br><span class="line"><span class="comment">// 客户端发送请求后，返回 socket 进行通讯</span></span><br><span class="line"><span class="comment">// 获取数据输入流，读取数据</span></span><br><span class="line">InputStream inputStream = socket.getInputStream();</span><br><span class="line"></span><br><span class="line"><span class="keyword">byte</span> [] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line"><span class="keyword">int</span> len;</span><br><span class="line">len = inputStream.read(b);</span><br><span class="line">System.out.println(<span class="keyword">new</span> String(b,<span class="number">0</span>,len));</span><br><span class="line"><span class="comment">// 获取数据输出流，发送数据</span></span><br><span class="line">OutputStream outputStream = socket.getOutputStream();</span><br><span class="line">outputStream.write(<span class="string">"你好客户端！"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">outputStream.close();</span><br><span class="line">inputStream.close();</span><br><span class="line">serverSocket.close();</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, <span class="number">8888</span>);</span><br><span class="line">    <span class="comment">//使用Socket 的字节输出流</span></span><br><span class="line">    OutputStream outputStream = socket.getOutputStream();</span><br><span class="line">    <span class="comment">//使用字节输出流 向服务器发送数据</span></span><br><span class="line">    outputStream.write(<span class="string">"你好服务器!"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取字节输入流，读取服务器发送的数据</span></span><br><span class="line">    InputStream inputStream = socket.getInputStream();</span><br><span class="line">    <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> len = inputStream.read(b);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="keyword">new</span> String(b,<span class="number">0</span>,len));</span><br><span class="line">    outputStream.close();</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">    System.out.println(<span class="string">"Error:"</span>+e.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><blockquote>
+<p>先启动服务器，服务器需要获取到网络输入流的内容，并使用本地输出流将获取到的内容保存到服务器</p>
+<p>客户端需要使用文件输入流将本地的文件读取出来，使用网络输出流将数据传递到服务器</p>
+</blockquote>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> testPro.Pro;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerSocketTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">//请求 客户端Socket对象</span></span><br><span class="line">            ServerSocket serverSocket =  <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">            <span class="comment">//获取Socket对象</span></span><br><span class="line">            Socket socket = serverSocket.accept();</span><br><span class="line">            Pro.upLoad(socket,<span class="string">"/Server.txt"</span>);</span><br><span class="line">            serverSocket.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"ServerSocket Error:"</span>+e.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testPro;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> LiYang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Project</span> Name: bilibili</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> Name: testPro</span></span><br><span class="line"><span class="comment"> * Created by MacBook Air on 2020/02/29.</span></span><br><span class="line"><span class="comment"> * Copyright © 2020 LiYang. All rights reserved.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pro</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            自定义一个文件的命名规则，防止文件被覆盖掉</span></span><br><span class="line"><span class="comment">            规则：域名+毫秒值 + 随机数</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        String fileName = <span class="string">"/Server"</span>+System.currentTimeMillis() + <span class="keyword">new</span> Random().nextInt(<span class="number">9999</span>)+<span class="string">".txt"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            让服务器一直处于监听状态 （死循环方法）</span></span><br><span class="line"><span class="comment">            上传文件 -&gt; 创建一个线程</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="comment">//请求 客户端Socket对象</span></span><br><span class="line">                ServerSocket serverSocket =  <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">                <span class="comment">//获取Socket对象</span></span><br><span class="line">                Socket socket = serverSocket.accept();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        upLoad(socket,fileName);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;).start();</span><br><span class="line">                serverSocket.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (</span><br><span class="line">                    IOException e) &#123;</span><br><span class="line">                System.out.println(<span class="string">"ServerSocket Error:"</span>+e.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 完成数据的保存</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">upLoad</span><span class="params">(Socket socket,String filename)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        InputStream inputStream = socket.getInputStream();</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"网络/src/test/"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!file.exists())&#123;</span><br><span class="line">            file.mkdir();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//创建本地输出流对象</span></span><br><span class="line">        FileOutputStream fileOutputStream = <span class="keyword">new</span> FileOutputStream(file + filename);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span> [] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> len =<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((len = inputStream.read(b)) != -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">//保存到服务器的磁盘上</span></span><br><span class="line">            fileOutputStream.write(b,<span class="number">0</span>,len);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取网络输出流</span></span><br><span class="line">        OutputStream outputStream = socket.getOutputStream();</span><br><span class="line">        <span class="comment">//给客户端回写</span></span><br><span class="line">        outputStream.write(<span class="string">"文件接收成功！"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">        fileOutputStream.close();</span><br><span class="line">        socket.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="客户端-1"><a href="#客户端-1" class="headerlink" title="客户端"></a>客户端</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">//创建本地输入流</span></span><br><span class="line">            FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(<span class="string">"网络/src/test/Socket.txt"</span>);</span><br><span class="line">            <span class="comment">//创建客户端对象</span></span><br><span class="line">            Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>,<span class="number">8888</span>);</span><br><span class="line">            <span class="comment">//获取网络字节输出流对象</span></span><br><span class="line">            OutputStream outputStream = socket.getOutputStream();</span><br><span class="line">            <span class="keyword">int</span> len;</span><br><span class="line">            <span class="keyword">byte</span> [] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="comment">//读取本地文件</span></span><br><span class="line">            <span class="keyword">while</span> ((len = fileInputStream.read(b))!= -<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="comment">//上传到服务器</span></span><br><span class="line">                outputStream.write(b,<span class="number">0</span>,len);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 只关闭输出流</span></span><br><span class="line">            socket.shutdownOutput();</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//获取网络字节输入流</span></span><br><span class="line">            InputStream inputStream = socket.getInputStream();</span><br><span class="line">            <span class="comment">//读取服务器回写数据</span></span><br><span class="line">            len = inputStream.read(b);</span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(b,<span class="number">0</span>,len));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//释放资源</span></span><br><span class="line">            fileInputStream.close();</span><br><span class="line">            socket.close();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"Socket Error:"</span>+e.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="B-S-模式模拟"><a href="#B-S-模式模拟" class="headerlink" title="B/S 模式模拟"></a>B/S 模式模拟</h2><blockquote>
+<p>访问路径 <code>http://localhost:8080/Server.txt</code></p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> Net;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> LiYang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Project</span> Name: bilibili</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> Name: Net</span></span><br><span class="line"><span class="comment"> * Created by MacBook Air on 2020/02/29.</span></span><br><span class="line"><span class="comment"> * Copyright © 2020 LiYang. All rights reserved.</span></span><br><span class="line"><span class="comment"> * B/S 版本的Server服务器</span></span><br><span class="line"><span class="comment"> * http://localhost:8080/Server.txt</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NetTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">// 创建服务器对象，并且设置端口号为 8080</span></span><br><span class="line">            ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8080</span>);</span><br><span class="line">            <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 监听客户端发送请求</span></span><br><span class="line">                Socket socket = serverSocket.accept();</span><br><span class="line">                InputStream  inputStream = socket.getInputStream();</span><br><span class="line">                OutputStream outputStream =  socket.getOutputStream();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 设置响应的相关数据</span></span><br><span class="line">                outputStream.write(<span class="string">"HTTP/1.1 200 OK\r\n"</span>.getBytes());</span><br><span class="line">                <span class="comment">// 设置编码格式</span></span><br><span class="line">                outputStream.write(<span class="string">"Content-Type:text/html;charset=utf-8\r\n"</span>.getBytes());</span><br><span class="line">                outputStream.write(<span class="string">"\r\n"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">// 获取请求的URL</span></span><br><span class="line">                    BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(inputStream));</span><br><span class="line">                    String url = bufferedReader.readLine();</span><br><span class="line">                    System.out.println(url);</span><br><span class="line">                    String [] arr = url.split(<span class="string">" "</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 裁剪出 需要获取的文件信息</span></span><br><span class="line">                    String file = arr[<span class="number">1</span>].substring(<span class="number">1</span>);</span><br><span class="line">                    System.out.println(file);</span><br><span class="line"></span><br><span class="line">                    FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(<span class="string">"./网络/src/Net/"</span> + file);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">int</span> len ;</span><br><span class="line">                    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">while</span> ((len = fileInputStream.read(bytes))!= -<span class="number">1</span>)&#123;</span><br><span class="line">                        outputStream.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    <span class="comment">// 如果发生错误，将错误信息返回到浏览器</span></span><br><span class="line">                    outputStream.write(e.getMessage().getBytes());</span><br><span class="line">                &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">                    outputStream.close();</span><br><span class="line">                    socket.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">            System.out.println(e.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>主要内容是 <code>Socket &amp; ServerSocket</code> 类的使用，配合数据流完成数据内容的传输。</p>
+<h3 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h3><ol>
+<li>构造方法</li>
+</ol>
+<ul>
+<li><p>public Socket([String](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/lang/String.html) host, int port)       throws [UnknownHostException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/net/UnknownHostException.html), IOException</p>
+</li>
+<li><p>[@Deprecated](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/lang/Deprecated.html) public Socket([String](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/lang/String.html) host, int port, boolean stream)       throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</p>
+<p><strong>Deprecated.</strong></p>
+<p>Use DatagramSocket instead for UDP transport.</p>
+</li>
+</ul>
+<ol start="2">
+<li>方法</li>
+</ol>
+<ul>
+<li>public [InputStream](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/InputStream.html) getInputStream()                           throws IOException</li>
+<li>public [OutputStream](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/OutputStream.html) getOutputStream()                             throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</li>
+<li>public void shutdownInput()                   throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</li>
+<li>public void shutdownOutput()                    throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</li>
+<li>public boolean isInputShutdown()</li>
+<li>public boolean isOutputShutdown()</li>
+</ul>
+<h3 id="ServerSocket"><a href="#ServerSocket" class="headerlink" title="ServerSocket"></a>ServerSocket</h3><ol>
+<li>构造方法</li>
+</ol>
+<ul>
+<li>public ServerSocket(int port, int backlog)             throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</li>
+<li>public ServerSocket(int port)             throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</li>
+</ul>
+<ol start="2">
+<li>方法</li>
+</ol>
+<ul>
+<li><p>public [Socket](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/net/Socket.html) accept()              throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</p>
+<p>Listens for a connection to be made to this socket and accepts it. The method blocks until a connection is made.</p>
+</li>
+<li><p>public void close()           throws [IOException](dfile:///Users/mac/Library/Application Support/Dash/DocSets/Java_SE13/Java.docset/Contents/Resources/Documents/java.base/java/io/IOException.html)</p>
+</li>
+<li><p>public boolean isClosed()</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb-Servlet</title>
     <url>/kawyang/3dd30874.html</url>
     <content><![CDATA[<blockquote>
@@ -389,9 +720,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="练习-exclamation"><a href="#练习-exclamation" class="headerlink" title="练习:exclamation:"></a>练习:exclamation:</h3><ol>
-<li><p>重定向</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自动跳转到Demo2  重定向</span></span><br><span class="line"><span class="comment">//设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">// 设置头</span></span><br><span class="line">resp.setHeader(<span class="string">"location"</span>, <span class="string">"/HomeWork/responseDemo2"</span>);</span><br><span class="line"></span><br><span class="line">resp.sendRedirect(<span class="string">"/HomeWork/responseDemo2"</span>);</span><br></pre></td></tr></table></figure></div>
+<h3 id="练习-exclamation"><a href="#练习-exclamation" class="headerlink" title="练习:exclamation:"></a>练习:exclamation:</h3><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自动跳转到Demo2  重定向</span></span><br><span class="line"><span class="comment">//设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">// 设置头</span></span><br><span class="line">resp.setHeader(<span class="string">"location"</span>, <span class="string">"/HomeWork/responseDemo2"</span>);</span><br><span class="line">resp.sendRedirect(<span class="string">"/HomeWork/responseDemo2"</span>);</span><br></pre></td></tr></table></figure></div>
 
 <ul>
 <li><p><strong>$ \color {red}{ forword 和   Redirect 区别}$</strong></p>
@@ -422,14 +751,17 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p>服务器输出字符数据</p>
-</li>
-<li><p>服务器输出字节流</p>
-</li>
-<li><p>验证码</p>
-</li>
+<ol>
+<li>服务器输出字符数据</li>
+<li>服务器输出字节流</li>
+<li>验证码</li>
 </ol>
+<h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">req.getRequestDispatcher(<span class="string">"responseDemo3"</span>).forward(req, resp);</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
 <h1 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h1><ol>
 <li>代表整个web应用，可以和程序的容器<code>tomcat</code>进行通讯</li>
 <li>功能<ol>
@@ -520,35 +852,180 @@ System.out.println(mimeType);</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>hexo-abbrlink-undefined</title>
-    <url>/kawyang/b3b09752.html</url>
+    <title>Error/hibernateError</title>
+    <url>/kawyang/53f99461.html</url>
+    <content><![CDATA[<h1 id="Hibernater-Error"><a href="#Hibernater-Error" class="headerlink" title="Hibernater Error"></a>Hibernater Error</h1><h2 id="javax-xml-bind-JAXBException"><a href="#javax-xml-bind-JAXBException" class="headerlink" title="javax/xml/bind/JAXBException"></a>javax/xml/bind/JAXBException</h2><blockquote>
+<p>缺少相关依赖</p>
+</blockquote>
+<h2 id="没有提供链接"><a href="#没有提供链接" class="headerlink" title="没有提供链接"></a>没有提供链接</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">WARN: HHH000181: No appropriate connection provider encountered, assuming application will be supplying connections</span><br><span class="line">8月 21, 2020 10:58:46 上午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator initiateService</span><br><span class="line">WARN: HHH000342: Could not obtain connection to query metadata : The application must supply JDBC connections</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>原因：Configuration configuration = new Configuration(); 没有调用<code>configure()</code>方法获取配置文件</p>
+<p>修改：Configuration configuration = new Configuration().configure(); </p>
+</blockquote>
+<h2 id="配置文件版本"><a href="#配置文件版本" class="headerlink" title="配置文件版本"></a>配置文件版本</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="code"><pre><span class="line">WARN: HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-configuration. Use namespace http://www.hibernate.org/dtd/hibernate-configuration instead.  Support <span class="keyword">for</span> obsolete DTD/XSD namespaces may be removed at any time.</span><br><span class="line"></span><br><span class="line">WARN: HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-mapping. Use namespace http://www.hibernate.org/dtd/hibernate-mapping instead.  Support <span class="keyword">for</span> obsolete DTD/XSD namespaces may be removed at any time.</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>提示 使用<code>Use namespace http://www.hibernate.org/dtd/hibernate-configuration</code> 替换<code>http://hibernate.sourceforge.net/hibernate-configuration</code></p>
+<p>使用：  <code>http://www.hibernate.org/dtd/hibernate-mapping</code> 替换 <code>http://hibernate.sourceforge.net/hibernate-mapping.</code></p>
+</blockquote>
+<h2 id="java-lang-NoClassDefFoundError-com-sun-xml-bind-v2-model-annotation-AnnotationReader"><a href="#java-lang-NoClassDefFoundError-com-sun-xml-bind-v2-model-annotation-AnnotationReader" class="headerlink" title="java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader"></a>java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader</h2><h2 id="org-hibernate-internal-util-config-ConfigurationException-Unable-to-perform-unmarshalling-at-line-number-0-and-column-0-in-RESOURCE-hibernate-cfg-xml-Message-null"><a href="#org-hibernate-internal-util-config-ConfigurationException-Unable-to-perform-unmarshalling-at-line-number-0-and-column-0-in-RESOURCE-hibernate-cfg-xml-Message-null" class="headerlink" title="org.hibernate.internal.util.config.ConfigurationException: Unable to perform unmarshalling at line number 0 and column 0 in RESOURCE hibernate.cfg.xml. Message: null"></a>org.hibernate.internal.util.config.ConfigurationException: Unable to perform unmarshalling at line number 0 and column 0 in RESOURCE hibernate.cfg.xml. Message: null</h2><blockquote>
+<p> 缺少依赖</p>
+</blockquote>
+<h2 id="Hibernate-依赖"><a href="#Hibernate-依赖" class="headerlink" title="Hibernate 依赖"></a>Hibernate 依赖</h2><ul>
+<li>hibernate-core</li>
+<li>Mysql-connection-java</li>
+<li>jaxb-api</li>
+<li>jaxb-impl</li>
+<li>jab-core</li>
+<li>activation</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.7.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-impl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.activation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="xml文件引用"><a href="#xml文件引用" class="headerlink" title="xml文件引用"></a>xml文件引用</h2><h3 id="hinernate-cfg-xml"><a href="#hinernate-cfg-xml" class="headerlink" title="hinernate.cfg.xml"></a>hinernate.cfg.xml</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="mapper-hbm-xml"><a href="#mapper-hbm-xml" class="headerlink" title="mapper.hbm.xml"></a>mapper.hbm.xml</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"kawyang.entity"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>笔记</title>
+    <url>/kawyang/78493f3f.html</url>
     <content><![CDATA[<blockquote>
-<p>本文解决的问题： 安装 <code>hexo-abbrlink</code> 后，并配置 <code>abbrlink</code> 连接，出现 <code>undefined</code>问题，所有文章标题都指向同一篇文章，并且无法重新启动 hexo 服务。</p>
+<ol>
+<li>转发和重定向区别，2. doGet和 doPost 使用   3. 文件上传下载</li>
+</ol>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="错误信息Error"><a href="#错误信息Error" class="headerlink" title="错误信息Error"></a>错误信息Error</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">&gt; hexo s</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something's wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">TypeError: Cannot read property 'enable' of undefined</span><br><span class="line">    at Hexo.logic (/Users/mac/blog/node_modules/hexo-abbrlink/lib/logic.js:59:44)</span><br><span class="line">    at Hexo.tryCatcher (/Users/mac/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.<span class="tag">&lt;<span class="name">anonymous</span>&gt;</span> (/Users/mac/blog/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/mac/blog/node_modules/hexo/lib/extend/filter.js:62:52</span><br><span class="line">    at tryCatcher (/Users/mac/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Object.gotValue (/Users/mac/blog/node_modules/bluebird/js/release/reduce.js:166:18)</span><br><span class="line">    at Object.gotAccum (/Users/mac/blog/node_modules/bluebird/js/release/reduce.js:155:25)</span><br><span class="line">    at Object.tryCatcher (/Users/mac/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:547:31)</span><br><span class="line">    at Promise._settlePromise (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:604:18)</span><br><span class="line">    at Promise._settlePromise0 (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:649:10)</span><br><span class="line">    at Promise._settlePromises (/Users/mac/blog/node_modules/bluebird/js/release/promise.js:729:18)</span><br><span class="line">    at _drainQueueStep (/Users/mac/blog/node_modules/bluebird/js/release/async.js:93:12)</span><br><span class="line">    at _drainQueue (/Users/mac/blog/node_modules/bluebird/js/release/async.js:86:9)</span><br><span class="line">    at Async._drainQueues (/Users/mac/blog/node_modules/bluebird/js/release/async.js:102:5)</span><br><span class="line">    at Immediate.Async.drainQueues [as _onImmediate] (/Users/mac/blog/node_modules/bluebird/js/release/async.js:15:14)</span><br><span class="line">    at processImmediate (internal/timers.js:456:21)</span><br></pre></td></tr></table></figure></div>
+<h1 id="转发和重定向的区别"><a href="#转发和重定向的区别" class="headerlink" title="转发和重定向的区别"></a>转发和重定向的区别</h1><table>
+<thead>
+<tr>
+<th>区别</th>
+<th align="left">转发 <strong>forword()</strong></th>
+<th>重定向 <strong>sendredirect()</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义</td>
+<td align="left">由服务器端进行跳转</td>
+<td>客户端进行跳转</td>
+</tr>
+<tr>
+<td>请求数</td>
+<td align="left">一次</td>
+<td>两次</td>
+</tr>
+<tr>
+<td>格式</td>
+<td align="left">req.getRequestDispatcher(“responseDemo3”).forward(req, resp);</td>
+<td>resp.sendRedirect(“/HomeWork/responseDemo2”);</td>
+</tr>
+<tr>
+<td>地址栏</td>
+<td align="left">不变</td>
+<td>改变，可以跳转到服务器外的网站</td>
+</tr>
+<tr>
+<td>数据</td>
+<td align="left">请求域中数据不会丢失</td>
+<td>请求域中数据丢失</td>
+</tr>
+</tbody></table>
+<h1 id="doPost-amp-doGet-请求"><a href="#doPost-amp-doGet-请求" class="headerlink" title="doPost &amp; doGet 请求"></a>doPost &amp; doGet 请求</h1><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Demo3..."</span>);</span><br><span class="line">        <span class="comment">// 默认 ISO-8859 TomCat</span></span><br><span class="line">        resp.setCharacterEncoding(<span class="string">"utf8"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//告诉浏览器编码 包含设置 TomCat</span></span><br><span class="line">        resp.setHeader(<span class="string">"Content-type"</span>, <span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//简单方式</span></span><br><span class="line">        resp.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//字节输出流</span></span><br><span class="line">        PrintWriter writer = resp.getWriter();</span><br><span class="line">        writer.write(<span class="string">"Hello Response"</span>);</span><br><span class="line">        <span class="comment">//window  JBK， JB132</span></span><br><span class="line">        writer.write(<span class="string">"你好！！"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 字节输出流</span></span><br><span class="line">        ServletOutputStream outputStream = resp.getOutputStream();</span><br><span class="line">        resp.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">        outputStream.write(<span class="string">"hello"</span>.getBytes(StandardCharsets.UTF_8));</span><br><span class="line">        outputStream.write(<span class="string">"你好"</span>.getBytes(<span class="string">"utf-8"</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>根据错误提示，找到<code>/Users/mac/blog/node_modules/hexo-abbrlink/lib/logic.js:59:44</code> 59 行，如图<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9naXRlZS5jb20vS2F3WWFuZy9pbWFnZS9yYXcvbWFzdGVyL2ltZy8yMDIwMDcwNzAwMDYxNy5wbmc?x-oss-process=image/format,png" alt=""><br>发现提示 <code>abbrlink.auto_category.enable</code> 未定义，因此在根目录配置文件内添加该属性即可解决。<br>最终 <code>abbrlink</code> 配置如下：</p>
-<blockquote>
-<p>修改 abbrlink 配置：</p>
+<h1 id="文件上传下载"><a href="#文件上传下载" class="headerlink" title="文件上传下载"></a>文件上传下载</h1><blockquote>
+<p>设置response 请求头，content-disposition:attachment;filename=file “ 设置 </p>
+<p>MIME 类型：多用途互联网邮件扩展类型。是设定某种扩展名的<a href="">文件</a>用一种<a href="">应用程序</a>来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
 </blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">#permalink: :year/:month/:day/:title/</span><br><span class="line">permalink: kawyang/:abbrlink.html</span><br><span class="line">abbrlink: </span><br><span class="line">  auto_category: </span><br><span class="line">    enable: false</span><br><span class="line">  alg: crc32</span><br><span class="line">  rep: hex</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>通过浏览器发送的请求获取需要的内容</li>
+<li>使用字节输入流加载进内存</li>
+<li>设置相应头信息</li>
+<li>将数据传送到网络</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Download?filename=images_1.png</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//1. 获取请求参数</span></span><br><span class="line">        String filename = request.getParameter(<span class="string">"filename"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.使用字节输入流加载进内存</span></span><br><span class="line">        <span class="comment">//2.1 找到真实路径</span></span><br><span class="line">        ServletContext servletContext = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">        String path = servletContext.getRealPath(<span class="string">"/img/"</span> + filename);</span><br><span class="line">        <span class="comment">//2.2 关联字节流</span></span><br><span class="line">        FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(path);</span><br><span class="line">        </span><br><span class="line"><span class="comment">// -------------</span></span><br><span class="line">    	<span class="comment">//3. 设置response的响应头</span></span><br><span class="line">        <span class="comment">//MIME 类型</span></span><br><span class="line">        String mimeType = servletContext.getMimeType(path);</span><br><span class="line">        response.setHeader(<span class="string">"content-type"</span>, mimeType);</span><br><span class="line">        <span class="comment">//设置打开方式 打开方式</span></span><br><span class="line">        response.setHeader(<span class="string">"content-disposition"</span>, <span class="string">"attachment;filename="</span> + filename);</span><br><span class="line"><span class="comment">// ------------- </span></span><br><span class="line">    </span><br><span class="line">        <span class="comment">// 4. 输出到网络</span></span><br><span class="line">        ServletOutputStream outputStream = response.getOutputStream();</span><br><span class="line">        <span class="keyword">byte</span>[]buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">8</span>];</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>((len = fileInputStream.read(buff)) != -<span class="number">1</span>)&#123;</span><br><span class="line">            outputStream.write(buff, <span class="number">0</span>, len);</span><br><span class="line">        &#125;</span><br><span class="line">        outputStream.shu</span><br><span class="line">        fileInputStream.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="enable-差别"><a href="#enable-差别" class="headerlink" title="enable 差别"></a>enable 差别</h2><ul>
-<li><p>true : 含有提示, 如图所示<br><img src="https://gitee.com/KawYang/image/raw/master/img/20200707001755.png" alt=""></p>
-</li>
-<li><p>false : 没有提示，如图所示</p>
-</li>
-</ul>
-<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200707001913.png" alt=""></p>
+
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://blog.csdn.net/weixin_40001125/article/details/88663468" target="_blank" rel="noopener">转发和重定向的区别和使用</a></p>
+<p> <a href="https://baike.baidu.com/item/MIME/2900607#2" target="_blank" rel="noopener">MIME类型</a></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>JavaWeb</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>LeetCode-双指针&amp;移除元素-27</title>
+    <url>/kawyang/276090df.html</url>
+    <content><![CDATA[<blockquote>
+<p>给你一个数组<code>nums</code> 和一个值 val，你需要 原地 移除所有数值等于<code>val</code>的元素，并返回移除后数组的新长度。<br>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 <code>原地</code> 修改输入数组。<br>元素的<code>顺序可以改变</code>。你不需要考虑数组中超出新长度后面的元素。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。<br>示例2:</p>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span></span><br><span class="line"><span class="keyword">int</span> len = removeElement(nums, val);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">	print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="解"><a href="#解" class="headerlink" title="解"></a>解</h1><p><img src="https://gitee.com/KawYang/image/raw/master/img/20200711155701.png" alt=""></p>
+<blockquote>
+<p>i 标记符合元素的结尾， 初始值为 : 第一个为 val 的值，在 i 之前全部符合要求。<br>j 标记查找后方元素，如果 为 val : 跳过，如果不同：将元素移动到 i 标记处.</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 找出 i 的初始值</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;nums.length &amp;&amp; nums[i] != val)&#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// j 查找不同的元素，如果不相同，移动到 i 的位置，i后移。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j&lt; nums.length; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] != val)&#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/remove-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>Error</tag>
+        <tag>LeetCode</tag>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>验证码</title>
+    <url>/kawyang/3523544f.html</url>
+    <content><![CDATA[<blockquote>
+<p>验证码使用</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="验证码生成步骤"><a href="#验证码生成步骤" class="headerlink" title="验证码生成步骤"></a>验证码生成步骤</h1><ol>
+<li>创建图片缓存对象<code>BufferedImage</code></li>
+<li>画图 </li>
+<li>生成随机数据</li>
+<li>填充到图片中</li>
+<li>干扰线</li>
+<li>将图片展示到前端页面</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> LiYang</span></span><br><span class="line"><span class="comment"> * 验证码生成并展示</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"all"</span>)</span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/CheckCode"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CheckCodeServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doPost(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> width = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">int</span> height = <span class="number">50</span>;</span><br><span class="line">        resp.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">//resp.setContentType("text/html;charset=utf-8");</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 1. 创建一个对象，在内存中代表图片</span></span><br><span class="line">        BufferedImage image = <span class="keyword">new</span> BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 画图</span></span><br><span class="line">        Graphics g = image.getGraphics();</span><br><span class="line">        <span class="comment">// 2.1 填充</span></span><br><span class="line">        g.setColor(Color.RED);</span><br><span class="line">        g.fillRect(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.2 画边框</span></span><br><span class="line">        g.setColor(Color.BLACK);</span><br><span class="line">        g.drawRect(<span class="number">0</span>, <span class="number">0</span>, width-<span class="number">1</span>, height-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        String s = <span class="string">"ABCDEFGHIGKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成随机数据</span></span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        g.setFont(<span class="keyword">new</span> Font(<span class="string">"黑体"</span>,Font.BOLD, <span class="number">35</span>));</span><br><span class="line">        String str = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span> ; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = random.nextInt(s.length());</span><br><span class="line">            str += String.valueOf(s.charAt(index));</span><br><span class="line">            g.drawString(String.valueOf(s.charAt(index)), <span class="number">20</span>* j, <span class="number">40</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置干扰线</span></span><br><span class="line">        g.setColor(Color.GREEN);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x1 = random.nextInt(width);</span><br><span class="line">            <span class="keyword">int</span> x2 = random.nextInt(width);</span><br><span class="line">            <span class="keyword">int</span> y1 = random.nextInt(height);</span><br><span class="line">            <span class="keyword">int</span> y2 = random.nextInt(height);</span><br><span class="line">            g.drawLine(x1, y1, x2, y2);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(str);</span><br><span class="line">        req.setAttribute(<span class="string">"CheckCode"</span>,str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 图片输出展示</span></span><br><span class="line"><span class="comment">//        PrintWriter writer = resp.getWriter();</span></span><br><span class="line"><span class="comment">//        writer.write("&lt;form action=\"\" method=\"post\" id=\"form1\"&gt;\n" +</span></span><br><span class="line"><span class="comment">//                "    请输入验证码：&lt;input type=\"text\" id=\"reset\" name=\"kayValue\" /&gt;\n" +</span></span><br><span class="line"><span class="comment">//                "    &lt;input type=\"submit\" value=\"验证\" /&gt;\n" +</span></span><br><span class="line"><span class="comment">//                "&lt;/form&gt;");</span></span><br><span class="line">        ImageIO.write(image, <span class="string">"jpg"</span>, resp.getOutputStream());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Json</title>
+    <url>/kawyang/cb358a7b.html</url>
+    <content><![CDATA[<blockquote>
+<p><code>Json</code> 的基本使用 </p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h1><p>​    </p>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java Web</tag>
       </tags>
   </entry>
   <entry>
@@ -612,190 +1089,6 @@ System.out.println(mimeType);</code></pre>
       <tags>
         <tag>LeetCode</tag>
         <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Json</title>
-    <url>/kawyang/cb358a7b.html</url>
-    <content><![CDATA[<blockquote>
-<p><code>Json</code> 的基本使用 </p>
-</blockquote>
-<a id="more"></a>
-
-<h1 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h1><p>​    </p>
-]]></content>
-      <categories>
-        <category>JavaWeb</category>
-      </categories>
-      <tags>
-        <tag>Java Web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode-双指针&amp;移除元素-27</title>
-    <url>/kawyang/276090df.html</url>
-    <content><![CDATA[<blockquote>
-<p>给你一个数组<code>nums</code> 和一个值 val，你需要 原地 移除所有数值等于<code>val</code>的元素，并返回移除后数组的新长度。<br>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 <code>原地</code> 修改输入数组。<br>元素的<code>顺序可以改变</code>。你不需要考虑数组中超出新长度后面的元素。</p>
-</blockquote>
-<a id="more"></a>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
-<p>给定 nums = [3,2,2,3], val = 3,</p>
-<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
-<p>你不需要考虑数组中超出新长度后面的元素。<br>示例2:</p>
-<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
-<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
-<p>注意这五个元素可为任意顺序。</p>
-<p>你不需要考虑数组中超出新长度后面的元素。</p>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
-<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
-<p>你可以想象内部操作如下:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span></span><br><span class="line"><span class="keyword">int</span> len = removeElement(nums, val);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">	print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="解"><a href="#解" class="headerlink" title="解"></a>解</h1><p><img src="https://gitee.com/KawYang/image/raw/master/img/20200711155701.png" alt=""></p>
-<blockquote>
-<p>i 标记符合元素的结尾， 初始值为 : 第一个为 val 的值，在 i 之前全部符合要求。<br>j 标记查找后方元素，如果 为 val : 跳过，如果不同：将元素移动到 i 标记处.</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 找出 i 的初始值</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;nums.length &amp;&amp; nums[i] != val)&#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// j 查找不同的元素，如果不相同，移动到 i 的位置，i后移。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j&lt; nums.length; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] != val)&#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<hr>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/remove-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSM-CRUD总结</title>
-    <url>/kawyang/f487e049.html</url>
-    <content><![CDATA[<blockquote>
-</blockquote>
-<a id="more"></a>
-
-<h1 id="SSM-CRUD"><a href="#SSM-CRUD" class="headerlink" title="SSM-CRUD"></a>SSM-CRUD</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>1、 分页</p>
-<p>2、数据校验</p>
-<p>​    前段 </p>
-<p>​    后端</p>
-<p>3、ajax</p>
-<p>4、REST风格的URL （GET、POST、PUT、DELETE）</p>
-<h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><p>1、基础框架SSM</p>
-<p>2、数据库MySQL</p>
-<p>3、前端框架-bootstrap</p>
-<p>4、项目依赖管理-Maven</p>
-<p>5、分页-pagehelper</p>
-<p>6、逆向工程-MyBatis Generator</p>
-<h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><ul>
-<li><p>创建Maven工程</p>
-</li>
-<li><p>引入依赖</p>
-<ul>
-<li>spring</li>
-<li>SpringMVC</li>
-<li>MyBatis</li>
-<li>数据库链接</li>
-<li>其他</li>
-</ul>
-</li>
-<li><p>引入bootstrap</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>SSM</category>
-      </categories>
-      <tags>
-        <tag>SSM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSM-CRUD总结</title>
-    <url>/kawyang/20ec3355.html</url>
-    <content><![CDATA[<blockquote>
-<p>本文对 SSM 整合的项目总结</p>
-</blockquote>
-<a id="more"></a>
-
-<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><h2 id="开发技术"><a href="#开发技术" class="headerlink" title="开发技术"></a>开发技术</h2><blockquote>
-<p>Maven 项目管理</p>
-</blockquote>
-<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200807182752.png" alt=""></p>
-<h1 id="color-red-Error-整理"><a href="#color-red-Error-整理" class="headerlink" title="$\color{red}{Error}$整理"></a>$\color{red}{Error}$整理</h1><h2 id="发布Error"><a href="#发布Error" class="headerlink" title="发布Error"></a>发布Error</h2><blockquote>
-<p>服务器环境 Window Server 2012R2</p>
-</blockquote>
-<h3 id="URL-路径错误"><a href="#URL-路径错误" class="headerlink" title="URL 路径错误"></a>URL 路径错误</h3><h4 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h4><blockquote>
-<ul>
-<li>相对路径: 不可以确定唯一资源 ,<ul>
-<li><strong>不</strong> 以<code>/ 或 ./</code>开头。 <strong>可以不写</strong> , 以本文件路径为准</li>
-</ul>
-</li>
-<li>绝对路径:确定唯一资源,找到当前路径和目标资源之间的<code>相对关系</code><ul>
-<li>/ 开始，以 服务器 路径为准</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<ul>
-<li>文件加载使用绝对路径</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;!-- 获得站点的根路径 --&gt;</span><br><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br><span class="line">&lt;!-- 绝对路径 --&gt;</span><br><span class="line">&lt;script src="$&#123;APP_PATH&#125;/static/updateEmp.js" &gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- 相对路径 --&gt;</span><br><span class="line">&lt;script src="static/updateEmp.js" &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>pageContext.setAttribute 不提示</strong></p>
-<ul>
-<li>添加<code>jsp-api</code>依赖</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h4 id="请求的URL"><a href="#请求的URL" class="headerlink" title="请求的URL"></a>请求的URL</h4><blockquote>
-<p>IDEA 运行的路径为 <code>/</code> , 当发布到服务器时，URL的根路径为项目<code>Tomcat\webapps</code>下的文件名，如果直接采用 <code>localhost:8080/add..</code>的方式进行访问会出现 404 错误。</p>
-</blockquote>
-<ul>
-<li>解决</li>
-</ul>
-<ol>
-<li>在 jsp 网页文件中，获取项目路径</li>
-</ol>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br></pre></td></tr></table></figure></div>
-
-<ol start="2">
-<li>使用 JavaScript 获取变量，当发送请求时，添加该 PATH 即可。</li>
-</ol>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> App_Path = <span class="string">"$&#123;APP_PATH&#125;"</span>;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在 JS 文件中，直接使用 App_Path 变量即可。[^资源]</li>
-</ol>
-<h3 id="数据库连接错误"><a href="#数据库连接错误" class="headerlink" title="数据库连接错误"></a>数据库连接错误</h3><blockquote>
-<p>在本地采用远程连接 MySQL 数据库的方式报 <code>serverTimezone</code> 错误。</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">8月 07, 2020 5:03:42 下午 com.mchange.v2.resourcepool.BasicResourcePool </span><br><span class="line">警告: com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@1ecb3ad -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: </span><br><span class="line">java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.</span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li><p>解决</p>
-<p>设置时区: 东八区设置为 <code>serverTimezone=GMT%2B8</code> </p>
-<p><a href="https://blog.csdn.net/love20yh/article/details/80799610" target="_blank" rel="noopener">参考链接</a></p>
-</li>
-</ul>
-<h3 id="JS文件编码错误"><a href="#JS文件编码错误" class="headerlink" title="JS文件编码错误"></a>JS文件编码错误</h3><blockquote>
-<p>访问网站时发现 使用 JS 文件加载的内容，中文乱码.</p>
-</blockquote>
-<ul>
-<li><p>解决</p>
-<p>将 JS 文件编码改为 <code>UTF-8 with BOM</code> </p>
-</li>
-</ul>
-<hr>
-<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.bilibili.com/video/BV19t41197zi?p=1" target="_blank" rel="noopener">学习资源</a></p>
-<p>[^资源]:</p>
-<p> Ty</p>
-]]></content>
-      <categories>
-        <category>SSM</category>
-      </categories>
-      <tags>
-        <tag>SSM</tag>
       </tags>
   </entry>
   <entry>
@@ -1404,6 +1697,136 @@ System.out.println(mimeType);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>SSM-CRUD总结</title>
+    <url>/kawyang/f487e049.html</url>
+    <content><![CDATA[<blockquote>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="SSM-CRUD"><a href="#SSM-CRUD" class="headerlink" title="SSM-CRUD"></a>SSM-CRUD</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>1、 分页</p>
+<p>2、数据校验</p>
+<p>​    前段 </p>
+<p>​    后端</p>
+<p>3、ajax</p>
+<p>4、REST风格的URL （GET、POST、PUT、DELETE）</p>
+<h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><p>1、基础框架SSM</p>
+<p>2、数据库MySQL</p>
+<p>3、前端框架-bootstrap</p>
+<p>4、项目依赖管理-Maven</p>
+<p>5、分页-pagehelper</p>
+<p>6、逆向工程-MyBatis Generator</p>
+<h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><ul>
+<li><p>创建Maven工程</p>
+</li>
+<li><p>引入依赖</p>
+<ul>
+<li>spring</li>
+<li>SpringMVC</li>
+<li>MyBatis</li>
+<li>数据库链接</li>
+<li>其他</li>
+</ul>
+</li>
+<li><p>引入bootstrap</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>SSM</category>
+      </categories>
+      <tags>
+        <tag>SSM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSM-CRUD总结</title>
+    <url>/kawyang/20ec3355.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文对 SSM 整合的项目总结</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><h2 id="开发技术"><a href="#开发技术" class="headerlink" title="开发技术"></a>开发技术</h2><blockquote>
+<p>Maven 项目管理</p>
+</blockquote>
+<p><img src="https://gitee.com/KawYang/image/raw/master/img/20200807182752.png" alt=""></p>
+<h1 id="color-red-Error-整理"><a href="#color-red-Error-整理" class="headerlink" title="$\color{red}{Error}$整理"></a>$\color{red}{Error}$整理</h1><h2 id="发布Error"><a href="#发布Error" class="headerlink" title="发布Error"></a>发布Error</h2><blockquote>
+<p>服务器环境 Window Server 2012R2</p>
+</blockquote>
+<h3 id="URL-路径错误"><a href="#URL-路径错误" class="headerlink" title="URL 路径错误"></a>URL 路径错误</h3><h4 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h4><blockquote>
+<ul>
+<li>相对路径: 不可以确定唯一资源 ,<ul>
+<li><strong>不</strong> 以<code>/ 或 ./</code>开头。 <strong>可以不写</strong> , 以本文件路径为准</li>
+</ul>
+</li>
+<li>绝对路径:确定唯一资源,找到当前路径和目标资源之间的<code>相对关系</code><ul>
+<li>/ 开始，以 服务器 路径为准</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>文件加载使用绝对路径</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;!-- 获得站点的根路径 --&gt;</span><br><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br><span class="line">&lt;!-- 绝对路径 --&gt;</span><br><span class="line">&lt;script src="$&#123;APP_PATH&#125;/static/updateEmp.js" &gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- 相对路径 --&gt;</span><br><span class="line">&lt;script src="static/updateEmp.js" &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>pageContext.setAttribute 不提示</strong></p>
+<ul>
+<li>添加<code>jsp-api</code>依赖</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="请求的URL"><a href="#请求的URL" class="headerlink" title="请求的URL"></a>请求的URL</h4><blockquote>
+<p>IDEA 运行的路径为 <code>/</code> , 当发布到服务器时，URL的根路径为项目<code>Tomcat\webapps</code>下的文件名，如果直接采用 <code>localhost:8080/add..</code>的方式进行访问会出现 404 错误。</p>
+</blockquote>
+<ul>
+<li>解决</li>
+</ul>
+<ol>
+<li>在 jsp 网页文件中，获取项目路径</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">&lt;% pageContext.setAttribute(<span class="string">"APP_PATH"</span>,request.getContextPath()); %&gt;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>使用 JavaScript 获取变量，当发送请求时，添加该 PATH 即可。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> App_Path = <span class="string">"$&#123;APP_PATH&#125;"</span>;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 JS 文件中，直接使用 App_Path 变量即可。[^资源]</li>
+</ol>
+<h3 id="数据库连接错误"><a href="#数据库连接错误" class="headerlink" title="数据库连接错误"></a>数据库连接错误</h3><blockquote>
+<p>在本地采用远程连接 MySQL 数据库的方式报 <code>serverTimezone</code> 错误。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">8月 07, 2020 5:03:42 下午 com.mchange.v2.resourcepool.BasicResourcePool </span><br><span class="line">警告: com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@1ecb3ad -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: </span><br><span class="line">java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>解决</p>
+<p>设置时区: 东八区设置为 <code>serverTimezone=GMT%2B8</code> </p>
+<p><a href="https://blog.csdn.net/love20yh/article/details/80799610" target="_blank" rel="noopener">参考链接</a></p>
+</li>
+</ul>
+<h3 id="JS文件编码错误"><a href="#JS文件编码错误" class="headerlink" title="JS文件编码错误"></a>JS文件编码错误</h3><blockquote>
+<p>访问网站时发现 使用 JS 文件加载的内容，中文乱码.</p>
+</blockquote>
+<ul>
+<li><p>解决</p>
+<p>将 JS 文件编码改为 <code>UTF-8 with BOM</code> </p>
+</li>
+</ul>
+<hr>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.bilibili.com/video/BV19t41197zi?p=1" target="_blank" rel="noopener">学习资源</a></p>
+<p>[^资源]:</p>
+]]></content>
+      <categories>
+        <category>SSM</category>
+      </categories>
+      <tags>
+        <tag>SSM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>单例设计模式</title>
     <url>/kawyang/cd333c07.html</url>
     <content><![CDATA[<blockquote>
@@ -1631,6 +2054,63 @@ System.out.println(mimeType);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>MyBatis-延迟加载</title>
+    <url>/kawyang/70e7f4d8.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文主要总结了 <code>Mybatis</code> 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="assocation-延迟加载"><a href="#assocation-延迟加载" class="headerlink" title="assocation 延迟加载"></a>assocation 延迟加载</h3><blockquote>
+<p>assocation实现一对一延迟加载</p>
+</blockquote>
+<p>将级联操作 转换为两条SQL语句，通过两次查询方式进行获取数据。</p>
+<p>含有 注入对象的对象查询，当查询结果不涉及注入对象信息时，不进行内嵌对象的查询。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"resultStuLazy"</span> <span class="attr">type</span>=<span class="string">"com.item.entity.Student"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加select 属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"com.item.entity.Classes_"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">select</span>=<span class="string">"com.item.repository.IClasses.findById"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">column</span>=<span class="string">"cid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findById"</span> <span class="attr">resultMap</span>=<span class="string">"resultStuLazy"</span>&gt;</span></span><br><span class="line">    select id,name,cid from student where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<blockquote>
+<p>在全局配置文件中开启延迟加载</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"aggressiveLazyLoading"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p><a href="https://www.jianshu.com/p/6f5b42d52d38" target="_blank" rel="noopener">name 参数参考</a></p>
+<h3 id="Collection-延迟加载"><a href="#Collection-延迟加载" class="headerlink" title="Collection 延迟加载"></a>Collection 延迟加载</h3><blockquote>
+<p>Collection 实现一对多延迟加载。</p>
+</blockquote>
+<p>在查询班级信息时，如果需要查询班级内所有👨‍🎓信息，需要进行级联操作。<br>可以将该操作分为两步：</p>
+<ul>
+<li>先根据🆔查询出班级信息 =&gt; select * from classes where id=?</li>
+<li>再根据👩‍🎓的班级🆔，查询出班级内所有👨‍🎓 =&gt; select * from student where cid=?</li>
+</ul>
+<blockquote>
+<p>查询班级信息</p>
+</blockquote>
+<p>采用配置文件的方式，用 <code>collection</code> 配置第二步的操作，使用 <code>ofType</code> 属性，完成数据类型的指定。<br>如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载start  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"classLazy"</span> <span class="attr">type</span>=<span class="string">"com.kawyang.entity.ClassesStu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"students"</span> <span class="attr">ofType</span>=<span class="string">"com.kawyang.entity.Student"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">select</span>=<span class="string">"com.kawyang.repository.IStudentRepository.findByCid"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIdLazy"</span> <span class="attr">resultMap</span>=<span class="string">"classLazy"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select * from classes where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  延迟加载end  --&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>根据班级 🆔 查询所有👩‍🎓👨‍🎓，使用注解方式如下：</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from student where cid=#&#123;id&#125;"</span>)</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">findByCid</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">IStudentRepository mapper = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IStudentRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">Student byIdLazy = mapper.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询学生信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级的名称，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy.getClasses().getName());</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"============"</span>);</span><br><span class="line"></span><br><span class="line">IClassRepository mapper1 = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IClassRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">ClassesStu byIdLazy1 = mapper1.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询本季信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级所有👩‍🎓👨‍🎓信息，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getStudents());</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1267149311.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@4b8729ff]</span><br><span class="line">==&gt;  Preparing: select * from student where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">KawYang</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line"></span><br><span class="line">============</span><br><span class="line"></span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1414549197.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@54504ecd]</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from student where cid=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==        Row: 3, 张三, 2</span><br><span class="line">&lt;==      Total: 2</span><br><span class="line">[Student(id=2, name=KawYang, classes=null), Student(id=3, name=张三, classes=null)]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure></div>
+
+<p>⚠️ : 由于 MyBatis 默认开启一级缓存，所以在第二步查询时，只执行了第二条SQL语句。</p>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>MyBatis</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBatis-基本操作</title>
     <url>/kawyang/8661f06f.html</url>
     <content><![CDATA[<blockquote>
@@ -1802,63 +2282,6 @@ System.out.println(mimeType);</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>MyBatis-延迟加载</title>
-    <url>/kawyang/70e7f4d8.html</url>
-    <content><![CDATA[<blockquote>
-<p>本文主要总结了 <code>Mybatis</code> 的数据库延迟加载问题，将多表查询的 SQL 语句进行拆分，根据需要进行相应的查询操作。</p>
-</blockquote>
-<a id="more"></a>
-
-<h3 id="assocation-延迟加载"><a href="#assocation-延迟加载" class="headerlink" title="assocation 延迟加载"></a>assocation 延迟加载</h3><blockquote>
-<p>assocation实现一对一延迟加载</p>
-</blockquote>
-<p>将级联操作 转换为两条SQL语句，通过两次查询方式进行获取数据。</p>
-<p>含有 注入对象的对象查询，当查询结果不涉及注入对象信息时，不进行内嵌对象的查询。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"resultStuLazy"</span> <span class="attr">type</span>=<span class="string">"com.item.entity.Student"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加select 属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"com.item.entity.Classes_"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">select</span>=<span class="string">"com.item.repository.IClasses.findById"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">column</span>=<span class="string">"cid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findById"</span> <span class="attr">resultMap</span>=<span class="string">"resultStuLazy"</span>&gt;</span></span><br><span class="line">    select id,name,cid from student where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-
-<blockquote>
-<p>在全局配置文件中开启延迟加载</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"aggressiveLazyLoading"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-<p><a href="https://www.jianshu.com/p/6f5b42d52d38" target="_blank" rel="noopener">name 参数参考</a></p>
-<h3 id="Collection-延迟加载"><a href="#Collection-延迟加载" class="headerlink" title="Collection 延迟加载"></a>Collection 延迟加载</h3><blockquote>
-<p>Collection 实现一对多延迟加载。</p>
-</blockquote>
-<p>在查询班级信息时，如果需要查询班级内所有👨‍🎓信息，需要进行级联操作。<br>可以将该操作分为两步：</p>
-<ul>
-<li>先根据🆔查询出班级信息 =&gt; select * from classes where id=?</li>
-<li>再根据👩‍🎓的班级🆔，查询出班级内所有👨‍🎓 =&gt; select * from student where cid=?</li>
-</ul>
-<blockquote>
-<p>查询班级信息</p>
-</blockquote>
-<p>采用配置文件的方式，用 <code>collection</code> 配置第二步的操作，使用 <code>ofType</code> 属性，完成数据类型的指定。<br>如下：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--  延迟加载start  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"classLazy"</span> <span class="attr">type</span>=<span class="string">"com.kawyang.entity.ClassesStu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"students"</span> <span class="attr">ofType</span>=<span class="string">"com.kawyang.entity.Student"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">select</span>=<span class="string">"com.kawyang.repository.IStudentRepository.findByCid"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">column</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIdLazy"</span> <span class="attr">resultMap</span>=<span class="string">"classLazy"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select * from classes where id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  延迟加载end  --&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<blockquote>
-<p>根据班级 🆔 查询所有👩‍🎓👨‍🎓，使用注解方式如下：</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from student where cid=#&#123;id&#125;"</span>)</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">findByCid</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">IStudentRepository mapper = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IStudentRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">Student byIdLazy = mapper.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询学生信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级的名称，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy.getClasses().getName());</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"============"</span>);</span><br><span class="line"></span><br><span class="line">IClassRepository mapper1 = MapperUtil.getMapper(<span class="string">"config.xml"</span>, IClassRepository<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">ClassesStu byIdLazy1 = mapper1.findByIdLazy(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//通过 🆔 查询本季信息，只需要获取 name 属性，不需要进行第二步操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getName());</span><br><span class="line">System.out.println(<span class="string">"------------"</span>);</span><br><span class="line"><span class="comment">//需要获取班级所有👩‍🎓👨‍🎓信息，需要进行两次查询操作。</span></span><br><span class="line">System.out.println(byIdLazy1.getStudents());</span><br></pre></td></tr></table></figure></div>
-
-<blockquote>
-<p>运行结果</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1267149311.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@4b8729ff]</span><br><span class="line">==&gt;  Preparing: select * from student where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">KawYang</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line"></span><br><span class="line">============</span><br><span class="line"></span><br><span class="line">Opening JDBC Connection</span><br><span class="line">Created connection 1414549197.</span><br><span class="line">Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@54504ecd]</span><br><span class="line">==&gt;  Preparing: select * from classes where id=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name</span><br><span class="line">&lt;==        Row: 2, 二班</span><br><span class="line">&lt;==      Total: 1</span><br><span class="line">二班</span><br><span class="line">------------</span><br><span class="line">==&gt;  Preparing: select * from student where cid=?</span><br><span class="line">==&gt; Parameters: 2(Integer)</span><br><span class="line">&lt;==    Columns: id, name, cid</span><br><span class="line">&lt;==        Row: 2, KawYang, 2</span><br><span class="line">&lt;==        Row: 3, 张三, 2</span><br><span class="line">&lt;==      Total: 2</span><br><span class="line">[Student(id=2, name=KawYang, classes=null), Student(id=3, name=张三, classes=null)]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure></div>
-
-<p>⚠️ : 由于 MyBatis 默认开启一级缓存，所以在第二步查询时，只执行了第二条SQL语句。</p>
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>MyBatis</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MyBatis-数据缓存</title>
     <url>/kawyang/579a3ded.html</url>
     <content><![CDATA[<blockquote>
@@ -1981,6 +2404,72 @@ System.out.println(mimeType);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Spring-AOP</title>
+    <url>/kawyang/97375e6e.html</url>
+    <content><![CDATA[<blockquote>
+<p>AOP</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>Aspect Oriented Programming  —- 面向切面编程</p>
+<ul>
+<li>降低耦合度</li>
+<li>易拓展</li>
+<li>复用</li>
+<li>非业务集中，便于统一管理</li>
+<li>业务代码比较纯粹，没有其他代码影响</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>创建Maven工程，添加坐标</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+</li>
+</ul>
+<p>Invocationhandler</p>
+<p>  生成代理类的类，</p>
+<p>  imlements InvocationHandler</p>
+<ul>
+<li><p>接收..?到回复..?委托对象</p>
+</li>
+<li><p>设置返回代理类</p>
+<p>Proxy.newProxyInstance()</p>
+</li>
+<li><p>编写委托对象方法</p>
+</li>
+</ul>
+<h3 id="Spring框架对AOP进行封装"><a href="#Spring框架对AOP进行封装" class="headerlink" title="Spring框架对AOP进行封装"></a>Spring框架对AOP进行封装</h3><p>不需要创建InvocationHandler，只需要创建一个切面对象，将业务代码在切面中完成即可</p>
+<ul>
+<li>创建切面类对象 Aspect（切面）</li>
+<li>添加注解</li>
+</ul>
+<p>LoggerAspect</p>
+<ul>
+<li><code>@Aspect</code> ： 表示该类为切面类</li>
+<li><code>@Component</code>：将该类对象注入到IoC容器中</li>
+<li><code>@Befor</code> :表示方法执行的具体位置和时机  </li>
+</ul>
+<p>CalImpl2 也需要添加<code>@Component</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  自动扫描  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.item"</span> &gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean class="com.item.AOP.LoggerAspect" p:id="" /&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  使 Aspect 标签生效，为目标类自动生成代理对象  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>context:component-scan 标签是扫描包内所有添加@Component注解的类，注入到IoC中</p>
+<p>aop:aspectj-autoproxy 让Spring结合切面类和目标类自动生成代理对象。</p>
+<ul>
+<li>切面：横切关注点被模块化的抽象对象</li>
+<li>通知：切面对象完成的工作（非业务代码，日志…）</li>
+<li>目标：被通知的对象，即被切面的对象</li>
+<li>代理：切面、通知、目标混合之后的对象</li>
+<li>连接点：通知插入业务代码的具体位置</li>
+<li>切点：AOP通过切点定位到连接点</li>
+</ul>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>AOP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBatis-级联操作</title>
     <url>/kawyang/fb315360.html</url>
     <content><![CDATA[<blockquote>
@@ -2052,134 +2541,6 @@ System.out.println(mimeType);</code></pre>
       <tags>
         <tag>MyBatis</tag>
         <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring-AOP</title>
-    <url>/kawyang/97375e6e.html</url>
-    <content><![CDATA[<blockquote>
-<p>AOP</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>Aspect Oriented Programming  —- 面向切面编程</p>
-<ul>
-<li>降低耦合度</li>
-<li>易拓展</li>
-<li>复用</li>
-<li>非业务集中，便于统一管理</li>
-<li>业务代码比较纯粹，没有其他代码影响</li>
-</ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
-<li><p>创建Maven工程，添加坐标</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-</li>
-</ul>
-<p>Invocationhandler</p>
-<p>  生成代理类的类，</p>
-<p>  imlements InvocationHandler</p>
-<ul>
-<li><p>接收jjadf 啊收到回复ahsudjf 委托对象</p>
-</li>
-<li><p>设置返回代理类</p>
-<p>Proxy.newProxyInstance()</p>
-</li>
-<li><p>编写委托对象方法</p>
-</li>
-</ul>
-<h3 id="Spring框架对AOP进行封装"><a href="#Spring框架对AOP进行封装" class="headerlink" title="Spring框架对AOP进行封装"></a>Spring框架对AOP进行封装</h3><p>不需要创建InvocationHandler，只需要创建一个切面对象，将业务代码在切面中完成即可</p>
-<ul>
-<li>创建切面类对象 Aspect（切面）</li>
-<li>添加注解</li>
-</ul>
-<p>LoggerAspect</p>
-<ul>
-<li><code>@Aspect</code> ： 表示该类为切面类</li>
-<li><code>@Component</code>：将该类对象注入到IoC容器中</li>
-<li><code>@Befor</code> :表示方法执行的具体位置和时机  </li>
-</ul>
-<p>CalImpl2 也需要添加<code>@Component</code></p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  自动扫描  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.item"</span> &gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;bean class="com.item.AOP.LoggerAspect" p:id="" /&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  使 Aspect 标签生效，为目标类自动生成代理对象  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>context:component-scan 标签是扫描包内所有添加@Component注解的类，注入到IoC中</p>
-<p>aop:aspectj-autoproxy 让Spring结合切面类和目标类自动生成代理对象。</p>
-<ul>
-<li>切面：横切关注点被模块化的抽象对象</li>
-<li>通知：切面对象完成的工作（非业务代码，日志…）</li>
-<li>目标：被通知的对象，即被切面的对象</li>
-<li>代理：切面、通知、目标混合之后的对象</li>
-<li>连接点：通知插入业务代码的具体位置</li>
-<li>切点：AOP通过切点定位到连接点</li>
-</ul>
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
-        <tag>AOP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring-工厂方法</title>
-    <url>/kawyang/6c92115f.html</url>
-    <content><![CDATA[<blockquote>
-<p>📝 : Spring的工厂方法，将🏭 交给 <code>IoC容器</code> 进行管理，🏭包括：静态🏭、实例🏭。</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="Spring-的工厂方法"><a href="#Spring-的工厂方法" class="headerlink" title="Spring 的工厂方法"></a>Spring 的工厂方法</h2><blockquote>
-<p>使用工厂创建独享，并将工厂交给 IoC容器 进行管理</p>
-</blockquote>
-<h3 id="静态工厂"><a href="#静态工厂" class="headerlink" title="静态工厂"></a>静态工厂</h3><ul>
-<li>实体类</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Long id;</span><br><span class="line">    String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>静态工厂</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.item.Car;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, Car&gt; carMap;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        carMap = <span class="keyword">new</span> HashMap&lt;Long, Car&gt;();</span><br><span class="line">        carMap.put(<span class="number">1L</span>, <span class="keyword">new</span> Car(<span class="number">1L</span>, <span class="string">"宝马"</span>));</span><br><span class="line">        carMap.put(<span class="number">2L</span>, <span class="keyword">new</span> Car(<span class="number">2L</span>, <span class="string">"奔驰"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(Long id, String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="keyword">return</span> carMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>配置工厂</li>
-</ul>
-<blockquote>
-<p>将类使用bean🏷️配置到工厂的方法中，IoC容器使用配置的方法，根据传递的参数来获取对象。</p>
-</blockquote>
-<p>配置参数 : index (0开始、形参位置)、name(形参名称)</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置静态工厂 默认为单例模式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.CarFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置参数 getCar--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">value</span>=<span class="string">"String"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>获取IoC容器中对象</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">        Car car =(Car) context.getBean(<span class="string">"car"</span>);</span><br><span class="line">        System.out.println(car);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h3><ul>
-<li>工厂类</li>
-</ul>
-<p>同上</p>
-<ul>
-<li>配置文件</li>
-</ul>
-<blockquote>
-<p>在配置文件中配置两个 bean (🏭bean、获取Car的bean)，将🏭类先交给 IoC容器管理，然后再配置Car，调用容器中🏭创建对象的方法。</p>
-</blockquote>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置工厂 bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factory"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.InstanceCarFactory"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置对象 Car  使用工厂 factory获取  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car2"</span> <span class="attr">factory-bean</span>=<span class="string">"factory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<ul>
-<li>使用</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    InstanceCarFactory factory = <span class="keyword">new</span> InstanceCarFactory();</span><br><span class="line">    System.out.println(factory.getCar(<span class="number">1L</span>));</span><br><span class="line"></span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">    Car car2 = (Car) context.getBean(<span class="string">"car2"</span>);</span><br><span class="line">    System.out.println(car2);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-
-
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -2317,6 +2678,68 @@ System.out.println(mimeType);</code></pre>
 <blockquote>
 <p>多个同类型，抛出异常，不知装载那个.</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring-工厂方法</title>
+    <url>/kawyang/6c92115f.html</url>
+    <content><![CDATA[<blockquote>
+<p>📝 : Spring的工厂方法，将🏭 交给 <code>IoC容器</code> 进行管理，🏭包括：静态🏭、实例🏭。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Spring-的工厂方法"><a href="#Spring-的工厂方法" class="headerlink" title="Spring 的工厂方法"></a>Spring 的工厂方法</h2><blockquote>
+<p>使用工厂创建独享，并将工厂交给 IoC容器 进行管理</p>
+</blockquote>
+<h3 id="静态工厂"><a href="#静态工厂" class="headerlink" title="静态工厂"></a>静态工厂</h3><ul>
+<li>实体类</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Long id;</span><br><span class="line">    String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>静态工厂</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.item.factory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.item.Car;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, Car&gt; carMap;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        carMap = <span class="keyword">new</span> HashMap&lt;Long, Car&gt;();</span><br><span class="line">        carMap.put(<span class="number">1L</span>, <span class="keyword">new</span> Car(<span class="number">1L</span>, <span class="string">"宝马"</span>));</span><br><span class="line">        carMap.put(<span class="number">2L</span>, <span class="keyword">new</span> Car(<span class="number">2L</span>, <span class="string">"奔驰"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">(Long id, String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="keyword">return</span> carMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>配置工厂</li>
+</ul>
+<blockquote>
+<p>将类使用bean🏷️配置到工厂的方法中，IoC容器使用配置的方法，根据传递的参数来获取对象。</p>
+</blockquote>
+<p>配置参数 : index (0开始、形参位置)、name(形参名称)</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置静态工厂 默认为单例模式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.CarFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置参数 getCar--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">value</span>=<span class="string">"String"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>获取IoC容器中对象</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">        Car car =(Car) context.getBean(<span class="string">"car"</span>);</span><br><span class="line">        System.out.println(car);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h3><ul>
+<li>工厂类</li>
+</ul>
+<p>同上</p>
+<ul>
+<li>配置文件</li>
+</ul>
+<blockquote>
+<p>在配置文件中配置两个 bean (🏭bean、获取Car的bean)，将🏭类先交给 IoC容器管理，然后再配置Car，调用容器中🏭创建对象的方法。</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置工厂 bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factory"</span> <span class="attr">class</span>=<span class="string">"com.item.factory.InstanceCarFactory"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置对象 Car  使用工厂 factory获取  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car2"</span> <span class="attr">factory-bean</span>=<span class="string">"factory"</span> <span class="attr">factory-method</span>=<span class="string">"getCar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>使用</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    InstanceCarFactory factory = <span class="keyword">new</span> InstanceCarFactory();</span><br><span class="line">    System.out.println(factory.getCar(<span class="number">1L</span>));</span><br><span class="line"></span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config-factory.xml"</span>);</span><br><span class="line">    Car car2 = (Car) context.getBean(<span class="string">"car2"</span>);</span><br><span class="line">    System.out.println(car2);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
 ]]></content>
       <categories>
         <category>框架</category>
