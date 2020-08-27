@@ -284,78 +284,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Hibernater-Error"><a href="#Hibernater-Error" class="headerlink" title="Hibernater Error"></a>Hibernater Error</h1><h2 id="javax-xml-bind-JAXBException"><a href="#javax-xml-bind-JAXBException" class="headerlink" title="javax/xml/bind/JAXBException"></a>javax/xml/bind/JAXBException</h2><blockquote>
-<p>缺少相关依赖</p>
-</blockquote>
-<h2 id="没有提供链接"><a href="#没有提供链接" class="headerlink" title="没有提供链接"></a>没有提供链接</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WARN: HHH000181: No appropriate connection provider encountered, assuming application will be supplying connections</span><br><span class="line">8月 21, 2020 10:58:46 上午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator initiateService</span><br><span class="line">WARN: HHH000342: Could not obtain connection to query metadata : The application must supply JDBC connections</span><br></pre></td></tr></table></figure></div>
-
-<blockquote>
-<p>原因：Configuration configuration = new Configuration(); 没有调用<code>configure()</code>方法获取配置文件</p>
-<p>修改：Configuration configuration = new Configuration().configure(); </p>
-</blockquote>
-<h2 id="配置文件版本"><a href="#配置文件版本" class="headerlink" title="配置文件版本"></a>配置文件版本</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WARN: HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-configuration. Use namespace http://www.hibernate.org/dtd/hibernate-configuration instead.  Support <span class="keyword">for</span> obsolete DTD/XSD namespaces may be removed at any time.</span><br><span class="line"></span><br><span class="line">WARN: HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-mapping. Use namespace http://www.hibernate.org/dtd/hibernate-mapping instead.  Support <span class="keyword">for</span> obsolete DTD/XSD namespaces may be removed at any time.</span><br></pre></td></tr></table></figure></div>
-
-<blockquote>
-<p>提示 使用<code>Use namespace http://www.hibernate.org/dtd/hibernate-configuration</code> 替换<code>http://hibernate.sourceforge.net/hibernate-configuration</code></p>
-<p>使用：  <code>http://www.hibernate.org/dtd/hibernate-mapping</code> 替换 <code>http://hibernate.sourceforge.net/hibernate-mapping.</code></p>
-</blockquote>
-<h2 id="java-lang-NoClassDefFoundError-com-sun-xml-bind-v2-model-annotation-AnnotationReader"><a href="#java-lang-NoClassDefFoundError-com-sun-xml-bind-v2-model-annotation-AnnotationReader" class="headerlink" title="java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader"></a>java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader</h2><h2 id="org-hibernate-internal-util-config-ConfigurationException-Unable-to-perform-unmarshalling-at-line-number-0-and-column-0-in-RESOURCE-hibernate-cfg-xml-Message-null"><a href="#org-hibernate-internal-util-config-ConfigurationException-Unable-to-perform-unmarshalling-at-line-number-0-and-column-0-in-RESOURCE-hibernate-cfg-xml-Message-null" class="headerlink" title="org.hibernate.internal.util.config.ConfigurationException: Unable to perform unmarshalling at line number 0 and column 0 in RESOURCE hibernate.cfg.xml. Message: null"></a>org.hibernate.internal.util.config.ConfigurationException: Unable to perform unmarshalling at line number 0 and column 0 in RESOURCE hibernate.cfg.xml. Message: null</h2><blockquote>
-<p> 缺少依赖</p>
-</blockquote>
-<h2 id="Hibernate-依赖"><a href="#Hibernate-依赖" class="headerlink" title="Hibernate 依赖"></a>Hibernate 依赖</h2><ul>
-<li>hibernate-core</li>
-<li>Mysql-connection-java</li>
-<li>jaxb-api</li>
-<li>jaxb-impl</li>
-<li>jab-core</li>
-<li>activation</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.7.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-impl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.activation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="xml文件引用"><a href="#xml文件引用" class="headerlink" title="xml文件引用"></a>xml文件引用</h2><h3 id="hinernate-cfg-xml"><a href="#hinernate-cfg-xml" class="headerlink" title="hinernate.cfg.xml"></a>hinernate.cfg.xml</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="mapper-hbm-xml"><a href="#mapper-hbm-xml" class="headerlink" title="mapper.hbm.xml"></a>mapper.hbm.xml</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"kawyang.entity"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-
+        <h1 id="Hibernater-Error"><a href="#Hibernater-Error" class="headerlink" title="Hibernater Error"></a>Hibernater Error</h1>
+        
       
 
       <!-- 标签云start -->
       <div class="article-entry" itemprop="articleBody">
         
-            
-            <!-- <h1 id="Hibernater-Error"><a href="#Hibernater-Error" class="headerlink" title="Hibernater Error"></a>Hibernater Error</h1><h2 id="javax-xml-bind-JAXBException"><a href="#javax-xml-bind-JAXBException" class="headerlink" title="javax/xml/bind/JAXBException"></a>javax/xml/bind/JAXBException</h2><blockquote>
-<p>缺少相关依赖</p>
-</blockquote>
-<h2 id="没有提供链接"><a href="#没有提供链接" class="headerlink" title="没有提供链接"></a>没有提供链接</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WARN: HHH000181: No appropriate connection provider encountered, assuming application will be supplying connections</span><br><span class="line">8月 21, 2020 10:58:46 上午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator initiateService</span><br><span class="line">WARN: HHH000342: Could not obtain connection to query metadata : The application must supply JDBC connections</span><br></pre></td></tr></table></figure></div>
-
-<blockquote>
-<p>原因：Configuration configuration = new Configuration(); 没有调用<code>configure()</code>方法获取配置文件</p>
-<p>修改：Configuration configuration = new Configuration().configure(); </p>
-</blockquote>
-<h2 id="配置文件版本"><a href="#配置文件版本" class="headerlink" title="配置文件版本"></a>配置文件版本</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WARN: HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-configuration. Use namespace http://www.hibernate.org/dtd/hibernate-configuration instead.  Support <span class="keyword">for</span> obsolete DTD/XSD namespaces may be removed at any time.</span><br><span class="line"></span><br><span class="line">WARN: HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-mapping. Use namespace http://www.hibernate.org/dtd/hibernate-mapping instead.  Support <span class="keyword">for</span> obsolete DTD/XSD namespaces may be removed at any time.</span><br></pre></td></tr></table></figure></div>
-
-<blockquote>
-<p>提示 使用<code>Use namespace http://www.hibernate.org/dtd/hibernate-configuration</code> 替换<code>http://hibernate.sourceforge.net/hibernate-configuration</code></p>
-<p>使用：  <code>http://www.hibernate.org/dtd/hibernate-mapping</code> 替换 <code>http://hibernate.sourceforge.net/hibernate-mapping.</code></p>
-</blockquote>
-<h2 id="java-lang-NoClassDefFoundError-com-sun-xml-bind-v2-model-annotation-AnnotationReader"><a href="#java-lang-NoClassDefFoundError-com-sun-xml-bind-v2-model-annotation-AnnotationReader" class="headerlink" title="java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader"></a>java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader</h2><h2 id="org-hibernate-internal-util-config-ConfigurationException-Unable-to-perform-unmarshalling-at-line-number-0-and-column-0-in-RESOURCE-hibernate-cfg-xml-Message-null"><a href="#org-hibernate-internal-util-config-ConfigurationException-Unable-to-perform-unmarshalling-at-line-number-0-and-column-0-in-RESOURCE-hibernate-cfg-xml-Message-null" class="headerlink" title="org.hibernate.internal.util.config.ConfigurationException: Unable to perform unmarshalling at line number 0 and column 0 in RESOURCE hibernate.cfg.xml. Message: null"></a>org.hibernate.internal.util.config.ConfigurationException: Unable to perform unmarshalling at line number 0 and column 0 in RESOURCE hibernate.cfg.xml. Message: null</h2><blockquote>
-<p> 缺少依赖</p>
-</blockquote>
-<h2 id="Hibernate-依赖"><a href="#Hibernate-依赖" class="headerlink" title="Hibernate 依赖"></a>Hibernate 依赖</h2><ul>
-<li>hibernate-core</li>
-<li>Mysql-connection-java</li>
-<li>jaxb-api</li>
-<li>jaxb-impl</li>
-<li>jab-core</li>
-<li>activation</li>
-</ul>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.7.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-impl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.activation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="xml文件引用"><a href="#xml文件引用" class="headerlink" title="xml文件引用"></a>xml文件引用</h2><h3 id="hinernate-cfg-xml"><a href="#hinernate-cfg-xml" class="headerlink" title="hinernate.cfg.xml"></a>hinernate.cfg.xml</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="mapper-hbm-xml"><a href="#mapper-hbm-xml" class="headerlink" title="mapper.hbm.xml"></a>mapper.hbm.xml</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"kawyang.entity"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
- -->
+            <!-- <h1 id="Hibernater-Error"><a href="#Hibernater-Error" class="headerlink" title="Hibernater Error"></a>Hibernater Error</h1> -->
         
     </div>
     <!-- 标签云  -->
@@ -1036,6 +972,84 @@
 
 
   
+    <article id="post-Util/docker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/kawyang/fa8faa2e.html">Docker 入门</a>
+    </h1>
+  
+
+        
+          
+
+        <a href="/kawyang/fa8faa2e.html" class="archive-article-date">
+  	<time datetime="2020-08-16T06:52:02.314Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-16</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker入门-菜鸟教程"><a href="#Docker入门-菜鸟教程" class="headerlink" title="Docker入门^菜鸟教程"></a>Docker入门<a href="https://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="noopener">^菜鸟教程</a></h1>
+        
+      
+
+      <!-- 标签云start -->
+      <div class="article-entry" itemprop="articleBody">
+        
+            <!-- <h1 id="Docker入门-菜鸟教程"><a href="#Docker入门-菜鸟教程" class="headerlink" title="Docker入门^菜鸟教程"></a>Docker入门<a href="https://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="noopener">^菜鸟教程</a></h1> -->
+        
+    </div>
+    <!-- 标签云  -->
+    <!--  -->
+    <!-- 标签云end -->
+
+      
+      
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/kawyang/fa8faa2e.html">show all >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SSM/SSM-CRUD总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1111,110 +1125,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/kawyang/20ec3355.html">show all >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaWeb/Json" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/kawyang/cb358a7b.html">Json</a>
-    </h1>
-  
-
-        
-          
-
-        <a href="/kawyang/cb358a7b.html" class="archive-article-date">
-  	<time datetime="2020-08-05T08:19:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><code>Json</code> 的基本使用 </p>
-</blockquote>
-        
-      
-
-      <!-- 标签云start -->
-      <div class="article-entry" itemprop="articleBody">
-        
-            <!-- <blockquote>
-<p><code>Json</code> 的基本使用 </p>
-</blockquote> -->
-        
-    </div>
-    <!-- 标签云  -->
-    <!--  -->
-    <!-- 标签云end -->
-
-      
-      
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaWeb//" class="article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/kawyang/cb358a7b.html">show all >></a>
         </p>
       
 
@@ -1412,11 +1322,11 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              <a href="javascript:void(0)" class="js-tag color3">Servlet</a>
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+              <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
             </li>
             
             <li class="article-tag-list-item">
@@ -1428,19 +1338,19 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color3">Servlet</a>
+              <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+            </li>
+            
+            <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color4">SSM</a>
             </li>
             
             <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-            </li>
-            
-            <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
             </li>
             
             <li class="article-tag-list-item">
@@ -1452,11 +1362,11 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color4">SSM</a>
+              <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
+              <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
             </li>
             
             <li class="article-tag-list-item">
@@ -1464,11 +1374,11 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              <a href="javascript:void(0)" class="js-tag color4">SQL</a>
             </li>
             
             <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              <a href="javascript:void(0)" class="js-tag color3">缓存</a>
             </li>
             
             <li class="article-tag-list-item">
