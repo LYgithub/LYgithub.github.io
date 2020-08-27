@@ -16,7 +16,7 @@
 <meta property="og:description" content="面向对象的数据查询,直接使用实体类的属性实现查询。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-22T09:57:05.000Z">
-<meta property="article:modified_time" content="2020-08-26T02:15:01.083Z">
+<meta property="article:modified_time" content="2020-08-27T13:12:13.181Z">
 <meta property="article:author" content="KawYang">
 <meta name="twitter:card" content="summary">
   
@@ -217,60 +217,68 @@
 
 <h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建 session 对象</span></span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">Session session = sessionFactory.openSession();</span><br><span class="line"><span class="comment">// 2. 创建查询对象</span></span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line"><span class="comment">// 3. 执行查询方法，获取数据</span></span><br><span class="line">List&lt;Student&gt; list = query.list();</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><ul>
-<li><pre><code class="sql">from Student // 从 Student 关联的 数据表进行查询 
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  from Student as s &#x2F;&#x2F; 表格取别名</span><br></pre></td></tr></table></figure></div></code></pre>
-</li>
-<li><pre><code class="sql">from Student s //省略 as
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### select</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select s from Student as s &#x2F;&#x2F; 查询全部信息</span><br></pre></td></tr></table></figure></div></code></pre>
-</li>
-<li><pre><code class="sql"><span class="keyword">select</span> s.id, s.name <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询相应属性
-&lt;!<span class="comment">--￼5--&gt;</span>
-</code></pre>
-</li>
-</ul>
-<h3 id="where-amp-不同参数的设置形式"><a href="#where-amp-不同参数的设置形式" class="headerlink" title="where &amp; 不同参数的设置形式"></a>where &amp; 不同参数的设置形式</h3><ul>
-<li><pre><code class="sql">where s.age between 18 and 20
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  where s.age between  :ageMin and :ageMax</span><br></pre></td></tr></table></figure></div>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Student // 从 Student 关联的 数据表进行查询</span><br></pre></td></tr></table></figure></div>
 
-&gt; 使用 `:name ` 的形式 设置HQL 中参数
-&gt;
-&gt; 运用 query.setParameter("name", value); 的方式设置变量的值</code></pre>
-</li>
-<li><pre><code class="sql">where s.age between  ? and ?
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  &gt; 使用 &#96;?&#96; 的形式设置 参数</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; 则运用  query.setParameter(index, value); 的形式设置变量的值，下标从 0 开始</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  where s.age in (:ids)</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Student as s // 表格取别名</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Student s //省略 as</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询全部信息</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.id, s.name <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询相应属性</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">new</span> Student(s.id,s.name) <span class="keyword">from</span> Student s// 将数据封装成对象,必须有相应的构造函数</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="where-amp-不同参数的设置形式"><a href="#where-amp-不同参数的设置形式" class="headerlink" title="where &amp; 不同参数的设置形式"></a>where &amp; 不同参数的设置形式</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age between 18 and 20</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age between  :ageMin and :ageMax</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>使用 <code>:name</code> 的形式 设置HQL 中参数</p>
+<p>运用 query.setParameter(“name”, value); 的方式设置变量的值</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age between  ? and ?</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>使用 <code>?</code> 的形式设置 参数</p>
+<p>则运用  query.setParameter(index, value); 的形式设置变量的值，下标从 0 开始</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age in (:ids)</span><br></pre></td></tr></table></figure></div>
 
 
-</code></pre>
-</li>
-</ul>
+
 <blockquote>
 <p>query.setParameterList(“ids”, int []{1,2,3,4,4}); 设置集合参数</p>
 </blockquote>
 <h3 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h3><blockquote>
 <p>min(), max(), avg(), count(),</p>
 </blockquote>
-<ul>
-<li><pre><code class="sql"><span class="keyword">select</span> <span class="keyword">count</span>( * ) <span class="keyword">from</span> Strudent
-&lt;!<span class="comment">--￼8--&gt;</span>
-</code></pre>
-</li>
-</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>( * ) <span class="keyword">from</span> Strudent</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">min</span>(s.id) <span class="keyword">from</span> Student s</span><br></pre></td></tr></table></figure></div>
+
 <h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><blockquote>
 <ul>
 <li>asc 升序 (默认)</li>
 <li>desc 降序</li>
 </ul>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age&gt; 20 order by s.name desc</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><blockquote>
 <ul>
-<li><pre><code class="sql">where s.age&gt; 20 order by s.name desc
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">### 连接查询</span><br><span class="line"></span><br><span class="line">&gt; - 内连接 inner (**inner join**) - inner 可以省略</span><br><span class="line">&gt; - 外连接 outer (**outer join , left outer join , right outer join **) - outer 可以省略</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select s.name , d.name from Student s [inner] join s.classes d;</span><br></pre></td></tr></table></figure></div></code></pre>
-</li>
-<li><pre><code class="sql"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> s.classes d;
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### distinct 过滤掉重复值</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select distinct s.age from Student s</span><br></pre></td></tr></table></figure></div>
-</code></pre>
-</li>
+<li>内连接 inner (<strong>inner join</strong>) - inner 可以省略</li>
+<li>外连接 outer (*<em>outer join , left outer join , right outer join *</em>) - outer 可以省略</li>
 </ul>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s [<span class="keyword">inner</span>] <span class="keyword">join</span> s.classes d;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> s.classes d;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="distinct-过滤掉重复值"><a href="#distinct-过滤掉重复值" class="headerlink" title="distinct 过滤掉重复值"></a>distinct 过滤掉重复值</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> s.age <span class="keyword">from</span> Student s</span><br></pre></td></tr></table></figure></div>
+
 <h2 id="Query使用"><a href="#Query使用" class="headerlink" title="Query使用"></a>Query使用</h2><ul>
 <li>creatQuery(HQL);</li>
 <li>list() : 返回List 查询结果</li>
@@ -314,60 +322,68 @@
 
 <h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建 session 对象</span></span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">Session session = sessionFactory.openSession();</span><br><span class="line"><span class="comment">// 2. 创建查询对象</span></span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line"><span class="comment">// 3. 执行查询方法，获取数据</span></span><br><span class="line">List&lt;Student&gt; list = query.list();</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><ul>
-<li><pre><code class="sql">from Student // 从 Student 关联的 数据表进行查询 
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  from Student as s &#x2F;&#x2F; 表格取别名</span><br></pre></td></tr></table></figure></div></code></pre>
-</li>
-<li><pre><code class="sql">from Student s //省略 as
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### select</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select s from Student as s &#x2F;&#x2F; 查询全部信息</span><br></pre></td></tr></table></figure></div></code></pre>
-</li>
-<li><pre><code class="sql"><span class="keyword">select</span> s.id, s.name <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询相应属性
-&lt;!<span class="comment">--￼5--&gt;</span>
-</code></pre>
-</li>
-</ul>
-<h3 id="where-amp-不同参数的设置形式"><a href="#where-amp-不同参数的设置形式" class="headerlink" title="where &amp; 不同参数的设置形式"></a>where &amp; 不同参数的设置形式</h3><ul>
-<li><pre><code class="sql">where s.age between 18 and 20
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  where s.age between  :ageMin and :ageMax</span><br></pre></td></tr></table></figure></div>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Student // 从 Student 关联的 数据表进行查询</span><br></pre></td></tr></table></figure></div>
 
-&gt; 使用 `:name ` 的形式 设置HQL 中参数
-&gt;
-&gt; 运用 query.setParameter("name", value); 的方式设置变量的值</code></pre>
-</li>
-<li><pre><code class="sql">where s.age between  ? and ?
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  &gt; 使用 &#96;?&#96; 的形式设置 参数</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; 则运用  query.setParameter(index, value); 的形式设置变量的值，下标从 0 开始</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  where s.age in (:ids)</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Student as s // 表格取别名</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Student s //省略 as</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询全部信息</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.id, s.name <span class="keyword">from</span> Student <span class="keyword">as</span> s // 查询相应属性</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">new</span> Student(s.id,s.name) <span class="keyword">from</span> Student s// 将数据封装成对象,必须有相应的构造函数</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="where-amp-不同参数的设置形式"><a href="#where-amp-不同参数的设置形式" class="headerlink" title="where &amp; 不同参数的设置形式"></a>where &amp; 不同参数的设置形式</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age between 18 and 20</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age between  :ageMin and :ageMax</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>使用 <code>:name</code> 的形式 设置HQL 中参数</p>
+<p>运用 query.setParameter(“name”, value); 的方式设置变量的值</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age between  ? and ?</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>使用 <code>?</code> 的形式设置 参数</p>
+<p>则运用  query.setParameter(index, value); 的形式设置变量的值，下标从 0 开始</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age in (:ids)</span><br></pre></td></tr></table></figure></div>
 
 
-</code></pre>
-</li>
-</ul>
+
 <blockquote>
 <p>query.setParameterList(“ids”, int []{1,2,3,4,4}); 设置集合参数</p>
 </blockquote>
 <h3 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h3><blockquote>
 <p>min(), max(), avg(), count(),</p>
 </blockquote>
-<ul>
-<li><pre><code class="sql"><span class="keyword">select</span> <span class="keyword">count</span>( * ) <span class="keyword">from</span> Strudent
-&lt;!<span class="comment">--￼8--&gt;</span>
-</code></pre>
-</li>
-</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>( * ) <span class="keyword">from</span> Strudent</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">min</span>(s.id) <span class="keyword">from</span> Student s</span><br></pre></td></tr></table></figure></div>
+
 <h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><blockquote>
 <ul>
 <li>asc 升序 (默认)</li>
 <li>desc 降序</li>
 </ul>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where s.age&gt; 20 order by s.name desc</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><blockquote>
 <ul>
-<li><pre><code class="sql">where s.age&gt; 20 order by s.name desc
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">### 连接查询</span><br><span class="line"></span><br><span class="line">&gt; - 内连接 inner (**inner join**) - inner 可以省略</span><br><span class="line">&gt; - 外连接 outer (**outer join , left outer join , right outer join **) - outer 可以省略</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select s.name , d.name from Student s [inner] join s.classes d;</span><br></pre></td></tr></table></figure></div></code></pre>
-</li>
-<li><pre><code class="sql"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> s.classes d;
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### distinct 过滤掉重复值</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;sql</span><br><span class="line">  select distinct s.age from Student s</span><br></pre></td></tr></table></figure></div>
-</code></pre>
-</li>
+<li>内连接 inner (<strong>inner join</strong>) - inner 可以省略</li>
+<li>外连接 outer (*<em>outer join , left outer join , right outer join *</em>) - outer 可以省略</li>
 </ul>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s [<span class="keyword">inner</span>] <span class="keyword">join</span> s.classes d;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.name , d.name <span class="keyword">from</span> Student s <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> s.classes d;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="distinct-过滤掉重复值"><a href="#distinct-过滤掉重复值" class="headerlink" title="distinct 过滤掉重复值"></a>distinct 过滤掉重复值</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> s.age <span class="keyword">from</span> Student s</span><br></pre></td></tr></table></figure></div>
+
 <h2 id="Query使用"><a href="#Query使用" class="headerlink" title="Query使用"></a>Query使用</h2><ul>
 <li>creatQuery(HQL);</li>
 <li>list() : 返回List 查询结果</li>
@@ -523,7 +539,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#格式"><span class="toc-number">1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单使用"><span class="toc-number">2.</span> <span class="toc-text">简单使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-number">3.</span> <span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#from"><span class="toc-number">3.1.</span> <span class="toc-text">from</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#where-amp-不同参数的设置形式"><span class="toc-number">3.2.</span> <span class="toc-text">where &amp; 不同参数的设置形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计函数"><span class="toc-number">3.3.</span> <span class="toc-text">统计函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#order-by"><span class="toc-number">3.4.</span> <span class="toc-text">order by</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Query使用"><span class="toc-number">4.</span> <span class="toc-text">Query使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分页查询"><span class="toc-number">4.1.</span> <span class="toc-text">分页查询</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#格式"><span class="toc-number">1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单使用"><span class="toc-number">2.</span> <span class="toc-text">简单使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-number">3.</span> <span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#from"><span class="toc-number">3.1.</span> <span class="toc-text">from</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-number">3.2.</span> <span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#where-amp-不同参数的设置形式"><span class="toc-number">3.3.</span> <span class="toc-text">where &amp; 不同参数的设置形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计函数"><span class="toc-number">3.4.</span> <span class="toc-text">统计函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#order-by"><span class="toc-number">3.5.</span> <span class="toc-text">order by</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接查询"><span class="toc-number">3.6.</span> <span class="toc-text">连接查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#distinct-过滤掉重复值"><span class="toc-number">3.7.</span> <span class="toc-text">distinct 过滤掉重复值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Query使用"><span class="toc-number">4.</span> <span class="toc-text">Query使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分页查询"><span class="toc-number">4.1.</span> <span class="toc-text">分页查询</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -725,15 +741,19 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color2">JavaEE</a>
+            </li>
+            
+            <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color5">java</a>
+            </li>
+            
+            <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color3">Servlet</a>
             </li>
             
             <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-            </li>
-            
-            <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color5">java</a>
             </li>
             
             <li class="article-tag-list-item">
@@ -753,7 +773,15 @@ MathJax.Hub.Queue(function() {
             </li>
             
             <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
+            </li>
+            
+            <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+            </li>
+            
+            <li class="article-tag-list-item">
+              <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
             </li>
             
             <li class="article-tag-list-item">
@@ -762,14 +790,6 @@ MathJax.Hub.Queue(function() {
             
             <li class="article-tag-list-item">
               <a href="javascript:void(0)" class="js-tag color5">抽象工厂</a>
-            </li>
-            
-            <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
-            </li>
-            
-            <li class="article-tag-list-item">
-              <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
             </li>
             
             <li class="article-tag-list-item">
