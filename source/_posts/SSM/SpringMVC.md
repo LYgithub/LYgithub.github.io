@@ -67,6 +67,8 @@ Spring MVC 流程非常复杂，实际开发中很简单，因为大部分的组
 
 - 在 web.xml 中配置 DispatcherServlet。
 
+  > DispatcherServlet 负责调度工作
+
 ```xml
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
@@ -665,6 +667,8 @@ springmvc.xml 添加 fastjson 配置。
     </mvc:message-converters>
 </mvc:annotation-driven>
 ```
+
+
 
 
 
@@ -1618,7 +1622,7 @@ JSP:<form:form modelAttribute="student">
 渲染的是 HTML 中的 `<input type="text"/>`，from 标签绑定的是模型数据，input 标签绑定的是模型数据中的属性值，通过 path 属性可以与模型数据中的属性名对应，并且支持及联操作。
 
 ```jsp
-<from:input path="address.name"/>
+<form:input path="address.name"/>
 ```
 
 - password
@@ -1676,7 +1680,7 @@ modelAndView.addObject("student",student);
 class Student{
 	List<String> Hobby;
     List<String> selectHobby;
-}
+}s
 
 student.setHobby(Arrays.asList("摄影","读书","听音乐","看电影","旅游","玩游戏"));
 student.setSelectHobby(Arrays.asList("摄影","读书","听音乐"));

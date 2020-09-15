@@ -8,7 +8,7 @@ categories: 框架
 date: 2020-07-06 16:08:04
 ---
 
-> 将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问时间。
+> 将查询过的数据进行缓存，可以减少数据库访问的次数，减轻负担服务器的，同时也可以提高数据访问效率。
 
 <!-- more -->
 
@@ -24,10 +24,9 @@ date: 2020-07-06 16:08:04
 	- close()
 	- commit()
 
-
 ## 二级缓存
 
-> 二级缓存是 `Mapper` 映射级别的缓存，多个 SqlSession 对象，操作同一个 Mapper 映射的 SQL ，公用一个缓存对象。
+> 二级缓存是 `SqlSessionFactoryBuilder` 映射级别的缓存，同一个 `SqlSessionFactoryBuilder`公用一个缓存对象。
 
 ### 使用步骤
 
@@ -96,7 +95,7 @@ date: 2020-07-06 16:08:04
 
 > 步骤
 
-使用`同一个`Mapper映射，创建两个`不同`的 SqlSession 对象，分别执行`相同` 的SQL操作
+使用`同一个`  SqlSessionFactoryBuilder ，创建两个`不同`的 SqlSession 对象，分别执行`相同` 的SQL操作
 
 if : 执行一次 SQL 语句
 	二级缓存成功！

@@ -379,3 +379,81 @@ IoC自动选择bean 进行注入
 - byType ： 通过类型装载
 
 > 多个同类型，抛出异常，不知装载那个.
+
+## 💎Component 注解
+
+> 该标签可以自动将 JavaBean 类  加入到 IoC 容器中，不需要配置 Bean
+
+1、 在 applicatContext.xml 中，添加Spring 扫描
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <!--  配置自动扫描 , 需要引入  context 和 spring-context 'schemaLocation' -->
+    <context:component-scan base-package="com.yang" />
+</beans>
+```
+
+2、 使用注解配置 JavaBean
+
+```java
+package com.yang;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author LiYang
+ * @Project Name: Spring-Aop-ManTest
+ * @Package Name: com.yang
+ * Created by MacBook Air on 2020/08/26.
+ * Copyright © 2020 LiYang. All rights reserved.
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+
+// 将类注入到IoC 容器中
+@Component("person")
+public class Person {
+    
+    // 设置 name 的值，默认为 null, int 类型 默认为 0，Integer 类型默认为 null
+    @Value("KawYang")
+    String name;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+
+```
+
+3、编写测试类，进行测试
+
+```java
+ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+// 没有起别名 ，使用 Person.class 进行定位
+Person person = context.getBean(Person.class);
+System.out.println(person.toString());
+
+// 使用别名获取
+Person person1 = ((Person) context.getBean("person"));
+System.out.println(person1.toString());
+```
+

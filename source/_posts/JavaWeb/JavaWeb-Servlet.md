@@ -445,48 +445,55 @@ Servlet (接口) -> GenericServlet (类)-> HttpServlet (类)
 
 ### 练习:exclamation:
 
-1. 重定向
+### 重定向
 
-   ```java
-   //自动跳转到Demo2  重定向
-   //设置状态码
-   resp.setStatus(302);
-   // 设置头
-   resp.setHeader("location", "/HomeWork/responseDemo2");
-   
-   resp.sendRedirect("/HomeWork/responseDemo2");
-   ```
+```java
+//自动跳转到Demo2  重定向
+//设置状态码
+resp.setStatus(302);
+// 设置头
+resp.setHeader("location", "/HomeWork/responseDemo2");
+resp.sendRedirect("/HomeWork/responseDemo2");
+```
 
-   * **$ \color {red}{ forword 和   Redirect 区别}$**
+* **$ \color {red}{ forword 和   Redirect 区别}$**
 
-   * 特点
+* 特点
 
-     * 地址栏发生变化
-     * 可访问其他服务器的资源
-     * 两次请求
-     * 不能共享数据
+  * 地址栏发生变化
+  * 可访问其他服务器的资源
+  * 两次请求
+  * 不能共享数据
 
-   * 路径 
+* 路径 
 
-     * 绝对路径： 确定唯一资源
+  * 绝对路径： 确定唯一资源
 
-       规则： 判断定义的路径是给谁用的
+    规则： 判断定义的路径是给谁用的
 
-       ​	客户端： **添加虚拟目录**（项目访问路径） => 重定向  ： 建议**动态获取** `String contextPath = req.getContextPath();`
+    ​	客户端： **添加虚拟目录**（项目访问路径） => 重定向  ： 建议**动态获取** `String contextPath = req.getContextPath();`
 
-       ​	服务器：**不需要加虚拟目录** => 转发
+    ​	服务器：**不需要加虚拟目录** => 转发
 
-       > "/HomeWork/responseDemo2" 省略 http://loaclhost:8080 
+    > "/HomeWork/responseDemo2" 省略 http://loaclhost:8080 
 
-     * 相对路径 ： 不可以确定唯一资源 , **不** 以`/` 开头，或 `./`开头 **可以不写**
+  * 相对路径 ： 不可以确定唯一资源 , **不** 以`/` 开头，或 `./`开头 **可以不写**
 
-       >  **找到当前路径和目标资源之间的相对关系**
+    >  **找到当前路径和目标资源之间的相对关系**
 
-2. 服务器输出字符数据
-
-3. 服务器输出字节流
-
+1. 服务器输出字符数据
+2. 服务器输出字节流
 4. 验证码
+
+### 转发
+
+```java
+req.getRequestDispatcher("responseDemo3").forward(req, resp);
+```
+
+
+
+
 
 # ServletContext对象
 
